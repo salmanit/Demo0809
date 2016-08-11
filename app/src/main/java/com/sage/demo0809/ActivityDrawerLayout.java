@@ -30,20 +30,25 @@ public class ActivityDrawerLayout extends AppCompatActivity {
         setTitle("");
 
         final EditText et= (EditText) findViewById(R.id.et_test);
-        String temp="&amp;#128563;&amp;#128516;&amp;#9917;&amp;#128516;";
+        String temp="&#128176;&#128531;&#128176;&#128516;&#22909;&#21543;&#22909;&#21543;&#128522;";
 //        et.setText(Html.fromHtml("&amp;#128563;&amp;#128516;&amp;#9917;&amp;#128516;"));
-//        et.setText(Html.fromHtml(StringEscapeUtils.escapeHtml4(Html.escapeHtml(temp))));
+        et.setText(Html.fromHtml(temp));
 
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 String resutl=StringEscapeUtils.unescapeHtml4(Html.toHtml(et.getText()));
                 MyLog.i("======="+resutl);
                 TextView tvmain= (TextView) findViewById(R.id.tv_main);
-                tvmain.setText(Html.fromHtml(resutl));
+
+//                tvmain.setText(Html.fromHtml(resutl));
+                tvmain.setText(Html.fromHtml(Html.escapeHtml(et.getText())));
                 /**第一步，将我们的带表情的字符串转换如下*/
                 /**&amp;#128176;&amp;#128531;&amp;#128176;&amp;#128516;&amp;#22909;&amp;#21543;&amp;#22909;&amp;#21543;&amp;#128522;*/
                 String result2=StringEscapeUtils.escapeHtml4(Html.escapeHtml(et.getText()));
+                    MyLog.i("00000==="+Html.escapeHtml(et.getText()));
 
                 MyLog.i("=====111="+result2);
                 TextView tvmain2= (TextView) findViewById(R.id.tv_main2);
