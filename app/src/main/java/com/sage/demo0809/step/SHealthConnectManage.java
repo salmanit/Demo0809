@@ -1,14 +1,17 @@
 package com.sage.demo0809.step;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 
 import com.sage.demo0809.MyLog;
+import com.sage.imagechooser.FragmentDiaOkCancel;
 import com.samsung.android.sdk.healthdata.HealthConnectionErrorResult;
 import com.samsung.android.sdk.healthdata.HealthConstants;
 import com.samsung.android.sdk.healthdata.HealthDataService;
@@ -23,37 +26,34 @@ import java.util.Set;
 /**
  * Created by Sage on 2016/8/11.
  */
-public class SHealthGetService extends Service {
-    @Nullable
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
+public class SHealthConnectManage {
+
+    public FragmentActivity activity;
+
+    public SHealthConnectManage(FragmentActivity activity) {
+        this.activity = activity;
     }
 
-
-    @Override
-    public void onCreate() {
-        super.onCreate();
-
-    }
     private HealthDataStore mStore;
     private HealthConnectionErrorResult mConnError;
     private Set<HealthPermissionManager.PermissionKey> mKeySet;
     private StepCountReporter mReporter;
-    private void getShealth() {
+    public void getShealth() {
         mKeySet = new HashSet<>();
         mKeySet.add(new HealthPermissionManager.PermissionKey(HealthConstants.StepCount.HEALTH_DATA_TYPE, HealthPermissionManager.PermissionType.READ));
         HealthDataService healthDataService = new HealthDataService();
         try {
-            healthDataService.initialize(this);
+            healthDataService.initialize(activity);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        mStore = new HealthDataStore(this, mConnectionListener);
+        mStore = new HealthDataStore(activity, mConnectionListener);
         mStore.connectService();
     }
 
-
+    public void disConnect(){
+        mStore.disconnectService();
+    }
     private final HealthResultHolder.ResultListener<HealthPermissionManager.PermissionResult> mPermissionListener =
             new HealthResultHolder.ResultListener<HealthPermissionManager.PermissionResult>() {
 
@@ -84,7 +84,7 @@ public class SHealthGetService extends Service {
 
                         if (resultMap.containsValue(Boolean.FALSE)) {
                             // Request the permission for reading step counts if it is not acquired
-                            pmsManager.requestPermissions(mKeySet, this).setResultListener(mPermissionListener);
+                            pmsManager.requestPermissions(mKeySet, activity).setResultListener(mPermissionListener);
                         } else {
                             // Get the current step count and display it
                             mReporter.start();
@@ -107,9 +107,9 @@ public class SHealthGetService extends Service {
                 }
             };
     private void showConnectionFailureDialog(HealthConnectionErrorResult error) {
-//        if(isFinishing()){
-//            return;
-//        }
+        if(activity.isFinishing()){
+            return;
+        }
         mConnError = error;
         String message = "连接S健康失败";
         if (mConnError.hasResolution()) {
@@ -131,22 +131,22 @@ public class SHealthGetService extends Service {
                     break;
             }
         }
-//        FragmentDiaOkCancel.create("温馨提示",message).setListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (mConnError.hasResolution()) {
-//                    mConnError.resolve(ActivityStepDataType.this);
-//                }
-//            }
-//        }).show(getSupportFragmentManager(),"showAlert");
+        FragmentDiaOkCancel.create("温馨提示",message).setListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mConnError.hasResolution()) {
+                    mConnError.resolve(activity);
+                }
+            }
+        }).show(activity.getSupportFragmentManager(),"showAlert");
 
     }
     private void showPermissionAlarmDialog() {
-//        if (isFinishing()) {
-//            return;
-//        }
+        if (activity.isFinishing()) {
+            return;
+        }
 
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        AlertDialog.Builder alert = new AlertDialog.Builder(activity);
         alert.setTitle("Notice");
         alert.setMessage("All permissions should be acquired");
         alert.setPositiveButton("OK", null);

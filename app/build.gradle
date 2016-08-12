@@ -33,7 +33,7 @@ dependencies {
     compile 'com.github.wseemann:FFmpegMediaMetadataRetriever:1.0.11'
     compile project(':highlight')
 
-
+    compile 'com.sage.bigscalephotoviewanim:libViewBigPics:1.0.7'
     // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
     compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.4'
 
