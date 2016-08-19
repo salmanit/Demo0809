@@ -14,18 +14,20 @@
         <meta-data android:name="com.samsung.android.health.platform_type" android:value="rel"/>
         <meta-data android:name="com.samsung.android.health.permission.read" android:value="com.samsung.health.step_count"/>
         <activity
-            android:name=".ActivityD"
+            android:name=".ui.ActivityD"
             android:windowSoftInputMode="adjustResize|stateHidden"></activity>
-        <activity android:name=".ActivityDrawerLayout">
+        <activity android:name=".ui.ActivityDrawerLayout">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
                 <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
-        <activity android:name=".ActivityChooseMood"></activity>
+        <activity android:name=".ui.ActivityChooseMood">
+
+        </activity>
         <activity
-            android:name=".ActivityStep"
+            android:name=".ui.ActivityStep"
             android:label="@string/title_activity_activity_step"
             android:theme="@style/AppTheme">
             <intent-filter>

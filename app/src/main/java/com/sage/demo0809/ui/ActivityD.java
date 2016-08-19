@@ -1,15 +1,27 @@
-package com.sage.demo0809;
+package com.sage.demo0809.ui;
 
 import android.annotation.TargetApi;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.graphics.Bitmap;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.os.Build;
+import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.sage.demo0809.MyLog;
+import com.sage.demo0809.R;
+import com.sage.demo0809.step.SHealthConnectService;
+
+import org.simple.eventbus.EventBus;
 
 import java.util.HashMap;
 
@@ -23,6 +35,7 @@ public class ActivityD extends AppCompatActivity {
     String url="http://sunroam.imgup.cn/aerospace/bjc/19.mp4";
     Toolbar toolbar;
     ImageView iv_thumb;
+    EditText et1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,16 +78,48 @@ public class ActivityD extends AppCompatActivity {
                     }
                 });
 
+        iv_thumb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startStep();
+            }
+        });
+        et1= (EditText) findViewById(R.id.et1);
+        EventBus.getDefault().register(this);
+    }
+
+    private void startStep() {
+        bindService(new Intent(this,SHealthConnectService.class),conn,BIND_AUTO_CREATE);
+    }
+    SHealthConnectService.MySHealthBind binder;
+    private ServiceConnection conn=new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            binder= (SHealthConnectService.MySHealthBind) service;
+            MyLog.i("111111111111=====onServiceConnected");
+            if(binder!=null){
+                binder.startConnect(ActivityD.this);
+            }
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+        }
+    };
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+        if(binder!=null)
+        unbindService(conn);
 
     }
 
-
-
-
-
-
-
-
+    @org.simple.eventbus.Subscriber(tag = "S_Health_Step")
+    public void getStep(int step){
+        et1.setText("步数"+step);
+    }
 
     private Bitmap get(String url){
        Bitmap bitmap= ThumbnailUtils.createVideoThumbnail(url, MediaStore.Images.Thumbnails.MINI_KIND);

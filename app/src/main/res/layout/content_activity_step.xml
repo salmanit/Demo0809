@@ -9,12 +9,30 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.sage.demo0809.ActivityStep"
+    tools:context=".ui.ActivityStep"
     tools:showIn="@layout/activity_step">
-<TextView
+<com.sage.demo0809.widget.TextViewLCR
     android:id="@+id/tv_step"
-    android:text="0"
+    android:text="实际"
+    app:words_count="4"
     android:textSize="30sp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
+<com.sage.demo0809.widget.TextViewLCR
+    android:id="@+id/tv_step2"
+    android:text="实际上"
+    app:words_count="4"
+    android:textSize="30sp"
+    android:layout_marginTop="30dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" />
+<com.sage.demo0809.widget.TextViewLCR
+    android:id="@+id/tv_step3"
+    android:text="实际上的"
+    android:textSize="30sp"
+    android:layout_marginTop="60dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" />
+
+
 </RelativeLayout>

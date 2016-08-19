@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sage.demo0809.ActivityDrawerLayout">
+    tools:context=".ui.ActivityDrawerLayout">
     <include layout="@layout/layout_toolbar2"/>
 <android.support.v4.widget.DrawerLayout
     android:fitsSystemWindows="true"

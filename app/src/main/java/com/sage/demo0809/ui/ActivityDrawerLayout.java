@@ -1,4 +1,4 @@
-package com.sage.demo0809;
+package com.sage.demo0809.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.sage.demo0809.MyLog;
+import com.sage.demo0809.R;
 import com.sage.demo0809.fragment.FragmentDemo;
 
 import org.apache.commons.lang3.StringEscapeUtils;

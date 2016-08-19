@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MyTextViewLCR_style">
+        <attr name="words_count" format="integer"/>
+    </declare-styleable>
+
+</resources>

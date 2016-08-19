@@ -1,4 +1,4 @@
-package com.sage.demo0809;
+package com.sage.demo0809.ui;
 
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
@@ -15,27 +15,39 @@ import android.view.animation.TranslateAnimation;
 import android.widget.TextView;
 import android.widget.ViewAnimator;
 
+import com.sage.demo0809.MyLog;
+import com.sage.demo0809.R;
 import com.sage.highlight.HighLight;
+
+import pl.droidsonroids.gif.GifImageView;
 
 
 public class ActivityChooseMood extends AppCompatActivity {
     HighLight highLight;
 //    private TextView tv_light;
+
+    GifImageView iv_box;
+    GifImageView iv_bubble;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_mood);
+        iv_box= (GifImageView) findViewById(R.id.iv_box);
+        iv_bubble= (GifImageView) findViewById(R.id.iv_bubble);
+
+
+
 //        tv_light= (TextView) findViewById(R.id.tv_light);
         MyLog.i("layout_textview=========="+R.layout.layout_textview);
         try {
             highLight=new HighLight(this)//
                     .intercept(false)
     //                .anchor(findViewById(R.id.id_container))//指你需要在哪个view上加一层透明的蒙版，如果不设置，默认为android.R.id.content
-                    .addHighLight(R.id.iv1,1, R.layout.temp_layout,callback)
-                    .addHighLight(R.id.iv2, 1,R.layout.temp_layout,callback)
-                    .addHighLight(R.id.iv3, 1,R.layout.temp_layout,callback)
-                    .addHighLight(R.id.iv4, 1,R.layout.temp_layout,callback)
-                    .addHighLight(R.id.iv5,1, R.layout.temp_layout,callback)
+                    .addHighLight(R.id.tv1,1, R.layout.temp_layout,callback)
+                    .addHighLight(R.id.tv2, 1,R.layout.temp_layout,callback)
+                    .addHighLight(R.id.tv3, 1,R.layout.temp_layout,callback)
+                    .addHighLight(R.id.tv4, 1,R.layout.temp_layout,callback)
+                    .addHighLight(R.id.tv5,1, R.layout.temp_layout,callback)
                     .addHighLight(R.id.btn_know,R.layout.layout_textview,callback)
             .setClickCallback(new HighLight.OnClickCallback() {
                 @Override
@@ -49,10 +61,10 @@ public class ActivityChooseMood extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        highLight.show();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
+                    highLight.show();
                     findViewById(R.id.layout_i_know).setVisibility(View.VISIBLE);
 
                     ObjectAnimator animator=ObjectAnimator.ofFloat(findViewById(R.id.tv_light),"alpha", 1f,0.2f);
@@ -62,7 +74,7 @@ public class ActivityChooseMood extends AppCompatActivity {
                     animator.setInterpolator(new AccelerateDecelerateInterpolator());
                     animator.start();
                 }
-            },2000);
+            },6000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,24 +99,6 @@ public class ActivityChooseMood extends AppCompatActivity {
         });
     }
 
-    private void delay() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    View tv=findViewById(R.id.tv_light);
-                    if(tv==null){
-                        MyLog.i("tv_light=============null");
-                        return;
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        },1);
-
-    }
 
 
     private HighLight.OnPosCallback callback= new HighLight.OnPosCallback(){
