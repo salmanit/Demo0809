@@ -4,4 +4,26 @@
         <attr name="words_count" format="integer"/>
     </declare-styleable>
 
+
+
+
+
+
+    <!--  波浪滚动圆球View属性  -->
+    <attr name="batteryLevel" format="float" />
+    <attr name="radius" format="integer" />
+    <attr name="flowRadius" format="dimension" />
+    <attr name="textColor" format="color" />
+    <attr name="textSize" format="dimension" />
+    <attr name="flowViewColor" format="color" />
+
+    <declare-styleable name="BatteryView">
+        <attr name="batteryLevel" />
+        <attr name="radius" />
+        <attr name="flowRadius" />
+        <attr name="textColor" />
+        <attr name="textSize" />
+        <attr name="flowViewColor"/>
+    </declare-styleable>
+
 </resources>

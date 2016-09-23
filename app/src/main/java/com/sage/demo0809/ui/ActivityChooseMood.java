@@ -17,6 +17,7 @@ import android.widget.ViewAnimator;
 
 import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
+import com.sage.demo0809.widget.BubbleLayout;
 import com.sage.highlight.HighLight;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -25,17 +26,30 @@ import pl.droidsonroids.gif.GifImageView;
 public class ActivityChooseMood extends AppCompatActivity {
     HighLight highLight;
 //    private TextView tv_light;
-
+ BubbleLayout bubbleLayout;
     GifImageView iv_box;
     GifImageView iv_bubble;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_mood);
-        iv_box= (GifImageView) findViewById(R.id.iv_box);
-        iv_bubble= (GifImageView) findViewById(R.id.iv_bubble);
+//        iv_box= (GifImageView) findViewById(R.id.iv_box);
+//        iv_bubble= (GifImageView) findViewById(R.id.iv_bubble);
 
-
+        bubbleLayout = (BubbleLayout) findViewById(R.id.bubble_layout);
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                while (!Thread.currentThread().isInterrupted()) {
+//                    try {
+//                        Thread.sleep(15);
+//                    } catch (InterruptedException e) {
+//                        e.printStackTrace();
+//                    }
+//                    bubbleLayout.postInvalidate();
+//                }
+//            }
+//        }).start();
 
 //        tv_light= (TextView) findViewById(R.id.tv_light);
         MyLog.i("layout_textview=========="+R.layout.layout_textview);
@@ -74,7 +88,7 @@ public class ActivityChooseMood extends AppCompatActivity {
                     animator.setInterpolator(new AccelerateDecelerateInterpolator());
                     animator.start();
                 }
-            },6000);
+            },600000);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,6 +109,19 @@ public class ActivityChooseMood extends AppCompatActivity {
             public void onClick(View v) {
                 highLight.remove();
 
+            }
+        });
+
+        findViewById(R.id.tv1).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bubbleLayout.reset();
+            }
+        });
+        findViewById(R.id.tv2).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bubbleLayout.stop();
             }
         });
     }

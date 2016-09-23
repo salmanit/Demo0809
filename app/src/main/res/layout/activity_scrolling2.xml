@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_toolbar_base"/>
+    <LinearLayout
+        android:background="#00ff0f"
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:onClick="intro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="介绍"/>
+        <EditText
+            android:inputType="number"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content" />
+        <FrameLayout
+            android:id="@+id/layout_rotate"
+            android:transitionName="shareNames"
+            android:background="@mipmap/placeholder_disk_play_song"
+            android:layout_width="100dp"
+            android:layout_height="100dp">
+            <ImageView
+                android:id="@+id/iv_next"
+
+                android:src="@mipmap/play_disc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:onClick="select"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="选择"/>
+        <Button
+            android:layout_gravity="center_horizontal"
+            android:onClick="fragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="fragment"/>
+
+
+    </LinearLayout>
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scroll"
+        android:background="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_peekHeight="50dp"
+        app:layout_behavior="android.support.design.widget.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tv_top"
+                android:onClick="top"
+                android:text="top"
+                android:gravity="center"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="50dp"
+                android:background="@color/colorPrimary"
+                android:text="人不会死在绝境，却往往栽在十字路口"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
+</android.support.design.widget.CoordinatorLayout>

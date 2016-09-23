@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 
-public class ActivityStep extends AppCompatActivity {
+public class ActivityStep extends ActivityBase {
 
     SHealthConnectService.MySHealthBind binder;
     TextView tv_step;
@@ -49,6 +49,15 @@ public class ActivityStep extends AppCompatActivity {
         setContentView(R.layout.activity_step);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("");
+        toolbar.setContentInsetsAbsolute(0,0);
+//        toolbar.setNavigationIcon(R.drawable.lib_btn_back);
+        findViewById(R.id.toolbar_right).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goNext(ActivityStep.class);
+            }
+        });
         tv_step = (TextView) findViewById(R.id.tv_step);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -67,7 +76,7 @@ public class ActivityStep extends AppCompatActivity {
         float size=tv_step.getTextSize();
         MyLog.i("30 size=="+size+" =="+getResources().getDisplayMetrics().density+"=="+getResources().getDisplayMetrics().densityDpi);
 
-new SimpleDateFormat("yyyy_MM-dd").format(new Date(111111111));
+    new SimpleDateFormat("yyyy_MM-dd").format(new Date(111111111));
         spiltString("dddd,1111");
         spiltString("dddd,1111,");
         spiltString(",dddd,1111");

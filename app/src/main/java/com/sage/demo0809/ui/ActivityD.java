@@ -31,7 +31,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
-public class ActivityD extends AppCompatActivity {
+public class ActivityD extends ActivityBase {
     String url="http://sunroam.imgup.cn/aerospace/bjc/19.mp4";
     Toolbar toolbar;
     ImageView iv_thumb;

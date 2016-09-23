@@ -49,11 +49,13 @@ public class TextViewLCR extends TextView {
             super.onDraw(canvas);
             return;
         }
+        getPaint().setColor(getCurrentTextColor());
         Rect bounds=new Rect();
         getPaint().getTextBounds("您",0,1,bounds);
         int oneWord=bounds.right-bounds.left;
         if(words_count>0){
             width=oneWord*words_count;
+            setWidth(width);
         }else{
             width=getWidth();
         }

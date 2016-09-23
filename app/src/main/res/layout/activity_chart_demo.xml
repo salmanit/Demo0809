@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:clipChildren="false"
+    android:background="@drawable/battery_view_bg_circle"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_toolbar_base"/>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srf"
+        android:saveEnabled="false"
+        android:layout_marginTop="60dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:clipChildren="false"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_test"
+            android:src="@drawable/skin_status_test"
+            android:layout_marginRight="20dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:id="@+id/tv_shade"
+            android:text="你好"
+            android:textColor="#ff00ff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.sage.demo0809.widget.CircularImageView
+            android:src="@drawable/bj"
+            android:scaleType="centerCrop"
+            android:layout_width="80dp"
+            android:layout_height="80dp" />
+        <RadioGroup
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+            <RadioButton
+                android:id="@+id/rb1"
+                android:button="@null"
+                android:textColor="@color/skin_test_color"
+                android:text="male"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/rb2"
+                android:text="female"
+                android:button="@null"
+                android:drawableTop="@drawable/skin_status_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RadioGroup>
+    </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <lecho.lib.hellocharts.view.ColumnChartView
+                android:id="@+id/chart1"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="6dp">
+                <ImageView
+                    android:id="@+id/iv_line"
+                    android:layout_gravity="bottom"
+                    android:layout_width="match_parent"
+                    android:src="#888888"
+                    android:layout_height="2dp"/>
+                <ImageView
+                    android:id="@+id/iv_circle"
+                    android:src="@drawable/shape_circle_view"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginBottom="1dp"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp" />
+            </FrameLayout>
+            <RadioGroup
+                android:id="@+id/rg_home"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:background="#f4f4f4"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rb_message"
+                    style="@style/home_tab_basic_style"
+                    android:drawableTop="@drawable/home_tab_orange_friends_press"
+                    android:text="message" />
+
+                <RadioButton
+                    android:id="@+id/rb_friends"
+                    style="@style/home_tab_basic_style"
+                    android:drawableTop="@drawable/home_tab_orange_friends_press"
+                    android:text="friends" />
+
+                <RadioButton
+                    android:id="@+id/rb_recommend"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="bottom"
+                    android:layout_marginBottom="1dp"
+                    android:background="@drawable/home_tab_orange_recommend_press"
+                    android:button="@null"
+                    android:checked="true"
+                    android:gravity="center" />
+
+                <RadioButton
+                    android:id="@+id/rb_discover"
+                    style="@style/home_tab_basic_style"
+                    android:drawableTop="@drawable/home_tab_orange_friends_press"
+                    android:text="discover" />
+
+                <RadioButton
+                    android:id="@+id/rb_me"
+                    style="@style/home_tab_basic_style"
+                    android:drawableTop="@drawable/home_tab_orange_friends_press"
+                    android:text="me" />
+            </RadioGroup>
+        </LinearLayout>
+
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</LinearLayout>

@@ -14,9 +14,10 @@
 <com.sage.demo0809.widget.TextViewLCR
     android:id="@+id/tv_step"
     android:text="实际"
+    android:textColor="#ff00f0"
     app:words_count="4"
-    android:textSize="30sp"
-    android:layout_width="match_parent"
+    android:textSize="20sp"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content" />
 <com.sage.demo0809.widget.TextViewLCR
     android:id="@+id/tv_step2"
