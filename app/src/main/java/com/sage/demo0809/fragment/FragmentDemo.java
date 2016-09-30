@@ -21,4 +21,29 @@ public class FragmentDemo extends Fragment {
 
         return inflater.inflate(R.layout.fragment_demo,container,false);
     }
+
+    FragmentEdit fragmentEdit1;
+    FragmentEdit fragmentEdit2;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().findViewById(R.id.iv_show).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fragmentEdit1==null){
+                    fragmentEdit1=new FragmentEdit();
+                }
+                fragmentEdit1.show(getChildFragmentManager(),"ppppp");
+            }
+        });
+        getView().findViewById(R.id.tv_hello).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(fragmentEdit2==null){
+                    fragmentEdit2=new FragmentEdit();
+                }
+                fragmentEdit2.show(getActivity().getSupportFragmentManager(),"aaaaaa");
+            }
+        });
+    }
 }

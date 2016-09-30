@@ -11,8 +11,8 @@
         <!--<item name="android:windowIsTranslucent">true</item>-->
         <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
 
-        <item name="Android:windowEnterTransition">@transition/activity_explode</item>
-        <item name="Android:windowExitTransition">@transition/activity_explode</item>
+        <!--<item name="Android:windowEnterTransition">@transition/activity_explode</item>-->
+        <!--<item name="Android:windowExitTransition">@transition/activity_explode</item>-->
     </style>
 
     <style name="activityAnimation" parent="@android:style/Animation">

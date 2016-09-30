@@ -4,13 +4,19 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -19,12 +25,18 @@ import android.widget.Toast;
 
 import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
+import com.sage.demo0809.bean.SimpleUser;
+import com.sage.demo0809.fragment.FragmentDemo;
+import com.sage.demo0809.widget.TextViewReply;
 import com.zhy.changeskin.SkinManager;
 import com.zhy.changeskin.base.BaseSkinActivity;
 import com.zhy.changeskin.callback.ISkinChangingCallback;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
@@ -42,7 +54,7 @@ import lecho.lib.hellocharts.view.ColumnChartView;
  */
 public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshLayout.OnRefreshListener{
 
-    SwipeRefreshLayout srf;
+//    SwipeRefreshLayout srf;
     ColumnChartView chart1;
 
 
@@ -50,11 +62,23 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart_demo);
-        srf= (SwipeRefreshLayout) findViewById(R.id.srf);
-        srf.setOnRefreshListener(this);
+
+
+        TextViewReply textViewReply= (TextViewReply) findViewById(R.id.tv_reply);
+        textViewReply.setReplyClickListener(new TextViewReply.TextViewReplyClickListener() {
+            @Override
+            public void spanClick(SimpleUser simpleUser) {
+                    Toast.makeText(ActivityChartDemo.this,simpleUser.userName,Toast.LENGTH_SHORT).show();
+            }
+        });
+        SimpleUser from=new SimpleUser("张三");
+        SimpleUser to=new SimpleUser("李四码子");
+        textViewReply.setContent(from,to,"just for testjust for testjust for testjust for testjust for testjust for test");
+//        srf= (SwipeRefreshLayout) findViewById(R.id.srf);
+//        srf.setOnRefreshListener(this);
         chart1= (ColumnChartView) findViewById(R.id.chart1);
         initChart1();
-
+        Toast.makeText(this,"00",Toast.LENGTH_SHORT).show();
         ((TextView)findViewById(R.id.tv_shade)).setShadowLayer(10,5,5,Color.parseColor("#ff00ff"));
         findViewById(R.id.iv_test).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,16 +94,29 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
         ImageView iv_line= (ImageView) findViewById(R.id.iv_line);
 
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         setTitle("");
         toolbar.setContentInsetsAbsolute(0,0);
-//        toolbar.setNavigationIcon(R.drawable.lib_btn_back);
+        toolbar.setNavigationIcon(R.drawable.lib_btn_back);
         findViewById(R.id.toolbar_right).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
             goNext(ScrollingActivity2.class);
             }
         });
+        ViewPager vp= (ViewPager) findViewById(R.id.vp);
+        vp.setAdapter(new FragmentPagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                return new FragmentDemo();
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+        });
+
     }
     public void goNext(Class cla){
         startActivity(new Intent(this,cla));
@@ -186,6 +223,6 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
 
     @Override
     public void onRefresh() {
-        srf.setRefreshing(false);
+//        srf.setRefreshing(false);
     }
 }

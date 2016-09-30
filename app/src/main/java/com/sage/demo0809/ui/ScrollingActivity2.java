@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.ActivityOptions;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.StateListDrawable;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -18,6 +19,8 @@ import android.support.design.widget.BottomSheetDialog;
 import android.support.design.widget.BottomSheetDialogFragment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,6 +29,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
@@ -63,14 +67,14 @@ public class ScrollingActivity2 extends ActivityBase {
         iv_next= (ImageView) findViewById(R.id.iv_next);
         tv_top= (TextView) findViewById(R.id.tv_top);
         layout_rotate=findViewById(R.id.layout_rotate);
-        final SensorManager mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        PackageManager packageManager = getPackageManager();
-        MyLog.i(packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_COUNTER)
-                +"========="+packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_DETECTOR));
-        final Sensor detectorSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        boolean result=mySensorManager.registerListener(listener, detectorSensor, SensorManager.SENSOR_DELAY_UI);
-
-        MyLog.i("==support=="+result+"==="+detectorSensor.getVendor()+"=="+detectorSensor.getPower()+"=="+detectorSensor.getType());
+//        final SensorManager mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+//        PackageManager packageManager = getPackageManager();
+//        MyLog.i(packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_COUNTER)
+//                +"========="+packageManager.hasSystemFeature(PackageManager.FEATURE_SENSOR_STEP_DETECTOR));
+//        final Sensor detectorSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+//        boolean result=mySensorManager.registerListener(listener, detectorSensor, SensorManager.SENSOR_DELAY_UI);
+//
+//        MyLog.i("==support=="+result+"==="+detectorSensor.getVendor()+"=="+detectorSensor.getPower()+"=="+detectorSensor.getType());
 //        new Thread(new Runnable() {
 //            public void run() {
 //                boolean result=mySensorManager.registerListener(listener, detectorSensor, SensorManager.SENSOR_DELAY_UI);
@@ -80,10 +84,24 @@ public class ScrollingActivity2 extends ActivityBase {
 //        }).start();
     }
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+//    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     private void goNextCla(){
         Intent intent = new Intent(this,ScrollingActivity.class);
-        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,findViewById(R.id.layout_rotate),"shareNames").toBundle());
+        ActivityOptionsCompat activityOptionsCompat=ActivityOptionsCompat.makeThumbnailScaleUpAnimation(findViewById(Window.ID_ANDROID_CONTENT)
+                , BitmapFactory.decodeResource(getResources(),R.drawable.bangdan_sl_img),
+                findViewById(Window.ID_ANDROID_CONTENT).getWidth()-100,findViewById(Window.ID_ANDROID_CONTENT).getHeight()-100);
+//        activityOptionsCompat=ActivityOptionsCompat.makeThumbnailScaleUpAnimation(layout_rotate,
+//                BitmapFactory.decodeResource(getResources(),R.drawable.bangdan_vs_img),layout_rotate.getWidth()/2,layout_rotate.getHeight()/2);
+//        activityOptionsCompat=ActivityOptionsCompat.makeScaleUpAnimation(findViewById(Window.ID_ANDROID_CONTENT),
+//                findViewById(Window.ID_ANDROID_CONTENT).getWidth()-100,findViewById(Window.ID_ANDROID_CONTENT).getHeight()-100
+//        ,100,100);
+//        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this,findViewById(R.id.layout_rotate),"shareNames");
+//        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+//                new Pair<View, String>(findViewById(R.id.layout_rotate),"shareNames")
+//                ,new Pair<View, String>(findViewById(R.id.btn_fragment),"love"));
+        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        startActivity(intent,activityOptionsCompat.toBundle());
+//        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,findViewById(R.id.layout_rotate),"shareNames").toBundle());
     }
     
     private SensorEventListener listener=new SensorEventListener() {

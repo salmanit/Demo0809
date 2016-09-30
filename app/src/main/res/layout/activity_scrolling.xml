@@ -69,25 +69,27 @@
                     android:padding="5dp"
                     android:src="@mipmap/mood_box" />
             </android.support.v7.widget.Toolbar>
-            <FrameLayout
-                android:id="@+id/layout_rotate"
+            <ImageView
                 android:transitionName="shareNames"
-                android:layout_gravity="center_horizontal"
-                android:background="@mipmap/placeholder_disk_play_song"
-                android:layout_width="200dp"
-                android:layout_height="100dp">
-                <ImageView
-
-                    android:src="@mipmap/play_disc"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </FrameLayout>
+                android:src="@mipmap/play_disc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            <!--<FrameLayout-->
+                <!--android:id="@+id/layout_rotate"-->
+                <!---->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:background="@mipmap/placeholder_disk_play_song"-->
+                <!--android:layout_width="200dp"-->
+                <!--android:layout_height="100dp">-->
+                <!---->
+            <!--</FrameLayout>-->
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
     <Button
         android:layout_marginTop="200dp"
         android:id="@+id/btn_show"
         android:text="show||hidden"
+        android:transitionName="love"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <include layout="@layout/content_scrolling" />

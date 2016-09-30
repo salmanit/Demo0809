@@ -74,7 +74,8 @@
         </activity>
 
         <!--图标测试，换肤测试。首页-->
-        <activity android:name=".ui.ActivityChartDemo">
+        <activity android:name=".ui.ActivityChartDemo"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
