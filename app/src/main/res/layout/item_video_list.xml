@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="#ffffff"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/iv_head"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_name"
+                android:text="jerry"
+                android:singleLine="true"
+                android:textSize="18sp"
+                android:textColor="#000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_marginTop="5dp"
+                android:text="4分钟前"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="16sp"
+        android:textColor="#000"
+        android:id="@+id/tv_content"
+        android:text="你在我心中是最美"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <FrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/video_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="200dp">
+
+        <com.universalvideoview.UniversalVideoView
+            android:id="@+id/videoView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_gravity="center"
+            app:uvv_autoRotation="false"
+            app:uvv_fitXY="false" />
+        <com.universalvideoview.UniversalMediaController
+            android:id="@+id/media_controller"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            app:uvv_scalable="true" />
+        <ImageView
+            android:id="@+id/iv_play_video"
+            android:layout_gravity="center"
+            android:src="@mipmap/mood_box"
+            android:layout_width="70dp"
+            android:layout_height="70dp" />
+    </FrameLayout>
+    <View
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#88888888"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <LinearLayout
+        android:id="@+id/layout_bottom"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:id="@+id/layout_zan"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_zan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_zan_count"
+                android:text="99"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/layout_cai"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_cai_count"
+                android:text="99"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+        <View
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="1dp"/>
+        <LinearLayout
+            android:id="@+id/layout_comment"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/tv_comment_count"
+                android:layout_marginLeft="10dp"
+                android:text="99"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

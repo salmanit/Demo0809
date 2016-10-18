@@ -90,16 +90,16 @@ public class ScrollingActivity2 extends ActivityBase {
         ActivityOptionsCompat activityOptionsCompat=ActivityOptionsCompat.makeThumbnailScaleUpAnimation(findViewById(Window.ID_ANDROID_CONTENT)
                 , BitmapFactory.decodeResource(getResources(),R.drawable.bangdan_sl_img),
                 findViewById(Window.ID_ANDROID_CONTENT).getWidth()-100,findViewById(Window.ID_ANDROID_CONTENT).getHeight()-100);
-//        activityOptionsCompat=ActivityOptionsCompat.makeThumbnailScaleUpAnimation(layout_rotate,
-//                BitmapFactory.decodeResource(getResources(),R.drawable.bangdan_vs_img),layout_rotate.getWidth()/2,layout_rotate.getHeight()/2);
-//        activityOptionsCompat=ActivityOptionsCompat.makeScaleUpAnimation(findViewById(Window.ID_ANDROID_CONTENT),
-//                findViewById(Window.ID_ANDROID_CONTENT).getWidth()-100,findViewById(Window.ID_ANDROID_CONTENT).getHeight()-100
-//        ,100,100);
-//        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this,findViewById(R.id.layout_rotate),"shareNames");
-//        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this,
-//                new Pair<View, String>(findViewById(R.id.layout_rotate),"shareNames")
-//                ,new Pair<View, String>(findViewById(R.id.btn_fragment),"love"));
-        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this);
+        activityOptionsCompat=ActivityOptionsCompat.makeThumbnailScaleUpAnimation(layout_rotate,
+                BitmapFactory.decodeResource(getResources(),R.drawable.bangdan_vs_img),layout_rotate.getWidth()/2,layout_rotate.getHeight()/2);
+        activityOptionsCompat=ActivityOptionsCompat.makeScaleUpAnimation(findViewById(Window.ID_ANDROID_CONTENT),
+                findViewById(Window.ID_ANDROID_CONTENT).getWidth()-100,findViewById(Window.ID_ANDROID_CONTENT).getHeight()-100
+        ,100,100);
+        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this,findViewById(R.id.layout_rotate),"shareNames");
+        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this,
+                new Pair<View, String>(findViewById(R.id.layout_rotate),"shareNames")
+                ,new Pair<View, String>(findViewById(R.id.btn_fragment),"love"));
+//        activityOptionsCompat=ActivityOptionsCompat.makeSceneTransitionAnimation(this);
         startActivity(intent,activityOptionsCompat.toBundle());
 //        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this,findViewById(R.id.layout_rotate),"shareNames").toBundle());
     }
@@ -168,7 +168,7 @@ public class ScrollingActivity2 extends ActivityBase {
         final BottomSheetDialog dialog = new BottomSheetDialog(this);
         dialog.setContentView(recyclerView);
         dialog.show();
-        adapter.setOnItemClickListener(new Adapter.OnItemClickListener() {
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(int position, String text) {
                 Toast.makeText(ScrollingActivity2.this, text, Toast.LENGTH_SHORT).show();
@@ -177,7 +177,7 @@ public class ScrollingActivity2 extends ActivityBase {
         });
     }
 
-    static class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
+    public class Adapter extends RecyclerView.Adapter<Adapter.Holder> {
 
         private OnItemClickListener mItemClickListener;
 
@@ -218,24 +218,24 @@ public class ScrollingActivity2 extends ActivityBase {
             }
         }
 
-        interface OnItemClickListener {
-            void onItemClick(int position, String text);
-        }
+
     }
 
-
+    public interface OnItemClickListener {
+        void onItemClick(int position, String text);
+    }
 
     public void fragment(View view){
         new MyBottomSheetDialogFragment().show(getSupportFragmentManager(),"111");
     }
 
-    String[] lists={"1111","2222","3333","1111","2222","3333","1111","2222",
-            "3333","1111","2222","3333","1111","2222","3333","1111","2222","3333","1111","2222","3333"
-            ,"1111","2222","3333","1111","2222","3333","1111","2222","3333","1111","2222","3333"
-            ,"1111","2222","3333","1111","2222","3333","1111","2222","3333","1111","2222","3333"};
 
-    public class MyBottomSheetDialogFragment extends BottomSheetDialogFragment{
 
+    public static class MyBottomSheetDialogFragment extends BottomSheetDialogFragment{
+        String[] lists={"1111","2222","3333","1111","2222","3333","1111","2222",
+                "3333","1111","2222","3333","1111","2222","3333","1111","2222","3333","1111","2222","3333"
+                ,"1111","2222","3333","1111","2222","3333","1111","2222","3333","1111","2222","3333"
+                ,"1111","2222","3333","1111","2222","3333","1111","2222","3333","1111","2222","3333"};
         @Nullable
         @Override
         public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

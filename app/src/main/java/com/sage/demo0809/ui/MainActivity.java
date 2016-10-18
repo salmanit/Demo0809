@@ -2,15 +2,12 @@ package com.sage.demo0809.ui;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
-import android.view.animation.RotateAnimation;
-import android.widget.Toast;
 
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 import com.sage.demo0809.MyLog;
@@ -18,29 +15,17 @@ import com.sage.demo0809.R;
 import com.sage.demo0809.app.ApiManager;
 import com.sage.demo0809.app.RxHelper;
 import com.sage.demo0809.app.RxSubscribe;
-import com.sage.demo0809.bean.BaseParams;
-import com.sage.demo0809.bean.LoginParam;
-import com.sage.demo0809.bean.LoginReply;
 import com.sage.demo0809.bean.MyRecordChart;
 import com.sage.demo0809.bean.MyRecordParams;
-import com.sage.demo0809.bean.UploadAvatar;
 
-import java.io.File;
 import java.util.HashMap;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

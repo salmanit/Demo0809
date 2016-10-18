@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.sage.demo0809.ui.MainActivity"
-    tools:showIn="@layout/activity_main">
+    tools:showIn="@layout/main_activity">
     <TextView
         android:background="#ff0000"
         android:layout_width="match_parent"

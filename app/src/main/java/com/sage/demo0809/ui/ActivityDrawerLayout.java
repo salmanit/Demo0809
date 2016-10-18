@@ -11,11 +11,21 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.db.chart.view.BarChartView;
 import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
 import com.sage.demo0809.fragment.FragmentDemo;
 
 import org.apache.commons.lang3.StringEscapeUtils;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class ActivityDrawerLayout extends AppCompatActivity {
 
@@ -31,6 +41,7 @@ public class ActivityDrawerLayout extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle("");
 
+        MyLog.i("----------------"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1475886888000l)));
         final EditText et= (EditText) findViewById(R.id.et_test);
         String temp="&#128176;&#128531;&#128176;&#128516;&#22909;&#21543;&#22909;&#21543;&#128522;";
 //        et.setText(Html.fromHtml("&amp;#128563;&amp;#128516;&amp;#9917;&amp;#128516;"));
@@ -82,5 +93,12 @@ public class ActivityDrawerLayout extends AppCompatActivity {
 //                }
             }
         });
+
+
+        BarChartView barChartView= (BarChartView) findViewById(R.id.chart3);
+
+
+        
+        
     }
 }

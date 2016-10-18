@@ -40,24 +40,29 @@
             android:layout_height="50dp" />
         <TextView
             android:id="@+id/tv_shade"
-            android:text="你好"
+            android:text="你好实际这么大你要"
             android:textColor="#ff00ff"
+            android:maxEms="6"
+
+            android:textSize="22sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <com.sage.demo0809.widget.CircularImageView
             android:src="@drawable/bj"
+            android:visibility="gone"
             android:scaleType="centerCrop"
             android:layout_width="80dp"
             android:layout_height="80dp" />
         <RadioGroup
             android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="100dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
             <RadioButton
                 android:id="@+id/rb1"
                 android:button="@null"
                 android:textColor="@color/skin_test_color"
                 android:text="male"
+                android:background="@drawable/rb_test"
                 android:layout_marginRight="15dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
@@ -65,7 +70,7 @@
                 android:id="@+id/rb2"
                 android:text="female"
                 android:button="@null"
-                android:drawableTop="@drawable/skin_status_test"
+                android:drawableTop="@drawable/rb_test"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </RadioGroup>

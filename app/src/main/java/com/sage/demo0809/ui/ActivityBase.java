@@ -17,7 +17,7 @@ import android.view.Window;
 
 public class ActivityBase extends AppCompatActivity {
 
-    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

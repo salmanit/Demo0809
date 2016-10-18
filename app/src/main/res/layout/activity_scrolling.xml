@@ -69,11 +69,7 @@
                     android:padding="5dp"
                     android:src="@mipmap/mood_box" />
             </android.support.v7.widget.Toolbar>
-            <ImageView
-                android:transitionName="shareNames"
-                android:src="@mipmap/play_disc"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+
             <!--<FrameLayout-->
                 <!--android:id="@+id/layout_rotate"-->
                 <!---->
@@ -93,7 +89,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <include layout="@layout/content_scrolling" />
-
+    <ImageView
+        android:transitionName="shareNames"
+        android:src="@mipmap/play_disc"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

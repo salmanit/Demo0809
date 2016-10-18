@@ -27,6 +27,7 @@ import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
 import com.sage.demo0809.bean.SimpleUser;
 import com.sage.demo0809.fragment.FragmentDemo;
+import com.sage.demo0809.step.ServiceTick;
 import com.sage.demo0809.widget.TextViewReply;
 import com.zhy.changeskin.SkinManager;
 import com.zhy.changeskin.base.BaseSkinActivity;
@@ -38,6 +39,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.TimerTask;
 
 import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.model.Axis;
@@ -48,6 +50,7 @@ import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
+import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
  * Created by Sage on 2016/9/10.
@@ -62,8 +65,8 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart_demo);
-
-
+        ShortcutBadger.applyCount(this, 10);
+        startService(new Intent(this, ServiceTick.class));
         TextViewReply textViewReply= (TextViewReply) findViewById(R.id.tv_reply);
         textViewReply.setReplyClickListener(new TextViewReply.TextViewReplyClickListener() {
             @Override
@@ -78,7 +81,6 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
 //        srf.setOnRefreshListener(this);
         chart1= (ColumnChartView) findViewById(R.id.chart1);
         initChart1();
-        Toast.makeText(this,"00",Toast.LENGTH_SHORT).show();
         ((TextView)findViewById(R.id.tv_shade)).setShadowLayer(10,5,5,Color.parseColor("#ff00ff"));
         findViewById(R.id.iv_test).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,7 +89,7 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
             }
         });
         SkinManager.getInstance().removeAnySkin();
-        setNewDrawable((RadioButton) findViewById(R.id.rb1));
+//        setNewDrawable((RadioButton) findViewById(R.id.rb1));
 
         RadioGroup rgHome= (RadioGroup) findViewById(R.id.rg_home);
         ImageView iv_circle= (ImageView) findViewById(R.id.iv_circle);
@@ -116,7 +118,22 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
                 return 2;
             }
         });
+        vp.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                ShortcutBadger.applyCount(ActivityChartDemo.this, position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
     public void goNext(Class cla){
         startActivity(new Intent(this,cla));
