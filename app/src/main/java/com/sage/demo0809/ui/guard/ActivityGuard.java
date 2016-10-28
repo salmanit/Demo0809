@@ -1,11 +1,9 @@
 package com.sage.demo0809.ui.guard;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.VelocityTracker;
 import android.view.Window;
@@ -13,7 +11,7 @@ import android.view.WindowManager;
 
 import com.sage.demo0809.R;
 
-public class MainActivity extends AppCompatActivity {
+public class ActivityGuard extends AppCompatActivity {
 
 	private static final boolean DBG = true;
 	private static final String TAG = "Fantastic";
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 				   WindowManager.LayoutParams.FLAG_FULLSCREEN);
         mStatusViewManager = new StatusViewManager(this, this.getApplicationContext());
         setContentView(R.layout.main);
-        startService(new Intent(MainActivity.this, FantasticLockService.class));
+        startService(new Intent(ActivityGuard.this, FantasticLockService.class));
 
 	}
 

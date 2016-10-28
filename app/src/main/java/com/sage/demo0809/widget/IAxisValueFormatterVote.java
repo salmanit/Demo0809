@@ -8,12 +8,16 @@ import com.github.mikephil.charting.formatter.IAxisValueFormatter;
  */
 
 public class IAxisValueFormatterVote implements IAxisValueFormatter {
+    public int last;
     @Override
     public String getFormattedValue(float value, AxisBase axis) {
-
-        return "选项一";
+        int index= (int) value;
+        if(index==0||index>last){
+            return "";
+        }
+        return lables[index-1];
     }
-
+    String[] lables={"A","B","C","D","E","F","G","H"};
     @Override
     public int getDecimalDigits() {
         return 0;

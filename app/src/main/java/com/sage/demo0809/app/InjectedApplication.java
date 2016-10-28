@@ -17,9 +17,13 @@
 package com.sage.demo0809.app;
 
 import android.app.Application;
+import android.content.Context;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.sage.demo0809.ui.finger.FingerprintModule;
+import com.umeng.analytics.MobclickAgent;
 import com.zhy.changeskin.SkinManager;
 
 import dagger.ObjectGraph;
@@ -28,7 +32,7 @@ import dagger.ObjectGraph;
  * The Application class of the sample which holds the ObjectGraph in Dagger and enables
  * dependency injection.
  */
-public class InjectedApplication extends Application {
+public class InjectedApplication extends MultiDexApplication {
 
     private static final String TAG = InjectedApplication.class.getSimpleName();
 
@@ -39,7 +43,17 @@ public class InjectedApplication extends Application {
         super.onCreate();
         SkinManager.getInstance().init(this);
         initObjectGraph(new FingerprintModule(this));
+
+
+        MobclickAgent.openActivityDurationTrack(false);
     }
+
+
+//    @Override
+//       protected void attachBaseContext(Context base) {
+//                super.attachBaseContext(base);
+//                 MultiDex.install(this) ;
+//            }
 
     /**
      * Initialize the Dagger module. Passing null or mock modules can be used for testing.

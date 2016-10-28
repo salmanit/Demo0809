@@ -23,7 +23,7 @@ public class FantasticLockService extends Service {
 		// TODO Auto-generated method stub
 		super.onCreate();
 		registerComponent();
-		mFxLockIntent = new Intent(FantasticLockService.this, MainActivity.class);
+		mFxLockIntent = new Intent(FantasticLockService.this, ActivityGuard.class);
 		mFxLockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 	}
 
@@ -57,7 +57,7 @@ public class FantasticLockService extends Service {
 				//屏蔽手机内置的锁屏
 				mKeyguardLock.disableKeyguard();
 				//启动该第三方锁屏
-				mFxLockIntent = new Intent(FantasticLockService.this, MainActivity.class);
+				mFxLockIntent = new Intent(FantasticLockService.this, ActivityGuard.class);
 				mFxLockIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 				startActivity(mFxLockIntent);
 				mKeyguardLock.reenableKeyguard();

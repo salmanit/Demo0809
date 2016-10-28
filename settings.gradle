@@ -1,1 +1,1 @@
-include ':app', ':highlight', ':mpandroidchart'
+include ':app', ':highlight', ':mpandroidchart', ':LibraryHealthStep'

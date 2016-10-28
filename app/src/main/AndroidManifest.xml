@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sage.demo0809">
 
-    <uses-permission android:name="android.permission.INTERNET" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -14,6 +13,17 @@
     <uses-permission android:name="android.permission.VIBRATE"/>
 
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+
+
+
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,6 +31,13 @@
         android:name=".app.InjectedApplication"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
+
+        <meta-data android:value="5811ce78310c931cf7001229" android:name="UMENG_APPKEY"/>
+        <meta-data android:value="DEFAULT" android:name="UMENG_CHANNEL"/>
+
+
+
         <meta-data
             android:name="com.samsung.android.health.platform_type"
             android:value="rel" />
@@ -28,17 +45,42 @@
             android:name="com.samsung.android.health.permission.read"
             android:value="com.samsung.health.step_count" />
 
-        <activity
-            android:name=".ui.ActivityD"
-            android:windowSoftInputMode="adjustResize|stateHidden" />
-        <activity android:name=".ui.ActivityChart">
 
+
+
+            <!--首页面，所有activity的列表-->
+        <activity android:name=".ui.ActivityLists">
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
              <category android:name="android.intent.category.LAUNCHER" />
              </intent-filter>
         </activity>
-        <activity android:name=".ui.ActivityChooseMood"></activity>
+
+        <!--collapsing滚动测试-->
+        <activity android:name=".ui.Activity7Collapsing"/>
+
+        <!--MPandroid图表库-->
+        <activity android:name=".ui.ActivityChart"/>
+
+        <!--hellocharts图表库-->
+        <activity android:name=".ui.ActivityChartDemo"/>
+
+        <!--心情选择库-->
+        <activity android:name=".ui.ActivityChooseMood"/>
+
+        <!--视频预览图-->
+        <activity
+            android:name=".ui.ActivityD"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <!--输入法表情使用-->
+        <activity
+            android:name=".ui.ActivityDrawerLayout"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+
+        <!--本地网页-->
+        <activity android:name=".ui.ActivityLocalWeb"
+            />
 
         <!--s健康读取数据页面。以及TextViewLCR-->
         <activity
@@ -47,6 +89,20 @@
             android:theme="@style/AppTheme" />
 
         <service android:name=".step.SHealthConnectService" />
+
+
+        <!--视频列表~全屏-->
+        <activity android:name=".ui.ActivityVideoList"
+            android:screenOrientation="portrait"
+            android:configChanges="screenSize|orientation|layoutDirection">
+        </activity>
+
+        <!--默认生成的登陆页-->
+         <activity android:name=".ui.LoginActivity"
+            android:screenOrientation="portrait"
+            android:configChanges="screenSize|orientation|layoutDirection">
+        </activity>
+
         <!--BottomSheetBehavior的测试。。。-->
         <activity
             android:name=".ui.ScrollingActivity"
@@ -73,39 +129,20 @@
             <!--</intent-filter>-->
         </activity>
 
-        <!--图标测试，换肤测试。首页-->
-        <activity android:name=".ui.ActivityLocalWeb"
-            >
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
 
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-            </activity>
-        <activity android:name=".ui.ActivityVideoList"
-           android:screenOrientation="portrait"
-            android:configChanges="screenSize|orientation|layoutDirection">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-            </activity>
 
         <activity android:name=".ui.finger.MainActivity"
             android:label="@string/app_name">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN"/>-->
-                <!--<category android:name="android.intent.category.LAUNCHER"/>-->
-            <!--</intent-filter>-->
         </activity>
 
+        <!--设置页面-->
         <activity
             android:name=".ui.finger.SettingsActivity"
             android:label="@string/action_settings" />
 
+        <!--锁屏页面-->
         <activity
-            android:name=".ui.guard.MainActivity"
+            android:name=".ui.guard.ActivityGuard"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait" >

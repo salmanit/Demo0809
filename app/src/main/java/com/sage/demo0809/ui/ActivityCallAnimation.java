@@ -8,7 +8,7 @@ import com.sage.demo0809.R;
 /**
  * Created by Sage on 2016/10/8.
  */
-
+@Deprecated
 public class ActivityCallAnimation extends ActivityBase {
 
     @Override

@@ -5,12 +5,12 @@ import android.graphics.RectF;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.MarkerView;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -26,14 +26,15 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.github.mikephil.charting.utils.MPPointF;
-import com.google.common.collect.MapMaker;
 import com.sage.demo0809.R;
+import com.sage.demo0809.bean.TwitterOptions;
 import com.sage.demo0809.widget.IAxisValueFormatterVote;
+import com.sage.demo0809.widget.MyBarChart;
+import com.sage.demo0809.widget.MyPieChart;
 import com.sage.demo0809.widget.XYMarkerView;
 
 import java.util.ArrayList;
-
-import lecho.lib.hellocharts.formatter.AxisValueFormatter;
+import java.util.Random;
 
 /**
  * Created by Sage on 2016/10/18.
@@ -113,8 +114,31 @@ public class ActivityChart extends ActivityBase implements OnChartValueSelectedL
         setData(5, 80);
 
         initPie();
+        initMyChartPie(8);
     }
 
+    public void refresh(View view){
+        int size=new Random().nextInt(8)+1;
+        initMyChartPie(size);
+        setData2(size,100);
+    }
+    private MyPieChart myChartPie;
+    MyBarChart myBarChart;
+    private void initMyChartPie(int size){
+        myChartPie= (MyPieChart) findViewById(R.id.mychartpie);
+        ArrayList<TwitterOptions> options=new ArrayList<>();
+        for(int i=0;i<size;i++){
+            TwitterOptions options1=new TwitterOptions();
+            options1.setText("选项测试。。。"+i);
+            options1.setCount(new Random().nextInt(10));
+            options.add(options1);
+        }
+
+        myChartPie.setData(options,"到底啥原因造成的鲸鱼集体自杀了？");
+
+         myBarChart= (MyBarChart) findViewById(R.id.mybarchart);
+        myBarChart.setData(options,"为啥天空这么蓝？");
+    }
     private void setData(int count, float range) {
 
         float start = 0f;
