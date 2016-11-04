@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.Window;
@@ -23,7 +24,10 @@ public class ActivityBase extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        String intentTitle=getIntent().getStringExtra("title");
+        if(!TextUtils.isEmpty(intentTitle)){
+            title=intentTitle;
+        }
         // 设置contentFeature,可使用切换动画
 //        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 //        Transition explode = TransitionInflater.from(this).inflateTransition(android.R.transition.explode);
@@ -31,8 +35,8 @@ public class ActivityBase extends AppCompatActivity {
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public void goNext(Class cla){
-        startActivity(new Intent(this,cla));
+    public void goNext(Class cla,String title){
+        startActivity(new Intent(this,cla).putExtra("title",title));
 //        Intent intent = new Intent(this, cla);
 //        startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
     }

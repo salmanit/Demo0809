@@ -55,7 +55,7 @@ public class ActivityStep extends ActivityBase {
         findViewById(R.id.toolbar_right).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goNext(ActivityStep.class);
+                goNext(ActivityStep.class,"s健康");
             }
         });
         tv_step = (TextView) findViewById(R.id.tv_step);

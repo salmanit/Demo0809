@@ -9,9 +9,13 @@ import com.sage.demo0809.R;
 import com.sage.demo0809.adapter.MyRvViewHolder;
 import com.sage.demo0809.adapter.MySimpleRvAdapter;
 import com.sage.demo0809.adapter.OnRecyclerItemClickListener;
+import com.sage.demo0809.app.InjectedApplication;
 import com.sage.demo0809.bean.BeanActivity;
+import com.sage.demo0809.service.OtherAccessibilityService;
+import com.sage.demo0809.service.RedAccessibilityService;
 import com.sage.demo0809.ui.finger.SettingsActivity;
 import com.sage.demo0809.ui.guard.ActivityGuard;
+import com.sage.demo0809.util.MyUtils;
 
 import java.util.ArrayList;
 
@@ -31,6 +35,13 @@ public class ActivityLists extends ActivityBase {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists);
+
+        MyUtils.isAccessibilitySettingsOn(this, RedAccessibilityService.class);
+        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
+
+        MyUtils.enabled(this,"");
+
+
         ButterKnife.bind(this);
         lists.add(new BeanActivity("collapsing滚动测试",Activity7Collapsing.class));
         lists.add(new BeanActivity("MPandroid图表库",ActivityChart.class));
@@ -47,6 +58,7 @@ public class ActivityLists extends ActivityBase {
         lists.add(new BeanActivity("BottomSheetDialogFragment",ScrollingActivity2.class));
         lists.add(new BeanActivity("设置页面xml写的",SettingsActivity.class));
         lists.add(new BeanActivity("锁屏页面",ActivityGuard.class));
+        lists.add(new BeanActivity("手机所有的app",ActivityAllApplication.class));
         LinearLayoutManager manager=new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         rv.setAdapter(new MySimpleRvAdapter<BeanActivity>(lists) {
@@ -66,7 +78,13 @@ public class ActivityLists extends ActivityBase {
         rv.addOnItemTouchListener(new OnRecyclerItemClickListener(rv) {
             @Override
             public void onItemClick(RecyclerView.ViewHolder vh, int position) {
-                goNext(lists.get(position).cla);
+
+                if(position%2==0){
+                    InjectedApplication.app.changeUMappKey("5811ce78310c931cf7001229");//测试用demo
+                }else{
+                    InjectedApplication.app.changeUMappKey("5819a8f2c62dca269700218f");//test test
+                }
+                goNext(lists.get(position).cla,lists.get(position).name);
             }
         });
 

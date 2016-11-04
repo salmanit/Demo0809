@@ -1,5 +1,6 @@
 package com.sage.demo0809.adapter;
 
+import android.graphics.drawable.Drawable;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -57,6 +58,10 @@ public class MyRvViewHolder extends RecyclerView.ViewHolder {
     public void setImageResource(int viewId,int resId){
         ImageView imageView=getView(viewId);
         imageView.setImageResource(resId);
+    }
+    public void setImageResource(int viewId, Drawable drawable){
+        ImageView imageView=getView(viewId);
+        imageView.setImageDrawable(drawable);
     }
 //    public void setImageUri(int viewId,String uri){
 //        setImageUri(viewId,uri, Utils.getHeaderOption());

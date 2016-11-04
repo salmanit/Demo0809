@@ -29,7 +29,7 @@ public class ScrollingActivity extends ActivityBase {
         findViewById(R.id.toolbar_right).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goNext(ActivityStep.class);
+                goNext(ActivityStep.class,"s健康");
             }
         });
 

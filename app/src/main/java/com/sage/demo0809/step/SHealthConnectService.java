@@ -245,7 +245,7 @@ public class SHealthConnectService extends Service {
     }
     public void stopObserver(){
         if(mStore!=null&&mObserver!=null)
-            HealthDataObserver.addObserver(mStore, HealthConstants.StepCount.HEALTH_DATA_TYPE, mObserver);
+            HealthDataObserver.removeObserver(mStore, mObserver);
     }
     // Read the today's step count on demand
     private void readTodayStepCount() {
