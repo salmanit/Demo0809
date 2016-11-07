@@ -175,6 +175,8 @@
 
         <!--手机所有的app-->
         <activity android:name=".ui.ActivityAllApplication"/>
+        <!--手机所有的app-->
+        <activity android:name=".ui.ActivityAllApplication2"/>
 
 
 
