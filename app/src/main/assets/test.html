@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
+    <meta content="yes" name="apple-mobile-web-app-capable">
+    <meta content="black" name="apple-mobile-web-app-status-bar-style">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <meta content="" name="pgv">
+    <meta http-equiv="Content-Security-Policy-Report-Only" content="script-src *.daishutijian.com *.map.baidu.com *.baidu.com *.beecloud.cn *.file.myqcloud.com *.qq.com *.idqqimg.com *.gtimg.cn *.gtimg.com 'unsafe-inline' 'unsafe-eval'; report-uri http://api.vac.qq.com/cgi-bin/DataUpload.fcgi" >
+    <title>订单列表</title>
+    <link rel="stylesheet" type="text/css" href="http://apps.daishutijian.com/wechat/resource/css/index.css?v=20161107001">
+    <link rel="stylesheet" type="text/css" href="http://apps.daishutijian.com/wechat/resource/css/init.css?v=20161107001">
+    <link rel="stylesheet" type="text/css" href="http://apps.daishutijian.com/wechat/resource/css/pages.css?v=20161107001">
+    <link rel="stylesheet" type="text/css" href="http://apps.daishutijian.com/wechat/resource/css/sweet-alert.css?v=20161107001">
+    <link rel="stylesheet" type="text/css" href="http://apps.daishutijian.com/wechat/resource/css/daishu_loading.css?v=20161107001">
+    <script type="text/javascript">
+        var res_version = "20161107001";
+        var user_name = '旗';
+        var social_id = '525CCAFF11AEBAE8E6664A77265051DD';
+        var user_id = '111773';
+        var rootPath = 'http://www.daishutijian.com/';
+        var appPath = 'http://apps.daishutijian.com/wechat/';
+        var statPath = 'http://stat.daishutijian.com/';
+        var appsRootPath = 'http://apps.daishutijian.com/';
+        var env = 'production';
+    </script>
+    <script type="text/javascript" src="http://apps.daishutijian.com/wechat/resource/js/webapp.min.js?v=20161107001"></script>
+    <script type="text/javascript" src="http://tajs.qq.com/h5?sId=500001206" charset="UTF-8"></script>
+</head>
+<body>
+<div style="display: none;">
+    <img  src='http://apps.daishutijian.com/wechat/resource/images/sns_share_logo.png' />
+</div>
+
+<div id="main">
+    <input type="hidden" id="head_title" value="订单列表"/>
+    <input type="hidden" id="cancel_time" value="144"/>
+    <div class="order-info">
+        <ul class="select_tab">
+            <li><a href="javascript:;" data-type="unpay" class="active">待支付<em name="unpay">(0)</em></a></li>
+            <li><a href="javascript:;" data-type="paied" class="">已预约<em name="paied">(0)</em></a></li>
+            <li><a href="javascript:;" data-type="all" class="">全部</a></li>
+        </ul>
+
+        <div class="physical_items">
+            <div class="none" style="display: none;color: #999;text-align: center;">暂无数据</div>
+            <div class="pay_item status_unpay" style="display:none;">
+                <div class="order_detail_box">
+                    <div class="item_pic" style="background-image:url(http://public-10006067.file.myqcloud.com//upload/imagelist/thumb/2447646d626603987f3352ccfe496042.png)"></div>
+                    <div class="item_desc">
+                        <h2 data-price="65800" data-p="1">亲友关怀套餐(男) <em style="display: none;">DIY</em></h2>
+                        <h5>
+                            abc                                                                                                                                                                    </h5>
+                        <h3>
+                            ¥<b>658</b>
+                            <em class="countdown" data-time-left="1889">等待支付</em>
+                        </h3>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="show_order_info">等待支付</div>
+                <div class="order_info">
+                    <div class="order_info_box">
+                        <div class="order_info_text">
+                            <h4><em name="currCity"></em>慈铭黄埔分院</h4>
+                            <h5>
+                                2016年11月24日 星期四                            </h5>
+                        </div>
+                        <div class="order_btns">
+                            <a href="http://apps.daishutijian.com/wechat/wxpay/pay/?order_id=43843&t=1010"
+                               target="_blank" class="a_btn_active">支付</a>
+                            <a data-url="http://apps.daishutijian.com/wechat/apply/index/43843/?package_id=28720"
+                               data-order_id="43843"
+                               data-hospital_order_id=""
+                               data-org_id="861"
+                               target="_self" class="a_btn_edit">更改</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="pay_item " style="display:none;">
+                <div class="order_detail_box">
+                    <div class="item_pic" style="background-image:url(http://public-10006067.file.myqcloud.com//upload/imagelist/thumb/2447646d626603987f3352ccfe496042.png)"></div>
+                    <div class="item_desc">
+                        <h2 data-price="65800" data-p="1">亲友关怀套餐(男) <em style="display: none;">DIY</em></h2>
+                        <h5>
+                            aaa                                                                                                                                                                    </h5>
+                        <h3>
+                            ¥<b>658</b>
+                            <em>支付超时</em>
+                        </h3>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+
+                <div class="show_order_info">等待支付</div>
+                <div class="order_info">
+                    <div class="order_info_box">
+                        <div class="order_info_text">
+                            <h4><em name="currCity"></em>慈铭黄埔分院</h4>
+                            <h5>
+                                2016年11月17日 星期四                            </h5>
+                        </div>
+                        <div class="order_btns">
+                            <a href="http://apps.daishutijian.com/wechat/usercenter/feedback" class="">反馈</a>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--点击更改底部出现的样式-->
+    <div class='hide_d'>
+        <ul>
+            <li class="xx_change">订单改期</li>
+            <li class='xx_xq'>订单取消</li>
+        </ul>
+        <p class='xx_off_p'>撤销</p>
+    </div>
+
+
+    <!--更改取消弹出框-->
+    <div class='xx_win'>
+        <i></i>
+        <p>确定要取消吗？</p>
+        <ul class='btn_ul clear'>
+            <li id="alert_ok">确定</li>
+            <li class="cancel">取消</li>
+        </ul>
+    </div>
+
+    <!--遮屏罩-->
+    <div class='big_canvas'></div>
+    <div class='big_canvas2'></div>
+    <!--代码结束-->
+    <script>
+    seajs.use(["page/orders.js?v=" + res_version], function (data) {
+        data.init();
+    });
+</script></div>
+<div class="error-tips" id="error_tips" style="top: 12px;display: none;"></div>
+<div id="loading" style="display:none;">
+    <div class="mum"></div>
+    <em></em>
+    <div class="son"></div>
+    <h1>拼命加载中</h1>
+</div>
+</body>
+</html>

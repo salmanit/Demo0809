@@ -11,7 +11,7 @@ public class TwitterOptions implements Serializable{
     private String text;
     private String img_option;
     private int count;
-
+    public float value;
     public String get_id() {
         return _id;
     }

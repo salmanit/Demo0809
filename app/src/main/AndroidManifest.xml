@@ -22,7 +22,7 @@
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
-
+    <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>-->
 
     <application
         android:allowBackup="true"
@@ -175,13 +175,20 @@
 
         <!--手机所有的app-->
         <activity android:name=".ui.ActivityAllApplication"/>
+
         <!--手机所有的app-->
         <activity android:name=".ui.ActivityAllApplication2"/>
 
+        <!--悬浮窗测试-->
+        <activity android:name=".ui.ActivitySuspension"/>
+
+        <!--myandroid 图片在列表页的测试-->
+        <activity android:name=".ui.ActivityMPAndroidList"/>
 
 
 
-
+    <!--for suspension window show-->
+    <service android:name=".service.ServiceSuspension"/>
 
         <service
             android:name=".ui.guard.FantasticLockService">

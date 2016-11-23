@@ -43,7 +43,9 @@ public class MyBarChart extends BarChart {
 
     IAxisValueFormatterVote xFormater=new IAxisValueFormatterVote();
     private void initDefault(){
-
+            if(isInEditMode()){
+                return;
+            }
         setDrawBarShadow(false);//--绘制当前展示的内容顶部阴影
         setDrawValueAboveBar(true);//--绘制的图形都在bar顶部
 

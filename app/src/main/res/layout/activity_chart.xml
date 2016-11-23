@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
     <Button
         android:id="@+id/btn_click"
+        android:layout_marginTop="25dp"
         android:text="refresh"
         android:onClick="refresh"
         android:layout_width="wrap_content"
@@ -23,11 +24,16 @@
         android:id="@+id/chart2"
         android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
         android:layout_height="0dp"  />
     <com.sage.demo0809.widget.MyPieChart
         android:id="@+id/mychartpie"
         android:layout_width="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="2"
+        android:layout_height="0dp"  />
+    <com.sage.demo0809.widget.MyPieChart2
+        android:id="@+id/mychartpie2"
+        android:layout_width="match_parent"
+        android:layout_weight="2"
         android:layout_height="0dp"  />
 </LinearLayout>

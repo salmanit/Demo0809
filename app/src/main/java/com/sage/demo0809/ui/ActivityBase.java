@@ -7,11 +7,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.Window;
+import android.widget.Toast;
 
+import com.sage.demo0809.R;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -34,6 +37,13 @@ public class ActivityBase extends AppCompatActivity {
 //        getWindow().setEnterTransition(explode);
     }
 
+    public void initMyToolbar(){
+        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+        if(toolbar!=null){
+            setSupportActionBar(toolbar);
+        }
+        setTitle("");
+    }
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public void goNext(Class cla,String title){
         startActivity(new Intent(this,cla).putExtra("title",title));
@@ -57,5 +67,10 @@ public class ActivityBase extends AppCompatActivity {
         MobclickAgent.onPageEnd(title); // （仅有Activity的应用中SDK自动调用，不需要单独写）保证 onPageEnd 在onPause 之前调用,因为 onPause 中会保存信息。"SplashScreen"为页面名称，可自定义
         MobclickAgent.onPause(this);
 
+    }
+
+
+    public void showToast(String msg){
+        Toast.makeText(this,msg,Toast.LENGTH_SHORT).show();
     }
 }

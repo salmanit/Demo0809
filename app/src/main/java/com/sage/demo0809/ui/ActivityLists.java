@@ -36,8 +36,8 @@ public class ActivityLists extends ActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists);
 
-        MyUtils.isAccessibilitySettingsOn(this, RedAccessibilityService.class);
-        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
+//        MyUtils.isAccessibilitySettingsOn(this, RedAccessibilityService.class);
+//        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
 
         MyUtils.enabled(this,"");
 
@@ -45,6 +45,7 @@ public class ActivityLists extends ActivityBase {
         ButterKnife.bind(this);
         lists.add(new BeanActivity("collapsing滚动测试",Activity7Collapsing.class));
         lists.add(new BeanActivity("MPandroid图表库",ActivityChart.class));
+        lists.add(new BeanActivity("MPandroid图表库列表里的测试",ActivityMPAndroidList.class));
         lists.add(new BeanActivity("hellocharts图表库",ActivityChartDemo.class));
         lists.add(new BeanActivity("心情选择库",ActivityChooseMood.class));
         lists.add(new BeanActivity("视频预览图",ActivityD.class));
@@ -60,6 +61,7 @@ public class ActivityLists extends ActivityBase {
         lists.add(new BeanActivity("锁屏页面",ActivityGuard.class));
         lists.add(new BeanActivity("手机所有的app",ActivityAllApplication.class));
         lists.add(new BeanActivity("手机所有的app2",ActivityAllApplication2.class));
+        lists.add(new BeanActivity("悬浮窗测试",ActivitySuspension.class));
         LinearLayoutManager manager=new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         rv.setAdapter(new MySimpleRvAdapter<BeanActivity>(lists) {

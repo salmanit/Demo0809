@@ -34,15 +34,16 @@ public class ActivityDrawerLayout extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_drawer_layout);
 
-        if(savedInstanceState==null){
-            getSupportFragmentManager().beginTransaction().replace(R.id.layout_left,new FragmentDemo(),"demo").commit();
-        }
-        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle("");
+//        if(savedInstanceState==null){
+//            getSupportFragmentManager().beginTransaction().replace(R.id.layout_left,new FragmentDemo(),"demo").commit();
+//        }
+//        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//        setTitle("");
 
         MyLog.i("----------------"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1475886888000l)));
         final EditText et= (EditText) findViewById(R.id.et_test);
+        final TextView tvmain2= (TextView) findViewById(R.id.tv_main2);
         String temp="&#128176;&#128531;&#128176;&#128516;&#22909;&#21543;&#22909;&#21543;&#128522;";
 //        et.setText(Html.fromHtml("&amp;#128563;&amp;#128516;&amp;#9917;&amp;#128516;"));
         et.setText(Html.fromHtml(temp));
@@ -52,23 +53,26 @@ public class ActivityDrawerLayout extends AppCompatActivity {
             public void onClick(View v) {
 
 
-                String resutl=StringEscapeUtils.unescapeHtml4(Html.toHtml(et.getText()));
-                MyLog.i("======="+resutl);
-                TextView tvmain= (TextView) findViewById(R.id.tv_main);
+//                String resutl=StringEscapeUtils.unescapeHtml4(Html.toHtml(et.getText()));
+//                MyLog.i("======="+resutl);
+//                TextView tvmain= (TextView) findViewById(R.id.tv_main);
+//
+////                tvmain.setText(Html.fromHtml(resutl));
+//                tvmain.setText(Html.fromHtml(Html.escapeHtml(et.getText())));
+//                /**第一步，将我们的带表情的字符串转换如下*/
+//                /**&amp;#128176;&amp;#128531;&amp;#128176;&amp;#128516;&amp;#22909;&amp;#21543;&amp;#22909;&amp;#21543;&amp;#128522;*/
+//                String result2=StringEscapeUtils.escapeHtml4(Html.escapeHtml(et.getText()));
+//                    MyLog.i("00000==="+Html.escapeHtml(et.getText()));
+//
+//                MyLog.i("=====111="+result2);
+//
+//                MyLog.i("====222=="+StringEscapeUtils.unescapeHtml4(result2));
+//
+//                /**使用的时候这样处理*/
+//                tvmain2.setText(Html.fromHtml(StringEscapeUtils.unescapeHtml4(result2)));
 
-//                tvmain.setText(Html.fromHtml(resutl));
-                tvmain.setText(Html.fromHtml(Html.escapeHtml(et.getText())));
-                /**第一步，将我们的带表情的字符串转换如下*/
-                /**&amp;#128176;&amp;#128531;&amp;#128176;&amp;#128516;&amp;#22909;&amp;#21543;&amp;#22909;&amp;#21543;&amp;#128522;*/
-                String result2=StringEscapeUtils.escapeHtml4(Html.escapeHtml(et.getText()));
-                    MyLog.i("00000==="+Html.escapeHtml(et.getText()));
-
-                MyLog.i("=====111="+result2);
-                TextView tvmain2= (TextView) findViewById(R.id.tv_main2);
-                MyLog.i("====222=="+StringEscapeUtils.unescapeHtml4(result2));
-
-                /**使用的时候这样处理*/
-                tvmain2.setText(Html.fromHtml(StringEscapeUtils.unescapeHtml4(result2)));
+                String send=Html.escapeHtml(et.getText().toString());
+                tvmain2.setText(Html.fromHtml(send));
             }
         });
 
@@ -87,6 +91,8 @@ public class ActivityDrawerLayout extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 System.out.println("========"+s);
+                String send=Html.escapeHtml(et.getText().toString());
+                System.out.println("========"+send);
 //                String  result=null;//调用过滤方法过滤；
 //                if(!TextUtils.equals(result,s.toString())){
 //                    et.setText(result);

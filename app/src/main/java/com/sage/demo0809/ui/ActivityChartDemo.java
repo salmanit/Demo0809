@@ -2,6 +2,7 @@ package com.sage.demo0809.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
@@ -39,17 +40,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.TimerTask;
 
+import lecho.lib.hellocharts.animation.PieChartRotationAnimator;
 import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Column;
 import lecho.lib.hellocharts.model.ColumnChartData;
+import lecho.lib.hellocharts.model.PieChartData;
+import lecho.lib.hellocharts.model.SliceValue;
 import lecho.lib.hellocharts.model.SubcolumnValue;
 import lecho.lib.hellocharts.model.Viewport;
 import lecho.lib.hellocharts.util.ChartUtils;
 import lecho.lib.hellocharts.view.ColumnChartView;
+import lecho.lib.hellocharts.view.PieChartView;
 import me.leolin.shortcutbadger.ShortcutBadger;
 
 /**
@@ -58,7 +64,8 @@ import me.leolin.shortcutbadger.ShortcutBadger;
 public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshLayout.OnRefreshListener{
 
 //    SwipeRefreshLayout srf;
-    ColumnChartView chart1;
+    PieChartView chart1;
+    private PieChartData data;
 
 
     @Override
@@ -79,8 +86,7 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
         textViewReply.setContent(from,to,"just for testjust for testjust for testjust for testjust for testjust for test");
 //        srf= (SwipeRefreshLayout) findViewById(R.id.srf);
 //        srf.setOnRefreshListener(this);
-        chart1= (ColumnChartView) findViewById(R.id.chart1);
-        initChart1();
+
         ((TextView)findViewById(R.id.tv_shade)).setShadowLayer(10,5,5,Color.parseColor("#ff00ff"));
         findViewById(R.id.iv_test).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -96,7 +102,7 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
         ImageView iv_line= (ImageView) findViewById(R.id.iv_line);
 
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         setTitle("");
         toolbar.setContentInsetsAbsolute(0,0);
         toolbar.setNavigationIcon(R.drawable.lib_btn_back);
@@ -132,6 +138,15 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
             @Override
             public void onPageScrollStateChanged(int state) {
 
+            }
+        });
+        initChartData();
+        initColumnChar();
+        findViewById(R.id.tv_shade).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                initChart1();
+                initChart2();
             }
         });
     }
@@ -191,53 +206,100 @@ public class ActivityChartDemo extends BaseSkinActivity implements SwipeRefreshL
             "Sep", "Oct", "Nov", "Dec",};
     private ColumnChartData columnData;
     public final static String[] days = new String[]{"Mon", "Tue", "Wen", "Thu", "Fri", "Sat", "Sun",};
+
     private void initChart1(){
 
 
-        int numSubcolumns = 1;
-        int numColumns = months.length;
+        int numValues = new Random().nextInt(7)+1;
 
-        List<AxisValue> axisValues = new ArrayList<AxisValue>();
-        List<Column> columns = new ArrayList<Column>();
-        List<SubcolumnValue> values;
-        for (int i = 0; i < numColumns; ++i) {
-
-            values = new ArrayList<>();
-            for (int j = 0; j < numSubcolumns; ++j) {
-                values.add(new SubcolumnValue((float) Math.random() * 50f + 5, ChartUtils.pickColor()));
-            }
-
-            axisValues.add(new AxisValue(i).setLabel(months[i]));
-
-            columns.add(new Column(values).setHasLabels(true));
+        List<SliceValue> values = new ArrayList<SliceValue>();
+        for (int i = 0; i < numValues; ++i) {
+            SliceValue sliceValue = new SliceValue((float) Math.random() * 3 , ChartUtils.pickColor());
+            sliceValue.setLabel(days[i]);
+//            sliceValue.setTarget((float) Math.random() * 30 + 15);
+            values.add(sliceValue);
         }
 
-        columnData = new ColumnChartData(columns);
+//        data = new PieChartData(values);
+//        data.setHasLabels(true);
+//        data.setHasLabelsOnlyForSelected(false);
+//        data.setHasLabelsOutside(true);
+//        data.setHasCenterCircle(false);
+//
+//        data.setSlicesSpacing(2);
+//        data.setCenterText1("Hello!");
 
-        columnData.setAxisXBottom(new Axis(axisValues).setHasLines(true));
-        columnData.setAxisYLeft(new Axis().setHasLines(true).setMaxLabelChars(2).setHasTiltedLabels(true));
-        columnData.setValueLabelBackgroundColor(Color.parseColor("#ffffff"));
-        columnData.setValueLabelBackgroundEnabled(false);
-        columnData.setValueLabelsTextColor(Color.parseColor("#000000"));
-        chart1.setColumnChartData(columnData);
+        // Get roboto-italic font.
+//        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Italic.ttf");
+//        data.setCenterText1Typeface(tf);
+//        data.setCenterText1FontSize(30);
 
-        // Set value touch listener that will trigger changes for chartTop.
-//        chart1.setOnValueTouchListener(new ValueTouchListener());
+//        data.setCenterText2("Charts (Roboto Italic)");
+//        Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Italic.ttf");
+//        data.setCenterText2Typeface(tf);
+//        data.setCenterText2FontSize(22);
+        data.setValues(values);
 
-        // Set selection mode to keep selected month column highlighted.
-        chart1.setValueSelectionEnabled(false);
-        chart1.setZoomEnabled(false);
-        chart1.setScrollEnabled(true);
-        chart1.setZoomType(ZoomType.HORIZONTAL);
-        Viewport maxViewport=chart1.getMaximumViewport();
-        MyLog.i("44="+maxViewport.toString());
-        maxViewport.top+=20;
-        MyLog.i("222222="+maxViewport.toString());
-        chart1.setMaximumViewport(maxViewport);
-        MyLog.i("3333=="+chart1.getMaximumViewport().toString());
+//        for (SliceValue value : data.getValues()) {
+//            value.setTarget((float) Math.random() * 30 + 15);
+//        }
+        chart1.startDataAnimation();
+        chart1.setChartRotation(new Random().nextInt(360),true);
     }
 
+    private void initChartData(){
 
+        chart1= (PieChartView) findViewById(R.id.chart1);
+
+        data = new PieChartData();
+        data.setHasLabels(true);
+        data.setHasLabelsOnlyForSelected(false);
+        data.setHasLabelsOutside(true);
+//        chart1.setCircleFillRatio(0.8f);
+        data.setValueLabelBackgroundEnabled(false);
+        data.setHasCenterCircle(false);
+        data.setValueLabelsTextColor(Color.argb(155,255,0,0));
+
+        data.setSlicesSpacing(2);
+        data.setCenterText1("Hello!");
+        chart1.setPieChartData(data);
+    }
+
+    ColumnChartView chart2;
+    ColumnChartData columnChartData;
+    private void initColumnChar(){
+        chart2= (ColumnChartView) findViewById(R.id.chart2);
+        chart2.setZoomEnabled(false);
+
+        columnChartData = new ColumnChartData();
+            Axis axisX = new Axis();
+            Axis axisY = new Axis().setHasLines(true);
+        columnChartData.setAxisXBottom(axisX);
+        columnChartData.setAxisYLeft(axisY);
+        columnChartData.setFillRatio(0.2f);
+        chart2.setColumnChartData(columnChartData);
+    }
+
+    public void initChart2(){
+        int numValues = new Random().nextInt(7)+1;
+        List<Column> columns = new ArrayList<Column>();
+        List<AxisValue> axisValues = new ArrayList<AxisValue>();
+        List<SubcolumnValue> values;
+        for (int i = 0; i < numValues; ++i) {
+
+            values = new ArrayList<>();
+            values.add(new SubcolumnValue((float) Math.random() * 50f, ChartUtils.pickColor()));
+            axisValues.add(new AxisValue(i).setLabel(""+i));
+            Column column = new Column(values);
+            column.setHasLabels(true);
+            column.setHasLabelsOnlyForSelected(false);
+            columns.add(column);
+        }
+
+        columnChartData.getAxisXBottom().setValues(axisValues);
+        columnChartData.setColumns(columns);
+        chart2.startDataAnimation(1200);
+    }
     @Override
     public void onRefresh() {
 //        srf.setRefreshing(false);

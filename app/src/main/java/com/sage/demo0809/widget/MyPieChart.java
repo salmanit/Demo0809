@@ -47,7 +47,7 @@ public class MyPieChart extends PieChart{
 //        setCenterTextTypeface(mTfLight);//字体
 
 
-        setDrawHoleEnabled(true);//中间是否为空
+        setDrawHoleEnabled(false);//中间是否为空
         setHoleColor(Color.WHITE);
 
         setTransparentCircleColor(Color.WHITE);
@@ -70,24 +70,25 @@ public class MyPieChart extends PieChart{
         setOnChartValueSelectedListener(null);
 
 
-        Legend l = getLegend();
-        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
-
-        // entry label styling
-        setEntryLabelColor(Color.WHITE);
-//        setEntryLabelTypeface(mTfRegular);
-        setEntryLabelTextSize(12f);
+//        Legend l = getLegend();
+//        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+//        l.setXEntrySpace(7f);
+//        l.setYEntrySpace(0f);
+//        l.setYOffset(0f);
+//
+//        // entry label styling
+//        setEntryLabelColor(Color.WHITE);
+////        setEntryLabelTypeface(mTfRegular);
+//        setEntryLabelTextSize(12f);
     }
     boolean first=true;
     String[] lables={"A","B","C","D","E","F","G","H"};
+    int[] color_choose={Color.RED,Color.GREEN,Color.GRAY,Color.BLUE,Color.YELLOW,Color.RED,Color.GREEN,Color.GRAY};
     public void setData(List<TwitterOptions> options,String question){
         if(first)
         initDefault();
         first=false;
-        setCenterText("中心文字看看多个会咋");
+        setCenterText("");
         ArrayList<Integer> colors = new ArrayList<>();//颜色
         ArrayList<PieEntry> entries = new ArrayList<>();
         if(options==null||options.size()==0){
@@ -99,23 +100,8 @@ public class MyPieChart extends PieChart{
         for (int i = 0; i < options.size()&&i<lables.length ; i++) {
             TwitterOptions option=options.get(i);
             entries.add(new PieEntry(option.getCount(),lables[i]));
-//            colors.add(Color.argb(255-i*interAlpha,255,0,0));
+            colors.add(color_choose[i]);
         }
-
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
-
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
 
 
         PieDataSet dataSet = new PieDataSet(entries, "");
@@ -138,10 +124,19 @@ public class MyPieChart extends PieChart{
         afterDataSet();
     }
     private void afterDataSet(){
-        animateY(900, Easing.EasingOption.EaseInOutQuad);
+        animateY(1400, Easing.EasingOption.EaseInOutQuad);
 //         spin(2000, 0, 360,Easing.EasingOption.EaseInOutQuad);
 
+        Legend l = getLegend();
+        l.setPosition(Legend.LegendPosition.RIGHT_OF_CHART);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
 
+        // entry label styling
+        setEntryLabelColor(Color.WHITE);
+//        setEntryLabelTypeface(mTfRegular);
+        setEntryLabelTextSize(12f);
 
     }
 }

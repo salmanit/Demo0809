@@ -11,26 +11,10 @@
     android:layout_height="match_parent">
     <LinearLayout
 android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:id="@+id/tv_main"
-            android:textSize="22sp"
-            android:text="main"
-            android:gravity="center"
-            android:layout_width="match_parent"
-           android:layout_weight="1"
-            android:layout_height="0dp" />
-        <com.db.chart.view.BarChartView
-            xmlns:chart="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/chart3"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_below="@+id/chart_toolbar"
-            android:layout_marginRight="12dp"
-            android:layout_marginLeft="12dp"
-            android:layout_marginBottom="12dp"
-            chart:chart_fontSize="15sp"/>
         <TextView
             android:id="@+id/tv_main2"
             android:textSize="22sp"
@@ -47,6 +31,26 @@ android:orientation="vertical"
             android:text="send"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_main"
+            android:textSize="22sp"
+            android:text="main"
+            android:gravity="center"
+            android:layout_width="match_parent"
+           android:layout_weight="1"
+            android:layout_height="0dp" />
+        <com.db.chart.view.BarChartView
+            xmlns:chart="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/chart3"
+            android:visibility="gone"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/chart_toolbar"
+            android:layout_marginRight="12dp"
+            android:layout_marginLeft="12dp"
+            android:layout_marginBottom="12dp"
+            chart:chart_fontSize="15sp"/>
+
     </LinearLayout>
     <LinearLayout
         android:background="#00ff0f"
