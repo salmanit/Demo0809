@@ -83,7 +83,15 @@ public class MyPieChart extends PieChart{
     }
     boolean first=true;
     String[] lables={"A","B","C","D","E","F","G","H"};
-    int[] color_choose={Color.RED,Color.GREEN,Color.GRAY,Color.BLUE,Color.YELLOW,Color.RED,Color.GREEN,Color.GRAY};
+//    int[] color_choose={Color.RED,Color.GREEN,Color.GRAY,Color.BLUE,Color.YELLOW,Color.RED,Color.GREEN,Color.GRAY};
+    int[] color_choose={Color.parseColor("#FF0000"),
+        Color.parseColor("#FF34B3"),
+        Color.parseColor("#FF6347"),
+        Color.parseColor("#FF8C69"),
+        Color.parseColor("#FFAEB9"),
+        Color.parseColor("#FFBBFF"),
+        Color.parseColor("#FFD39B"),
+        Color.parseColor("#FFEC8B")};
     public void setData(List<TwitterOptions> options,String question){
         if(first)
         initDefault();

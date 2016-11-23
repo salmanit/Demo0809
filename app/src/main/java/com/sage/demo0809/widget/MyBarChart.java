@@ -110,7 +110,14 @@ public class MyBarChart extends BarChart {
 //        setMarker(mv); // Set the marker to the chart
     }
     String[] lables={"A","B","C","D","E","F","G","H"};
-
+    int[] color_choose={Color.parseColor("#FF0000"),
+            Color.parseColor("#FF34B3"),
+            Color.parseColor("#FF6347"),
+            Color.parseColor("#FF8C69"),
+            Color.parseColor("#FFAEB9"),
+            Color.parseColor("#FFBBFF"),
+            Color.parseColor("#FFD39B"),
+            Color.parseColor("#FFEC8B")};
     public  void setData(List<TwitterOptions> options, String question) {
 
         xFormater.last=options.size();
@@ -119,11 +126,12 @@ public class MyBarChart extends BarChart {
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
         int[] colors=new int[options.size()];
         int interAlpha=255/options.size();
-        for (int i = 0; i < options.size() ; i++) {
+        for (int i = 0; i < options.size()&&i<color_choose.length ; i++) {
             TwitterOptions temp=options.get(i);
             BarEntry barEntry = new BarEntry(i + 1f,temp.getCount());
             yVals1.add(barEntry);
-            colors[i]= Color.argb(255-i*interAlpha,255,0,0);
+//            colors[i]= Color.argb(255-i*interAlpha,255,0,0);
+            colors[i]=color_choose[i];
         }
 
         BarDataSet set1;
