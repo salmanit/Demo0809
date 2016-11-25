@@ -62,6 +62,7 @@ public class ActivityLists extends ActivityBase {
         lists.add(new BeanActivity("手机所有的app",ActivityAllApplication.class));
         lists.add(new BeanActivity("手机所有的app2",ActivityAllApplication2.class));
         lists.add(new BeanActivity("悬浮窗测试",ActivitySuspension.class));
+        lists.add(new BeanActivity("tablayout测试",ActivityTabLayout.class));
         LinearLayoutManager manager=new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         rv.setAdapter(new MySimpleRvAdapter<BeanActivity>(lists) {

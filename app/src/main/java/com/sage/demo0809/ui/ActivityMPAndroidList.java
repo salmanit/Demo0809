@@ -48,7 +48,7 @@ public class ActivityMPAndroidList extends ActivityBase {
             int size=new Random().nextInt(8)+1;
             for(int j=0;j<size;j++){
                 TwitterOptions options=new TwitterOptions();
-                options.setCount(new Random().nextInt(100));
+                options.setCount(new Random().nextInt(5));
                 options.setText("options"+i);
                 temp.optionses.add(options);
             }

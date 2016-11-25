@@ -12,7 +12,6 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 import com.github.mikephil.charting.formatter.IValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 import com.github.mikephil.charting.utils.ViewPortHandler;
@@ -43,9 +42,7 @@ public class MyBarChart extends BarChart {
 
     IAxisValueFormatterVote xFormater=new IAxisValueFormatterVote();
     private void initDefault(){
-            if(isInEditMode()){
-                return;
-            }
+
         setDrawBarShadow(false);//--绘制当前展示的内容顶部阴影
         setDrawValueAboveBar(true);//--绘制的图形都在bar顶部
 
@@ -53,7 +50,7 @@ public class MyBarChart extends BarChart {
 
         // if more than 60 entries are displayed in the chart, no values will be
         // drawn
-//        setMaxVisibleValueCount(80); //Y方向的最大值.
+        setMaxVisibleValueCount(80); //Y方向的最大值.
 
         // scaling can now only be done on x- and y-axis separately
 //        setPinchZoom(false);  //--双指缩放.
@@ -122,23 +119,22 @@ public class MyBarChart extends BarChart {
 
         xFormater.last=options.size();
         getXAxis().setLabelCount(options.size());
-//        getXAxis().setAxisMaximum(options.size()+1);
         ArrayList<BarEntry> yVals1 = new ArrayList<>();
         int[] colors=new int[options.size()];
-        int interAlpha=255/options.size();
         for (int i = 0; i < options.size()&&i<color_choose.length ; i++) {
             TwitterOptions temp=options.get(i);
             BarEntry barEntry = new BarEntry(i + 1f,temp.getCount());
             yVals1.add(barEntry);
-//            colors[i]= Color.argb(255-i*interAlpha,255,0,0);
-            colors[i]=color_choose[i];
+            colors[i]= color_choose[i];
         }
 
         BarDataSet set1;
-
+        getAxisLeft().setLabelCount(2,true);
         if (getData() != null &&
                 getData().getDataSetCount() > 0) {
+
             set1 = (BarDataSet) getData().getDataSetByIndex(0);
+            set1.setStackLabels(lables);
             set1.setValues(yVals1);
             set1.setColors(colors);
             getData().notifyDataChanged();

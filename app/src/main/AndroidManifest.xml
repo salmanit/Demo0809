@@ -185,6 +185,10 @@
         <!--myandroid 图片在列表页的测试-->
         <activity android:name=".ui.ActivityMPAndroidList"/>
 
+        <!--myandroid 的测试-->
+        <activity android:name=".ui.ActivityTabLayout"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+
 
 
     <!--for suspension window show-->
