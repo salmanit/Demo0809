@@ -27,7 +27,7 @@ import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class ActivityDrawerLayout extends AppCompatActivity {
+public class ActivityDrawerLayout extends ActivityBase {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +40,8 @@ public class ActivityDrawerLayout extends AppCompatActivity {
 //        Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
 //        setTitle("");
-
+        initMyToolbar();
+        findViewById(R.id.layout_root).setFitsSystemWindows(true);
         MyLog.i("----------------"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1475886888000l)));
         final EditText et= (EditText) findViewById(R.id.et_test);
         final TextView tvmain2= (TextView) findViewById(R.id.tv_main2);

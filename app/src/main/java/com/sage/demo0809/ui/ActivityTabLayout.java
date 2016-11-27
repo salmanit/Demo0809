@@ -3,6 +3,7 @@ package com.sage.demo0809.ui;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
+import android.webkit.WebView;
 
 import com.sage.demo0809.R;
 import com.sage.demo0809.widget.WebViewVideoFull;
@@ -20,14 +21,18 @@ public class ActivityTabLayout extends ActivityBase {
     TabLayout tabLayout;
     @BindView(R.id.wv)
     WebViewVideoFull wv;
+    @BindView(R.id.wv2)
+    WebView wv2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablayout);
         ButterKnife.bind(this);
-
-        wv.loadUrl("http://voip.vtc365.com/LiveVideoServer/play4ThirdParty.do?video.videoId=346031");
+        initMyToolbar();
+//        wv.loadUrl("http://voip.vtc365.com/LiveVideoServer/m_liveVideoRoom.do?groupId=731&key=fLmlBp02FK81SZ65AYui");
+        wv2.getSettings().setJavaScriptEnabled(true);
+        wv2.loadUrl("http://voip.vtc365.com/LiveVideoServer/play4ThirdParty.do?video.videoId=346721");
     }
 
 

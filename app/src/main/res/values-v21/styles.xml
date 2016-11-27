@@ -17,4 +17,17 @@
         <!--<item name="android:windowEnterTransition">@transition/activity_explode</item>-->
         <!--<item name="android:windowExitTransition">@transition/activity_explode</item>-->
     <!--</style>-->
+
+    <style name="AppThemeMy" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--<item name="android:windowIsTranslucent">true</item>-->
+        <!--<item name="android:windowAnimationStyle">@style/activityAnimation</item>-->
+
+        <!--<item name="Android:windowEnterTransition">@transition/activity_explode</item>-->
+        <!--<item name="Android:windowExitTransition">@transition/activity_explode</item>-->
+    </style>
 </resources>

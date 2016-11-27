@@ -1,10 +1,11 @@
 package com.sage.demo0809.widget;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.Build;
 import android.support.v4.app.FragmentActivity;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -12,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -29,7 +32,6 @@ public class WebViewVideoFull extends WebView {
     public ProgressBar progressbar;
     public TextView tv_error;
     private FragmentActivity activity;
-    private String webViewUrl;
     /**
      * 视频全屏参数
      */
@@ -53,19 +55,18 @@ public class WebViewVideoFull extends WebView {
         initDefault(context);
     }
 
-
-    private void initDefault(Context context){
-        activity= (FragmentActivity) context;
+    private void initDefault(Context context) {
+        activity = (FragmentActivity) context;
         progressbar = new ProgressBar(context, null, android.R.attr.progressBarStyleHorizontal);
         progressbar.setLayoutParams(new AbsoluteLayout.LayoutParams(AbsoluteLayout.LayoutParams.MATCH_PARENT, 15, 0, 0));
         addView(progressbar);
 
-        tv_error=new TextView(context);
+        tv_error = new TextView(context);
         tv_error.setText("点击刷新");
         tv_error.setBackgroundColor(Color.parseColor("#66000000"));
-        tv_error.setLayoutParams( new AbsoluteLayout.LayoutParams(AbsoluteLayout.LayoutParams.WRAP_CONTENT,
-                LayoutParams.WRAP_CONTENT, 250, 300));
-        tv_error.setPadding(20,10,10,20);
+        tv_error.setLayoutParams(new AbsoluteLayout.LayoutParams(AbsoluteLayout.LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT, 350, 500));
+        tv_error.setPadding(20, 10, 10, 20);
         tv_error.setVisibility(GONE);
         addView(tv_error);
 
@@ -73,6 +74,7 @@ public class WebViewVideoFull extends WebView {
         setWebChromeClient(new WebChromeClientCustom());
         setWebViewClient(new WebViewClientCustom());
     }
+
     public class WebChromeClientCustom extends android.webkit.WebChromeClient {
         @Override
         public void onProgressChanged(WebView view, int newProgress) {
@@ -90,10 +92,13 @@ public class WebViewVideoFull extends WebView {
             super.onProgressChanged(view, newProgress);
         }
 
-        /*** 视频播放相关的方法 **/
+        /***
+         * 视频播放相关的方法
+         **/
 
         @Override
         public View getVideoLoadingProgressView() {
+            LogDebug("log=========getVideoLoadingProgressView");
             FrameLayout frameLayout = new FrameLayout(getContext());
             frameLayout.setLayoutParams(new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, FrameLayout.LayoutParams.MATCH_PARENT));
             return frameLayout;
@@ -101,11 +106,13 @@ public class WebViewVideoFull extends WebView {
 
         @Override
         public void onShowCustomView(View view, CustomViewCallback callback) {
+            LogDebug("log=========onShowCustomView");
             showCustomView(view, callback);
         }
 
         @Override
         public void onHideCustomView() {
+            LogDebug("log=========onHideCustomView");
             hideCustomView();
         }
 //        @Override
@@ -129,15 +136,17 @@ public class WebViewVideoFull extends WebView {
 //        }
     }
 
-    private void LogDebug(String msg){
-        if(BuildConfig.DEBUG){
-            System.out.println("======"+msg);
+    private void LogDebug(String msg) {
+        if (BuildConfig.DEBUG) {
+            System.out.println("======" + msg);
         }
     }
-    public class WebViewClientCustom extends WebViewClient{
+
+    public class WebViewClientCustom extends WebViewClient {
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            if( url.startsWith("http:") || url.startsWith("https:") ) {
+            LogDebug("log=========shouldOverrideUrlLoading==" + url);
+            if (url.startsWith("http:") || url.startsWith("https:")) {
                 view.loadUrl(url);
                 return true;
             }
@@ -151,6 +160,18 @@ public class WebViewVideoFull extends WebView {
                 return true;
             }
 
+        }
+
+        @Override
+        public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+            super.onReceivedError(view, request, error);
+            try {
+                if (Build.VERSION.SDK_INT >= 23)
+                    LogDebug("log============" + error.getErrorCode() + "=======" + request.getUrl().toString() + "======" + request.isForMainFrame() + "====" + request.getMethod());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //这个新的方法监听的错误比较多。需要区分处理error
         }
 
         @Override
@@ -168,6 +189,7 @@ public class WebViewVideoFull extends WebView {
         }
 
     }
+
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
         try {
@@ -182,8 +204,8 @@ public class WebViewVideoFull extends WebView {
     }
 
 
-    protected  void initSettings(){
-        WebSettings mWebSettings =getSettings();
+    protected void initSettings() {
+        WebSettings mWebSettings = getSettings();
         mWebSettings.setJavaScriptEnabled(true);
         mWebSettings.setLoadWithOverviewMode(true);
         mWebSettings.setUseWideViewPort(true);
@@ -203,13 +225,11 @@ public class WebViewVideoFull extends WebView {
      **/
     private void showCustomView(View view, WebChromeClient.CustomViewCallback callback) {
         // if a view already exists then immediately terminate the new one
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
         if (customView != null) {
             callback.onCustomViewHidden();
             return;
         }
-
-        ((Activity)getContext()).getWindow().getDecorView();
-
         FrameLayout decor = (FrameLayout) activity.getWindow().getDecorView();
         fullscreenContainer = new FullscreenHolder(activity);
         fullscreenContainer.addView(view, COVER_SCREEN_PARAMS);
@@ -223,6 +243,7 @@ public class WebViewVideoFull extends WebView {
      * 隐藏视频全屏
      */
     private void hideCustomView() {
+        activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         if (customView == null) {
             return;
         }
@@ -233,6 +254,7 @@ public class WebViewVideoFull extends WebView {
         fullscreenContainer = null;
         customView = null;
         customViewCallback.onCustomViewHidden();
+
         setVisibility(View.VISIBLE);
     }
 

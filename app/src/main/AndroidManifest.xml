@@ -30,7 +30,7 @@
         android:label="@string/app_name"
         android:name=".app.InjectedApplication"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppThemeMy">
 
 
         <!--<meta-data android:value="5811ce78310c931cf7001229" android:name="UMENG_APPKEY"/>-->
@@ -106,7 +106,7 @@
         <activity
             android:name=".ui.ActivityStep"
             android:label="@string/title_activity_activity_step"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppThemeMy" />
 
         <service android:name=".step.SHealthConnectService" />
 
@@ -127,13 +127,13 @@
         <activity
             android:name=".ui.ScrollingActivity"
             android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppThemeMy">
 
         </activity>
         <activity
             android:name=".ui.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppThemeMy">
 
         </activity>
 
@@ -141,7 +141,7 @@
         <activity
             android:name=".ui.ScrollingActivity2"
             android:label="@string/title_activity_scrolling2"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppThemeMy">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -185,7 +185,7 @@
         <!--myandroid 图片在列表页的测试-->
         <activity android:name=".ui.ActivityMPAndroidList"/>
 
-        <!--myandroid 的测试-->
+        <!--tablayout 的测试-->
         <activity android:name=".ui.ActivityTabLayout"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 
