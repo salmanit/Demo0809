@@ -1,6 +1,7 @@
 package com.sage.demo0809.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
@@ -54,7 +55,7 @@ public class ServiceSuspension extends Service {
     {
         wmParams = new WindowManager.LayoutParams();
         //获取的是WindowManagerImpl.CompatModeWrapper
-        mWindowManager = (WindowManager)getApplication().getSystemService(getApplication().WINDOW_SERVICE);
+        mWindowManager = (WindowManager)getApplication().getSystemService(Context.WINDOW_SERVICE);
         Log.i(TAG, "mWindowManager--->" + mWindowManager);
         //设置window type
         wmParams.type = WindowManager.LayoutParams.TYPE_TOAST;

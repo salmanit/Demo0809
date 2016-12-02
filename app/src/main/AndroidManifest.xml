@@ -15,7 +15,7 @@
     <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
 
 
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -59,7 +59,7 @@
             android:resource="@xml/accessibility"/>
     </service>
     <service android:name=".service.OtherAccessibilityService"
-        android:label="名字测试"
+        android:label="后退运行测试"
         android:enabled="true"
         android:exported="true"
         android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
@@ -105,8 +105,7 @@
         <!--s健康读取数据页面。以及TextViewLCR-->
         <activity
             android:name=".ui.ActivityStep"
-            android:label="@string/title_activity_activity_step"
-            android:theme="@style/AppThemeMy" />
+            android:label="@string/title_activity_activity_step" />
 
         <service android:name=".step.SHealthConnectService" />
 
@@ -126,22 +125,19 @@
         <!--BottomSheetBehavior的测试。。。-->
         <activity
             android:name=".ui.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"
-            android:theme="@style/AppThemeMy">
+            android:label="@string/title_activity_scrolling">
 
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppThemeMy">
+            android:label="@string/title_activity_main">
 
         </activity>
 
         <!--BottomSheetDialogFragment 的测试。旋转测试-->
         <activity
             android:name=".ui.ScrollingActivity2"
-            android:label="@string/title_activity_scrolling2"
-            android:theme="@style/AppThemeMy">
+            android:label="@string/title_activity_scrolling2">
             <!--<intent-filter>-->
                 <!--<action android:name="android.intent.action.MAIN" />-->
 
@@ -187,6 +183,15 @@
 
         <!--tablayout 的测试-->
         <activity android:name=".ui.ActivityTabLayout"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <!--normal webview 的测试-->
+        <activity android:name=".ui.ActivityWebTest"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <!--转场动画测试-->
+        <activity android:name=".ui.ActivityTransitionParent"
+            android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <!--转场动画测试子页面-->
+        <activity android:name=".ui.ActivityTransitionChild"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
 
 

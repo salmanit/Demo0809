@@ -27,4 +27,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/btn_close" />
+    <Button
+        android:text="dispaly"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btn_display" />
+    <LinearLayout
+        android:id="@+id/layout_test"
+        android:background="#fff"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"/>
 </LinearLayout>

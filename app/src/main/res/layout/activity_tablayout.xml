@@ -35,6 +35,11 @@
         android:layout_height="match_parent"/>
     <WebView
         android:id="@+id/wv2"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <com.tencent.smtt.sdk.WebView
+        android:id="@+id/tbsContent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 </LinearLayout>

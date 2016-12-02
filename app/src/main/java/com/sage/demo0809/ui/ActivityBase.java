@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sage.demo0809.R;
@@ -30,6 +31,10 @@ public class ActivityBase extends AppCompatActivity {
         String intentTitle=getIntent().getStringExtra("title");
         if(!TextUtils.isEmpty(intentTitle)){
             title=intentTitle;
+            TextView toolbar_title= (TextView) findViewById(R.id.toolbar_title);
+            if(toolbar_title!=null){
+                toolbar_title.setText(title);
+            }
         }
         // 设置contentFeature,可使用切换动画
 //        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
