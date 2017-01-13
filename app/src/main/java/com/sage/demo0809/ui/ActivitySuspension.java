@@ -1,6 +1,5 @@
 package com.sage.demo0809.ui;
 
-import android.app.Presentation;
 import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Build;
@@ -9,17 +8,18 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewCompat;
 import android.util.Log;
-import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.sage.demo0809.R;
 import com.sage.demo0809.service.ServiceSuspension;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -38,16 +38,32 @@ public class ActivitySuspension extends ActivityBase {
     Button btnOpen;
     @BindView(R.id.btn_close)
     Button btnClose;
+    @BindView(R.id.tv1)
+    TextView tv1;
+    @BindView(R.id.tv2)
+    TextView tv2;
+    @BindView(R.id.tv3)
+    TextView tv3;
+    @BindView(R.id.tv4)
+    TextView tv4;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_suspension);
         ButterKnife.bind(this);
+//        tv1.setTextColor(-436207617);
+//        tv2.setTextColor(0);
+//        tv3.setTextColor(2147483647);
+//        tv4.setTextColor(-1);
+        tv1.setTextColor(-452984832);
+        tv2.setTextColor(-1728053248);
+        tv3.setTextColor(2130706432);
+        tv4.setTextColor(-1);
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
-    @OnClick({R.id.btn_open_service, R.id.btn_close_service, R.id.btn_open, R.id.btn_close,R.id.btn_display})
+    @OnClick({R.id.btn_open_service, R.id.btn_close_service, R.id.btn_open, R.id.btn_close, R.id.btn_display})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btn_open_service:
@@ -76,8 +92,9 @@ public class ActivitySuspension extends ActivityBase {
 //                } catch (Exception e) {
 //                    e.printStackTrace();
 //                }
-                ViewCompat.setTranslationY(btnClose,500);
-                ViewCompat.setRotation(btnClose,20);
+
+                ViewCompat.setTranslationY(btnClose, 500);
+                ViewCompat.setRotation(btnClose, 20);
                 break;
         }
     }
@@ -88,6 +105,7 @@ public class ActivitySuspension extends ActivityBase {
     LinearLayout mFloatLayout;
     View mFloatView;
     int[] location;
+
     private void createFloatView() {
         //获取LayoutParams对象
         wmParams = new WindowManager.LayoutParams();
@@ -127,13 +145,13 @@ public class ActivitySuspension extends ActivityBase {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 // TODO Auto-generated method stub
-                if(location==null){
-                    location=new int[2];
+                if (location == null) {
+                    location = new int[2];
                     mFloatLayout.getLocationOnScreen(location);
                 }
-                wmParams.x = (int) ((int) event.getRawX() - mFloatLayout.getWidth() / 2-location[0]);
+                wmParams.x = (int) ((int) event.getRawX() - mFloatLayout.getWidth() / 2 - location[0]);
                 //25为状态栏高度
-                wmParams.y = (int) ((int) event.getRawY() - mFloatLayout.getHeight() / 2 - 40-location[1]);
+                wmParams.y = (int) ((int) event.getRawY() - mFloatLayout.getHeight() / 2 - 40 - location[1]);
                 mWindowManager.updateViewLayout(mFloatLayout, wmParams);
                 return false;
             }

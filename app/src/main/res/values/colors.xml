@@ -12,7 +12,13 @@
 
 
 
-
+    <color name="leftColorBottom">#f4511e</color>
+    <color name="leftColor">#531805</color>
+    <color name="rightColor">#1e57f4</color>
+    <color name="rightBottomColor">#07115c</color>
+    <color name="selectLeftColor">#7ef41e</color>
+    <color name="selectRightColor">#bcafab</color>
+    <color name="xyColor">#21cdef</color>
 
 
 

@@ -4,10 +4,34 @@
         <attr name="words_count" format="integer"/>
     </declare-styleable>
 
+    <declare-styleable name="RelativeLayout_with_bg_my">
+        <attr name="sage_arrow_height" format="dimension"/>
+        <attr name="sage_arrow_width" format="dimension"/>
+        <attr name="sage_arrow_start" format="dimension"/>
+        <attr name="sage_bg_color" format="color"/>
+        <attr name="sage_radius_top_left" format="dimension"/>
+        <attr name="sage_radius_top_right" format="dimension"/>
+        <attr name="sage_radius_bottom_left" format="dimension"/>
+        <attr name="sage_radius_bottom_right" format="dimension"/>
+        <attr name="sage_radius_same" format="dimension"/>
+        <attr name="sage_arrow_direction" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
+            </attr>
+    </declare-styleable>
 
-
-
-
+    <!--自定义柱状图属性-->
+    <declare-styleable name="MyChartView">
+        <attr name="leftColor" format="color"></attr>
+        <attr name="leftColorBottom" format="color"></attr>
+        <attr name="selectLeftColor" format="color"></attr>
+        <attr name="rightColor" format="color"></attr>
+        <attr name="rightColorBottom" format="color"></attr>
+        <attr name="selectRightColor" format="color"></attr>
+        <attr name="xyColor" format="color"></attr>
+    </declare-styleable>
 
     <!--  波浪滚动圆球View属性  -->
     <attr name="batteryLevel" format="float" />

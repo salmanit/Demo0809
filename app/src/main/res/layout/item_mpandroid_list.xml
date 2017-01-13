@@ -1,28 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#fff"
+    android:orientation="vertical">
+
     <View
-        android:background="#ff00ff"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
+        android:layout_height="1dp"
+        android:background="#ff00ff" />
+
     <TextView
-        android:text="TextView"
-        android:padding="20dp"
+        android:id="@+id/tv_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_content" />
-        <com.sage.demo0809.widget.MyBarChart
-            android:id="@+id/mybarchart"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
-    <View
-        android:background="#ff00ff"
+        android:padding="20dp"
+        android:text="TextView" />
+
+    <com.sage.demo0809.widget.MyBarChart
+        android:id="@+id/mybarchart"
         android:layout_width="match_parent"
-        android:layout_height="1dp"/>
-        <com.sage.demo0809.widget.MyPieChart
-            android:layout_marginTop="10dp"
-            android:id="@+id/mypiechart"
-            android:layout_width="match_parent"
-            android:layout_height="150dp" />
+        android:layout_height="150dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#ff00ff" />
+
+    <com.sage.demo0809.widget.MyPieChart
+        android:id="@+id/mypiechart"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="10dp" />
 </LinearLayout>

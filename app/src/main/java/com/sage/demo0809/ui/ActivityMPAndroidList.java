@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.sage.demo0809.R;
 import com.sage.demo0809.adapter.MyRvViewHolder;
 import com.sage.demo0809.adapter.MySimpleRvAdapter;
+import com.sage.demo0809.adapter.SpaceItemDecoration;
 import com.sage.demo0809.bean.TwitterItems;
 import com.sage.demo0809.bean.TwitterOptions;
 import com.sage.demo0809.widget.MyBarChart;
@@ -20,6 +21,7 @@ import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Sage on 2016/11/23.
@@ -33,7 +35,7 @@ public class ActivityMPAndroidList extends ActivityBase {
     AppBarLayout appBarLayout;
     @BindView(R.id.rv)
     RecyclerView rv;
-
+    MySimpleRvAdapter<TwitterItems> adapter;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,22 +43,23 @@ public class ActivityMPAndroidList extends ActivityBase {
         ButterKnife.bind(this);
         initMyToolbar();
 
-        ArrayList<TwitterItems> lists=new ArrayList<>();
-        for(int i=0;i<15;i++){
-            TwitterItems temp=new TwitterItems();
-            temp.content="content"+i;
-            int size=new Random().nextInt(8)+1;
-            for(int j=0;j<size;j++){
-                TwitterOptions options=new TwitterOptions();
+        ArrayList<TwitterItems> lists = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            TwitterItems temp = new TwitterItems();
+            temp.content = "content" + i;
+            int size = new Random().nextInt(8) + 1;
+            for (int j = 0; j < size; j++) {
+                TwitterOptions options = new TwitterOptions();
                 options.setCount(new Random().nextInt(5));
-                options.setText("options"+i);
+                options.setText("options" + i);
                 temp.optionses.add(options);
             }
             lists.add(temp);
         }
 
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(new MySimpleRvAdapter<TwitterItems>(lists) {
+        rv.addItemDecoration(new SpaceItemDecoration(30));
+        rv.setAdapter(adapter=new MySimpleRvAdapter<TwitterItems>(lists) {
             @Override
             public int layoutId(int viewType) {
                 return R.layout.item_mpandroid_list;
@@ -65,16 +68,31 @@ public class ActivityMPAndroidList extends ActivityBase {
             @Override
             public void handleData(MyRvViewHolder holder, int position, TwitterItems data) {
 
-                holder.setText(R.id.tv_content,data.content);
-                MyBarChart myBarChart=holder.getView(R.id.mybarchart);
-                MyPieChart myPieChart=holder.getView(R.id.mypiechart);
+                holder.setText(R.id.tv_content, data.content);
+                MyBarChart myBarChart = holder.getView(R.id.mybarchart);
+                MyPieChart myPieChart = holder.getView(R.id.mypiechart);
 
-                myBarChart.setData(data.optionses,"11");
-                myPieChart.setData(data.optionses,"22");
+                myBarChart.setData(data.optionses, "11");
+                myPieChart.setData(data.optionses, "22");
             }
         });
     }
 
 
+    @OnClick(R.id.tv_click)
+    public void onClick() {
 
+        TwitterItems temp = new TwitterItems();
+        temp.content = "content" + 12345;
+        int size = new Random().nextInt(8) + 1;
+        for (int j = 0; j < size; j++) {
+            TwitterOptions options = new TwitterOptions();
+            options.setCount(new Random().nextInt(5));
+            options.setText("options" + 12345);
+            temp.optionses.add(options);
+        }
+        adapter.getLists().add(0,temp);
+        adapter.notifyItemInserted(0);
+
+    }
 }

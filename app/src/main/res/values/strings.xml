@@ -135,4 +135,10 @@
     </string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_scrolling2">ScrollingActivity2</string>
+
+    <string name="md5test"><![CDATA[app_id=118923999865083820161220134342&biz_content={
+  "qudao" : "关爱++",
+  "shoujihao" : "15021819629"
+}&charset=utf-8&format=json&sign_type=MD5&timestamp=2016-12-22 16:19:28&version=1.0E6FD3976A207F4B269918DEB30223A28
+]]></string>
 </resources>

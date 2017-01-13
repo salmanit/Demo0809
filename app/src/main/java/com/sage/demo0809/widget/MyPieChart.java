@@ -92,7 +92,7 @@ public class MyPieChart extends PieChart {
         // the chart.
         for (int i = 0; i < options.size()&&i<lables.length ; i++) {
             TwitterOptions option=options.get(i);
-            float value=option.getCount()==1?1.1f:option.getCount();
+            float value=option.getCount()==1?1.0f:option.getCount();
             entries.add(new PieEntry(value,lables[i]+value));
             colors.add(color_choose[i]);
         }

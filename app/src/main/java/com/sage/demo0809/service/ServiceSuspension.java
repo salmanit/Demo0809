@@ -1,11 +1,16 @@
 package com.sage.demo0809.service;
 
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
 import android.view.GestureDetector;
@@ -13,12 +18,19 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
+import com.sage.demo0809.ui.ActivityLists;
+
+import java.util.LinkedList;
 
 /**
  * Created by Sage on 2016/11/14.
@@ -41,8 +53,93 @@ public class ServiceSuspension extends Service {
         // TODO Auto-generated method stub
         super.onCreate();
         Log.i(TAG, "oncreat");
-        createFloatView();
+        try {
+            showNotification();
+            createFloatView();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    public static boolean isDarkNotificationTheme(Context context) {
+        return !isSimilarColor(Color.BLACK, getNotificationColor(context));
+    }
+    private static boolean isSimilarColor(int baseColor, int color) {
+        int simpleBaseColor=baseColor|0xff000000;
+        int simpleColor=color|0xff000000;
+        int baseRed=Color.red(simpleBaseColor)-Color.red(simpleColor);
+        int baseGreen=Color.green(simpleBaseColor)-Color.green(simpleColor);
+        int baseBlue=Color.blue(simpleBaseColor)-Color.blue(simpleColor);
+        double value=Math.sqrt(baseRed*baseRed+baseGreen*baseGreen+baseBlue*baseBlue);
+        if (value<180.0) {
+            return true;
+        }
+        return false;
+    }
+
+    private void showNotification() {
+         boolean isDark=isDarkNotificationTheme(this);
+
+        RemoteViews remoteViews=new RemoteViews(getPackageName(),R.layout.layout_step_notify_custom);
+        remoteViews.setTextViewText(R.id.tv_step,22222+"\n步");
+        remoteViews.setTextViewText(R.id.tv_distance,22+"\n公里");
+        remoteViews.setTextViewText(R.id.tv_calorie,123+"\n千卡");
+        remoteViews.setInt(R.id.tv_step,"setTextColor",isDark?Color.WHITE:Color.BLACK);
+        remoteViews.setInt(R.id.tv_distance,"setTextColor",isDark?Color.WHITE:Color.BLACK);
+        remoteViews.setInt(R.id.tv_calorie,"setTextColor",isDark?Color.WHITE:Color.BLACK);
+        Intent intent=new Intent(getApplicationContext(), ActivityLists.class);
+        PendingIntent pendingIntent=PendingIntent.getActivity(getApplicationContext(),200,intent,PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(this)
+                .setContent(remoteViews)
+                .setPriority(NotificationCompat.PRIORITY_MAX)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher);
+        startForeground(999, builder.build());
+    }
+
+    /**
+     * 获取通知栏颜色
+     * @param context
+     * @return
+     */
+    public static int getNotificationColor(Context context) {
+        NotificationCompat.Builder builder=new NotificationCompat.Builder(context);
+        Notification notification=builder.build();
+        int layoutId=notification.contentView.getLayoutId();
+        ViewGroup viewGroup= (ViewGroup) LayoutInflater.from(context).inflate(layoutId, null, false);
+        if (viewGroup.findViewById(android.R.id.title)!=null) {
+            MyLog.i("======11===="+((TextView) viewGroup.findViewById(android.R.id.title)).getCurrentTextColor());
+//            return ((TextView) viewGroup.findViewById(android.R.id.title)).getCurrentTextColor();
+        }
+        return findColor(viewGroup);
+    }
+
+    private static int findColor(ViewGroup viewGroupSource) {
+        int color= Color.TRANSPARENT;
+        LinkedList<ViewGroup> viewGroups=new LinkedList<>();
+        viewGroups.add(viewGroupSource);
+        while (viewGroups.size()>0) {
+            ViewGroup viewGroup1=viewGroups.getFirst();
+            for (int i = 0; i < viewGroup1.getChildCount(); i++) {
+                if (viewGroup1.getChildAt(i) instanceof ViewGroup) {
+                    viewGroups.add((ViewGroup) viewGroup1.getChildAt(i));
+                }
+                else if (viewGroup1.getChildAt(i) instanceof TextView) {
+                    if (((TextView) viewGroup1.getChildAt(i)).getCurrentTextColor()!=-1) {
+                        color=((TextView) viewGroup1.getChildAt(i)).getCurrentTextColor();
+                        MyLog.i("=============="+color);
+                    }
+                }
+            }
+            viewGroups.remove(viewGroup1);
+        }
+        return color;
+    }
+
+
+
 
     @Override
     public IBinder onBind(Intent intent)
@@ -133,6 +230,12 @@ public class ServiceSuspension extends Service {
         {
             //移除悬浮窗口
             mWindowManager.removeView(mFloatLayout);
+        }
+
+        try {
+            ((NotificationManager) getSystemService(NOTIFICATION_SERVICE)).cancel(999);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 

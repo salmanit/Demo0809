@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.sage.demo0809">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
@@ -28,7 +29,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".app.InjectedApplication"
+        android:name=".AMSKY"
         android:supportsRtl="true"
         android:theme="@style/AppThemeMy">
 
@@ -43,7 +44,9 @@
         <meta-data
             android:name="com.samsung.android.health.permission.read"
             android:value="com.samsung.health.step_count" />
-
+        <service
+            android:name=".service.SampleResultService"
+            android:exported="false"/>
 
     <service android:name=".service.RedAccessibilityService"
         android:label="微信红包测试"
@@ -193,6 +196,15 @@
         <!--转场动画测试子页面-->
         <activity android:name=".ui.ActivityTransitionChild"
             android:configChanges="orientation|screenSize|keyboardHidden"/>
+        <!--behavior-->
+        <activity android:name=".ui.ActivityBehaviorTest"
+            android:screenOrientation="portrait"/>
+        <!--test1-->
+        <activity android:name=".ui.ActivityTest1"
+            android:screenOrientation="portrait"/>
+        <!--test2-->
+        <activity android:name=".ui.ActivityTest2"
+            android:screenOrientation="portrait"/>
 
 
 

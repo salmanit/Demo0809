@@ -39,12 +39,15 @@ public class ActivityLists extends ActivityBase {
 //        MyUtils.isAccessibilitySettingsOn(this, RedAccessibilityService.class);
 //        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
 
+
+
+
         MyUtils.enabled(this,"");
 
-
+        System.err.println("7.1.9".compareTo("7.1.90")+"================");
         ButterKnife.bind(this);
-        lists.add(new BeanActivity("collapsing滚动测试",Activity7Collapsing.class));
-        lists.add(new BeanActivity("MPandroid图表库",ActivityChart.class));
+        lists.add(new BeanActivity("collapsing滚动测试1036",Activity7Collapsing.class));
+        lists.add(new BeanActivity("MPandroid图表库1036",ActivityChart.class));
         lists.add(new BeanActivity("MPandroid图表库列表里的测试",ActivityMPAndroidList.class));
         lists.add(new BeanActivity("hellocharts图表库",ActivityChartDemo.class));
         lists.add(new BeanActivity("心情选择库",ActivityChooseMood.class));
@@ -65,6 +68,9 @@ public class ActivityLists extends ActivityBase {
         lists.add(new BeanActivity("tablayout测试",ActivityTabLayout.class));
         lists.add(new BeanActivity("normal webview测试",ActivityWebTest.class));
         lists.add(new BeanActivity("自定义转场动画",ActivityTransitionParent.class));
+        lists.add(new BeanActivity("behavior学习",ActivityBehaviorTest.class));
+        lists.add(new BeanActivity("test1",ActivityTest1.class));
+        lists.add(new BeanActivity("test2",ActivityTest2.class));
         LinearLayoutManager manager=new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         rv.setAdapter(new MySimpleRvAdapter<BeanActivity>(lists) {
@@ -85,11 +91,11 @@ public class ActivityLists extends ActivityBase {
             @Override
             public void onItemClick(RecyclerView.ViewHolder vh, int position) {
 
-                if(position%2==0){
-                    InjectedApplication.app.changeUMappKey("5811ce78310c931cf7001229");//测试用demo
-                }else{
-                    InjectedApplication.app.changeUMappKey("5819a8f2c62dca269700218f");//test test
-                }
+//                if(position%2==0){
+//                    InjectedApplication.app.changeUMappKey("5811ce78310c931cf7001229");//测试用demo
+//                }else{
+//                    InjectedApplication.app.changeUMappKey("5819a8f2c62dca269700218f");//test test
+//                }
                 goNext(lists.get(position).cla,lists.get(position).name);
             }
         });

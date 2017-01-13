@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_root"
+    android:orientation="vertical"
+    android:fitsSystemWindows="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <include layout="@layout/layout_toolbar_test"/>
+    <RadioGroup
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rb1"
+            android:text="rb1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <RadioButton
+            android:id="@+id/rb2"
+            android:text="rb2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+<ImageView
+    android:id="@+id/iv_scale"
+    android:layout_marginLeft="50dp"
+    android:scaleType="centerCrop"
+    android:src="@mipmap/banner"
+    android:layout_width="200dp"
+    android:layout_height="200dp" />
+
+    <TextView
+        android:id="@+id/tv"
+        android:text="just ignore what just happened,okey?"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/iv_system"
+        android:layout_marginLeft="50dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/banner"
+        android:layout_width="200dp"
+        android:layout_height="200dp" />
+</LinearLayout>

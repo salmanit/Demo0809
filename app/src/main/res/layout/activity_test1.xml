@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_root"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f4f4"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <WebView
+        android:id="@+id/wv"
+        android:layout_width="match_parent"
+        android:layout_height="10dp" />
+
+    <TextView
+        android:id="@+id/tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1" />
+
+    <com.sage.demo0809.widget.RelativeLayoutWithBg
+        android:id="@+id/rv_with_bg"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:paddingTop="10dp"
+        app:sage_arrow_start="50dp"
+        app:sage_bg_color="#ff00ff"
+        app:sage_radius_same="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:text="hello"
+            android:textColor="#000000" />
+    </com.sage.demo0809.widget.RelativeLayoutWithBg>
+
+    <com.sage.demo0809.widget.RelativeLayoutWithBg
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:sage_arrow_height="5dp"
+        app:sage_arrow_start="10dp"
+        app:sage_bg_color="#ff00ff"
+        app:sage_arrow_direction="left"
+        app:sage_radius_same="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#ffffff"
+            android:padding="5dp"
+            android:text="hello"
+            android:textColor="#000000" />
+    </com.sage.demo0809.widget.RelativeLayoutWithBg>
+    <com.sage.demo0809.widget.RelativeLayoutWithBg
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:sage_arrow_height="5dp"
+        app:sage_arrow_start="10dp"
+        app:sage_bg_color="#ff00ff"
+        app:sage_arrow_direction="right"
+        app:sage_radius_same="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#ffffff"
+            android:padding="5dp"
+            android:text="hello"
+            android:textColor="#000000" />
+    </com.sage.demo0809.widget.RelativeLayoutWithBg>
+    <com.sage.demo0809.widget.RelativeLayoutWithBg
+        android:layout_marginTop="10dp"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        app:sage_arrow_height="5dp"
+        app:sage_arrow_start="10dp"
+        app:sage_bg_color="#ff00ff"
+        app:sage_arrow_direction="bottom"
+        app:sage_radius_same="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="#ffffff"
+            android:padding="5dp"
+            android:text="hello"
+            android:textColor="#000000" />
+    </com.sage.demo0809.widget.RelativeLayoutWithBg>
+
+    <RelativeLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="50dp" />
+
+    <com.sage.demo0809.widget.MyChartView
+        android:id="@+id/my_chart_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+</LinearLayout>

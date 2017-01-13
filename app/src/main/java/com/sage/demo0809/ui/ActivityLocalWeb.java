@@ -102,6 +102,11 @@ public class ActivityLocalWeb extends ActivityBase {
             public void onLoadResource(WebView view, String url) {
                 super.onLoadResource(view, url);
                 MyLog.i("onLoadResource22======"+url);
+                try {
+                    MyLog.i("+++++++++++++"+url.substring(url.indexOf("changeTitle@")));
+                } catch (Exception e) {
+
+                }
             }
 
             @Override
@@ -162,8 +167,9 @@ public class ActivityLocalWeb extends ActivityBase {
 
         String dongwang="http://saas.dongsport.com/sso/login-GA.jsp";
 //        mWebview.loadUrl(fileUrl);
-        mWebview.loadUrl("http://apps.daishutijian.com/wechat/org/package/");
+//        mWebview.loadUrl("http://apps.daishutijian.com/wechat/org/package/");
 //        mWebview.loadUrl("file:///android_asset/test.html");
+        mWebview.loadUrl("http://10.0.3.132:8082/thanks/iframe.html");
     }
 
     @Override
