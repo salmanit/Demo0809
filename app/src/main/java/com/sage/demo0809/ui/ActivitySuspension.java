@@ -1,6 +1,8 @@
 package com.sage.demo0809.ui;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.widget.TextView;
 
 import com.sage.demo0809.R;
 import com.sage.demo0809.service.ServiceSuspension;
+import com.sage.demo0809.service.TestService;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -56,10 +59,15 @@ public class ActivitySuspension extends ActivityBase {
 //        tv2.setTextColor(0);
 //        tv3.setTextColor(2147483647);
 //        tv4.setTextColor(-1);
-        tv1.setTextColor(-452984832);
-        tv2.setTextColor(-1728053248);
-        tv3.setTextColor(2130706432);
-        tv4.setTextColor(-1);
+    }
+
+    private void test() {
+        SharedPreferences sp = getSharedPreferences("aaaaaa", Context.MODE_PRIVATE);
+        sp.edit().putBoolean("aaa", true)
+                .putInt("bbb", 111)
+                .putString("ccc", "aa")
+                .apply();
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -169,4 +177,21 @@ public class ActivitySuspension extends ActivityBase {
     }
 
 
+    @OnClick({R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4})
+    public void onClick2(View view) {
+        switch (view.getId()) {
+            case R.id.tv1:
+                startService(new Intent(this, TestService.class));
+                break;
+            case R.id.tv2:
+                stopService(new Intent(this, TestService.class));
+                break;
+            case R.id.tv3:
+                float step=getSharedPreferences("aaaaa", Context.MODE_PRIVATE).getFloat("step",0);
+                tv4.setText("step"+step);
+                break;
+            case R.id.tv4:
+                break;
+        }
+    }
 }
