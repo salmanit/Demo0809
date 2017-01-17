@@ -179,6 +179,7 @@ public class ActivitySuspension extends ActivityBase {
 
     @OnClick({R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4})
     public void onClick2(View view) {
+        showToast("click");
         switch (view.getId()) {
             case R.id.tv1:
                 startService(new Intent(this, TestService.class));
@@ -187,7 +188,7 @@ public class ActivitySuspension extends ActivityBase {
                 stopService(new Intent(this, TestService.class));
                 break;
             case R.id.tv3:
-                float step=getSharedPreferences("aaaaa", Context.MODE_PRIVATE).getFloat("step",0);
+                float step=getSharedPreferences("aaaaa", Context.MODE_PRIVATE).getFloat("stepTemp",0);
                 tv4.setText("step"+step);
                 break;
             case R.id.tv4:

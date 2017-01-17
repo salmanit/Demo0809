@@ -1,7 +1,9 @@
 package com.sage.demo0809.service;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -18,8 +20,7 @@ import java.util.Date;
  * Created by Sage on 2017/1/16.
  */
 
-public class TestService extends Service implements SensorEventListener{
-
+public class TestService extends Service implements SensorEventListener {
 
 
     @Nullable
@@ -37,13 +38,18 @@ public class TestService extends Service implements SensorEventListener{
             e.printStackTrace();
         }
     }
+
     private Sensor detectorSensor;
     Sensor countSensor;
     private SensorManager mySensorManager;
     private Sensor myAccelerometer;
-    int stepSensor=-1;
+    int stepSensor = -1;
+    SharedPreferences sp;
+
     //测步器&计步器传感器
     private void addCountStepListener() {
+        sp = getSharedPreferences("aaaaa", Context.MODE_PRIVATE);
+
         mySensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
         detectorSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_STEP_DETECTOR);
         countSensor = mySensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
@@ -52,8 +58,8 @@ public class TestService extends Service implements SensorEventListener{
             stepSensor = 0;
 
             mySensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
-        } else
-        if (detectorSensor != null) {
+            mySensorManager.registerListener(tempListener, countSensor, SensorManager.SENSOR_DELAY_UI);
+        } else if (detectorSensor != null) {
             stepSensor = 1;
             new Thread(new Runnable() {
                 @Override
@@ -66,12 +72,29 @@ public class TestService extends Service implements SensorEventListener{
 
         }
     }
-    private SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss sss");
+
+    private SensorEventListener tempListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            System.out.println("temp===========" + Arrays.toString(event.values)+"===="+countSensor.isWakeUpSensor()+"=="+detectorSensor.isWakeUpSensor());
+            mySensorManager.unregisterListener(tempListener);
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
+    private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss sss");
+
     @Override
     public void onSensorChanged(SensorEvent event) {
-        System.out.println("stepSensor="+stepSensor+"======"+ Arrays.toString(event.values)
-                +"=="+format.format(new Date(event.timestamp))+"timestamp=="+event.timestamp+"===="+event.accuracy
-                +"time="+ SystemClock.currentThreadTimeMillis());
+        long realTime = System.currentTimeMillis() + ((event.timestamp - SystemClock.elapsedRealtimeNanos()) / 1000000L);
+        System.out.println("stepSensor=" + stepSensor + "======" + Arrays.toString(event.values)
+                + "==" + format.format(new Date(realTime)) + "timestamp==" + event.timestamp + "accuracy====" + event.accuracy
+                + "time=" + SystemClock.elapsedRealtimeNanos());
+
+        sp.edit().putFloat("stepTemp", event.values[0]).apply();
     }
 
     @Override
@@ -82,8 +105,8 @@ public class TestService extends Service implements SensorEventListener{
     @Override
     public void onDestroy() {
         super.onDestroy();
-//        if(detectorSensor!=null){
-//            mySensorManager.unregisterListener(this);
-//        }
+
+//        mySensorManager.unregisterListener(this);
+
     }
 }
