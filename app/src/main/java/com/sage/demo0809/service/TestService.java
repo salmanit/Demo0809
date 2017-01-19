@@ -59,12 +59,14 @@ public class TestService extends Service implements SensorEventListener {
 
             mySensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
             mySensorManager.registerListener(tempListener, countSensor, SensorManager.SENSOR_DELAY_UI);
-        } else if (detectorSensor != null) {
+        }
+//        else
+        if (detectorSensor != null) {
             stepSensor = 1;
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    mySensorManager.registerListener(TestService.this, detectorSensor, SensorManager.SENSOR_DELAY_UI);
+                    mySensorManager.registerListener(detectorSensorListener, detectorSensor, SensorManager.SENSOR_DELAY_UI);
                 }
             }).start();
 
@@ -85,12 +87,26 @@ public class TestService extends Service implements SensorEventListener {
 
         }
     };
+    private SensorEventListener detectorSensorListener = new SensorEventListener() {
+        @Override
+        public void onSensorChanged(SensorEvent event) {
+            long realTime = System.currentTimeMillis() + ((event.timestamp - SystemClock.elapsedRealtimeNanos()) / 1000000L);
+            System.out.println(event.sensor.getName()+"=detectorSensorListener="  + "======" + Arrays.toString(event.values)
+                    + "==" + format.format(new Date(realTime)) + "timestamp==" + event.timestamp + "accuracy====" + event.accuracy
+                    + "time=" + SystemClock.elapsedRealtimeNanos());
+        }
+
+        @Override
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+        }
+    };
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss sss");
 
     @Override
     public void onSensorChanged(SensorEvent event) {
         long realTime = System.currentTimeMillis() + ((event.timestamp - SystemClock.elapsedRealtimeNanos()) / 1000000L);
-        System.out.println("stepSensor=" + stepSensor + "======" + Arrays.toString(event.values)
+        System.out.println(event.sensor.getName()+"=stepSensor=" + stepSensor + "======" + Arrays.toString(event.values)
                 + "==" + format.format(new Date(realTime)) + "timestamp==" + event.timestamp + "accuracy====" + event.accuracy
                 + "time=" + SystemClock.elapsedRealtimeNanos());
 

@@ -18,6 +18,7 @@ import com.sage.demo0809.ui.guard.ActivityGuard;
 import com.sage.demo0809.util.MyUtils;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,11 +41,10 @@ public class ActivityLists extends ActivityBase {
 //        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
 
 
-
-
+        int year=Calendar.getInstance().get(Calendar.YEAR);
         MyUtils.enabled(this,"");
 
-        System.err.println("7.1.9".compareTo("7.1.90")+"================");
+        System.err.println("7.1.9".compareTo("7.1.90")+"================"+year);
         ButterKnife.bind(this);
         lists.add(new BeanActivity("collapsing滚动测试1036",Activity7Collapsing.class));
         lists.add(new BeanActivity("MPandroid图表库1036",ActivityChart.class));
