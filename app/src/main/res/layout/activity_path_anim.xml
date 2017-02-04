@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp"
+    android:background="#661831d2"
+    android:orientation="vertical">
+
+    <com.sage.demo0809.util.path.PathAnimView
+        android:id="@+id/pv1"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp" />
+
+    <com.sage.demo0809.util.path.PathAnimView
+        android:id="@+id/pv2"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp" />
+    <com.sage.demo0809.util.path.PathAnimView
+        android:id="@+id/pv3"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp" />
+    <com.sage.demo0809.util.path.StoreHouseAnimView
+        android:id="@+id/pv4"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginTop="10dp" />
+</LinearLayout>

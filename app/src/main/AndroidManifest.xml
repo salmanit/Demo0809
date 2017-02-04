@@ -213,6 +213,10 @@
         <activity
             android:name=".ui.ActivityTest2"
             android:screenOrientation="portrait" />
+        <!--vector path anim-->
+        <activity
+            android:name=".ui.ActivityPathAnima"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".receiver.ReceiverShotdown">
             <intent-filter>

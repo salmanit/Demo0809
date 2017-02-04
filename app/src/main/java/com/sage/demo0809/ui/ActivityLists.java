@@ -46,6 +46,7 @@ public class ActivityLists extends ActivityBase {
 
         System.err.println("7.1.9".compareTo("7.1.90")+"================"+year);
         ButterKnife.bind(this);
+        lists.add(new BeanActivity("vector的path动画",ActivityPathAnima.class));
         lists.add(new BeanActivity("collapsing滚动测试1036",Activity7Collapsing.class));
         lists.add(new BeanActivity("MPandroid图表库1036",ActivityChart.class));
         lists.add(new BeanActivity("MPandroid图表库列表里的测试",ActivityMPAndroidList.class));

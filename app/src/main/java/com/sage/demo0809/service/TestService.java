@@ -58,7 +58,7 @@ public class TestService extends Service implements SensorEventListener {
             stepSensor = 0;
 
             mySensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
-            mySensorManager.registerListener(tempListener, countSensor, SensorManager.SENSOR_DELAY_UI);
+//            mySensorManager.registerListener(tempListener, countSensor, SensorManager.SENSOR_DELAY_UI);
         }
 //        else
         if (detectorSensor != null) {
@@ -122,7 +122,7 @@ public class TestService extends Service implements SensorEventListener {
     public void onDestroy() {
         super.onDestroy();
 
-//        mySensorManager.unregisterListener(this);
+        mySensorManager.unregisterListener(this);
 
     }
 }

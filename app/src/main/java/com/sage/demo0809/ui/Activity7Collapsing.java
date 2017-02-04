@@ -14,6 +14,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -52,7 +53,9 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
 
     ProgressBar pb;
     TextView tv_pb;
-
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
