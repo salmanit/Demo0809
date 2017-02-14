@@ -150,7 +150,7 @@
         <TextView
             android:id="@+id/tv_pb"
             android:layout_gravity="center_vertical"
-            android:background="#000fff"
+            android:background="#f00"
             android:padding="5dp"
             android:text="10"
             android:textColor="#fff000"

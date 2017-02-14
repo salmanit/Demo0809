@@ -1,5 +1,6 @@
 package com.sage.demo0809.ui;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +9,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v7.app.NotificationCompat;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.sage.demo0809.R;
@@ -83,11 +87,12 @@ public class ActivitySuspension extends ActivityBase {
                 break;
             case R.id.btn_open:
                 createFloatView();
+                showNotification();
                 break;
             case R.id.btn_close:
+                NotificationManagerCompat.from(this).cancel(999);
                 if (mFloatLayout != null) {
                     mWindowManager.removeView(mFloatLayout);
-                    finish();
                 }
 
                 break;
@@ -105,6 +110,18 @@ public class ActivitySuspension extends ActivityBase {
                 ViewCompat.setRotation(btnClose, 20);
                 break;
         }
+    }
+
+    private void showNotification(){
+        RemoteViews remoteViews = new RemoteViews(getPackageName(), R.layout.layout_step_notify_custom);
+        remoteViews.setTextViewText(R.id.tv_step, 999 + "\n步");
+        Intent intent = new Intent(getApplicationContext(), ActivityTest1.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 200, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        android.support.v4.app.NotificationCompat.Builder builder = new android.support.v4.app.NotificationCompat.Builder(this).setAutoCancel(false)
+                .setContent(remoteViews)
+                .setContentIntent(pendingIntent)
+                .setSmallIcon(R.mipmap.ic_launcher);
+        NotificationManagerCompat.from(this).notify(999,builder.build());
     }
 
     private static final String TAG = "FloatWindowTest";

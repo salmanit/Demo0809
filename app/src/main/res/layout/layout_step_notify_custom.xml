@@ -16,20 +16,22 @@
         android:layout_weight="1"
         android:layout_width="0dp"
         android:gravity="center"
-        tools:text="0\n步"
+        android:text="0\n步"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/tv_distance"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:gravity="center"
-        tools:text="0\n步"
+        android:text="0\n步"
+        style="@style/NotificationContent"
         android:layout_height="wrap_content" />
     <TextView
         android:id="@+id/tv_calorie"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:gravity="center"
-        tools:text="0\n步"
+        android:text="0\n步"
+        style="@style/NotificationTitle"
         android:layout_height="wrap_content" />
 </LinearLayout>

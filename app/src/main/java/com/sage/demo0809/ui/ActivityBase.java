@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.sage.demo0809.R;
+import com.sage.demo0809.util.ThemeHelper;
 import com.umeng.analytics.MobclickAgent;
 
 /**
@@ -24,10 +25,10 @@ import com.umeng.analytics.MobclickAgent;
 
 public class ActivityBase extends AppCompatActivity {
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ThemeHelper.statusBarLightMode(this);
         String intentTitle=getIntent().getStringExtra("title");
         if(!TextUtils.isEmpty(intentTitle)){
             title=intentTitle;

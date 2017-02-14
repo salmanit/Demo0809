@@ -1,11 +1,15 @@
 package com.sage.demo0809.ui;
 
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
@@ -49,6 +53,7 @@ public class ActivityChart extends ActivityBase implements OnChartValueSelectedL
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chart);
+        testsss((TextView) findViewById(R.id.tv_test));
         initMyToolbar();
         myChartPie= (MyPieChart) findViewById(R.id.mychartpie);
         myChartPie2= (MyPieChart2) findViewById(R.id.mychartpie2);
@@ -61,8 +66,21 @@ public class ActivityChart extends ActivityBase implements OnChartValueSelectedL
         myChartPie2.initDefault();
         initPie(5);
         initMyChartPie(5);
-    }
 
+    }
+    private  void testsss(TextView mRightText){
+        System.out.println("==============0");
+        mRightText.setBackgroundResource(R.mipmap.mood_box);
+        try {
+            System.out.println("==============1");
+            Drawable bg=mRightText.getBackground();
+            bg.setColorFilter(Color.parseColor("#ff0000"), PorterDuff.Mode.SRC_ATOP);
+            mRightText.setBackground(bg);
+            System.out.println("==============2");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     public void refresh(View view){
         int size=new Random().nextInt(5)+1;
         initMyChartPie(size);

@@ -2,7 +2,10 @@ package com.sage.demo0809.ui;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
@@ -56,6 +59,7 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
     static {
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,7 +73,6 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
 
         pb = (ProgressBar) findViewById(R.id.pb);
         tv_pb = (TextView) findViewById(R.id.tv_pb);
-
         System.out.println("=========");
 
         appBarLayout.setBackgroundResource(R.mipmap.placeholder_disk_play_song);
@@ -96,8 +99,8 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
         findViewById(R.id.iv_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("开始更新");
-                File file = new File(Environment.getExternalStorageDirectory(), "/test/p.apk");
+                showToast("开始更新,新版本0214");
+                File file = new File(Environment.getExternalStorageDirectory(), "/p.apk");
                 MyLog.i("p.apk path=======" + file.getAbsolutePath());
                 TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), file.getAbsolutePath());
             }
@@ -127,7 +130,7 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
             findViewById(R.id.layout_my).setVisibility(View.VISIBLE);
         }
         float alpha = 1 + verticalOffset * 1f / appBarLayout.getTotalScrollRange();
-        System.out.println(alpha + "==11=======" + appBarLayout.getTotalScrollRange() + "===" + verticalOffset);
+//        System.out.println(alpha + "==11=======" + appBarLayout.getTotalScrollRange() + "===" + verticalOffset);
         findViewById(R.id.layout_my).setAlpha(alpha);
 
 
@@ -144,7 +147,11 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv1://load
-                TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), "/sdcard/zhibo8/p.apk");
+                File patch=new File(Environment.getExternalStorageDirectory(),"/apk/patch_signed_7zip.apk");
+                if(patch.exists()){
+                    TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), patch.getAbsolutePath());
+                }
+
                 break;
             case R.id.tv2://show
                 showInfo(this);

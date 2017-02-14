@@ -1,7 +1,9 @@
 package com.sage.demo0809.ui;
 
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
@@ -12,15 +14,20 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
 import com.sage.demo0809.widget.MyChartView;
 import com.sage.demo0809.widget.RelativeLayoutWithBg;
+import com.tencent.tinker.lib.tinker.Tinker;
+import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by Sage on 2016/12/16.
@@ -65,8 +72,18 @@ public class ActivityTest1 extends ActivityBase {
                 rv.setDirection(count%4);
             }
         });
+        showToast("version=="+getVerName());
     }
-
+    public  String getVerName() {
+        String verName = "0.1";
+        try {
+            verName = getPackageManager().getPackageInfo(
+                    getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return verName;
+    }
     private void initChatView() {
 
         myChartView.setLefrColorBottom(getResources().getColor(R.color.leftColorBottom));
@@ -113,5 +130,19 @@ public class ActivityTest1 extends ActivityBase {
     }
 
 
-    private void test(){}
+    @OnClick({R.id.tv_load,R.id.tv_cancel_})
+    public  void clickView(View view){
+        switch (view.getId()){
+            case R.id.tv_load:
+                showToast("开始更新,新版本0207");
+                File file = new File(Environment.getExternalStorageDirectory(), "/p.apk");
+                MyLog.i("p.apk path=======" + file.getAbsolutePath());
+                if(file.exists())
+                    TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), file.getAbsolutePath());
+                break;
+            case R.id.tv_cancel_:
+                Tinker.with(getApplicationContext()).cleanPatch();
+                break;
+        }
+    }
 }

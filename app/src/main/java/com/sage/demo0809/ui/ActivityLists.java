@@ -17,8 +17,12 @@ import com.sage.demo0809.ui.finger.SettingsActivity;
 import com.sage.demo0809.ui.guard.ActivityGuard;
 import com.sage.demo0809.util.MyUtils;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,6 +36,21 @@ public class ActivityLists extends ActivityBase {
     @BindView(R.id.rv)
     RecyclerView rv;
     public ArrayList<BeanActivity>  lists=new ArrayList<>();
+
+    /**
+     02-13 16:55:10.166 9709-9709/com.sage.demo0809 I/System.out: 2017-01-20 14:04:30--------2017-01-20 15:04:30
+     02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-22 14:57:34--------2017-01-22 15:57:34
+     02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-23 18:27:25--------2017-01-23 19:27:25
+     02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-27 11:35:15--------2017-01-27 11:35:15
+     02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-29 18:33:50--------2017-01-29 18:33:50
+     02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-30 13:25:11--------2017-01-30 13:25:11
+     02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-31 16:11:17--------2017-01-31 16:11:17
+     02-13 16:55:10.169 9709-9709/com.sage.demo0809 I/System.out: 2017-02-09 19:08:11--------2017-02-09 19:08:11
+     02-13 16:55:10.169 9709-9709/com.sage.demo0809 I/System.out: 2017-02-08 09:39:47--------2017-02-08 09:39:47
+     * */
+    private void sout(String showTime,long time){
+        System.out.println(showTime+"--------"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(time)));
+    }
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,14 +59,24 @@ public class ActivityLists extends ActivityBase {
 //        MyUtils.isAccessibilitySettingsOn(this, RedAccessibilityService.class);
 //        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
 
+        //2017-01-19 09:00:33  2017-02-08 09:39:47
+        System.out.println("--------1--"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1486517987653l)));
 
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
+        System.out.println("--------2--"+format.format(new Date(1486517987653l)));
+        format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
+        System.out.println("--------2--"+format.format(new Date(1486517987653l)));
+
+        String result=SimpleDateFormat.getDateInstance().format(new Date(1486517987653l));
+        System.out.println("---------33--"+result);
         int year=Calendar.getInstance().get(Calendar.YEAR);
         MyUtils.enabled(this,"");
 
         System.err.println("7.1.9".compareTo("7.1.90")+"================"+year);
         ButterKnife.bind(this);
         lists.add(new BeanActivity("vector的path动画",ActivityPathAnima.class));
-        lists.add(new BeanActivity("collapsing滚动测试1036",Activity7Collapsing.class));
+        lists.add(new BeanActivity("collapsing滚动测试",Activity7Collapsing.class));
         lists.add(new BeanActivity("MPandroid图表库1036",ActivityChart.class));
         lists.add(new BeanActivity("MPandroid图表库列表里的测试",ActivityMPAndroidList.class));
         lists.add(new BeanActivity("hellocharts图表库",ActivityChartDemo.class));

@@ -8,9 +8,13 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.hardware.TriggerEvent;
+import android.hardware.TriggerEventListener;
+import android.os.Build;
 import android.os.IBinder;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -20,6 +24,7 @@ import java.util.Date;
  * Created by Sage on 2017/1/16.
  */
 
+@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
 public class TestService extends Service implements SensorEventListener {
 
 
@@ -59,8 +64,10 @@ public class TestService extends Service implements SensorEventListener {
 
             mySensorManager.registerListener(this, countSensor, SensorManager.SENSOR_DELAY_UI);
 //            mySensorManager.registerListener(tempListener, countSensor, SensorManager.SENSOR_DELAY_UI);
+            mySensorManager.requestTriggerSensor(triggerEventListener,countSensor);
+
         }
-//        else
+        else
         if (detectorSensor != null) {
             stepSensor = 1;
             new Thread(new Runnable() {
@@ -75,6 +82,12 @@ public class TestService extends Service implements SensorEventListener {
         }
     }
 
+    private TriggerEventListener triggerEventListener=new TriggerEventListener() {
+        @Override
+        public void onTrigger(TriggerEvent event) {
+            System.out.println("triggerEventListener temp===========" + Arrays.toString(event.values));
+        }
+    };
     private SensorEventListener tempListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
@@ -118,11 +131,11 @@ public class TestService extends Service implements SensorEventListener {
 
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-
-        mySensorManager.unregisterListener(this);
-
-    }
+//    @Override
+//    public void onDestroy() {
+//        super.onDestroy();
+//
+//        mySensorManager.unregisterListener(this);
+//
+//    }
 }

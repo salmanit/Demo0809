@@ -6,7 +6,7 @@ android {
             storeFile file('C:/Users/Administrator/.android/debug.keystore')
         }
         release {
-            keyAlias '0809demo'
+            keyAlias 'demo0809'
             keyPassword '111111'
             storeFile file('F:/demo/Demo0809/key111111.jks')
             storePassword '111111'
@@ -23,7 +23,7 @@ android {
         minSdkVersion 16
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0"
+        versionName "1.1"
         multiDexEnabled true
         /**
          * you can use multiDex and install it in your ApplicationLifeCycle implement
@@ -44,6 +44,9 @@ android {
     }
     buildTypes {
         release {
+            // 移除无用的resource文件
+            shrinkResources false
+            //开启代码混淆
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -75,11 +78,11 @@ ext {
 
     //for normal build
     //old apk file to build patch apk
-    tinkerOldApkPath = "${bakPath}/app-release-0112-16-33-17.apk"
+    tinkerOldApkPath = "${bakPath}/app-release-0214-17-24-43.apk"
     //proguard mapping file to build patch apk
 //    tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
     //resource R.txt to build patch apk, must input if there is resource changed
-    tinkerApplyResourcePath = "${bakPath}/app-release-0112-16-33-17-R.txt"
+    tinkerApplyResourcePath = "${bakPath}/app-release-0214-17-24-43-R.txt"
 
     //only use for build all flavor, if not, just ignore this field
 //    tinkerBuildFlavorDirectory = "${bakPath}/app-1018-17-32-47"
