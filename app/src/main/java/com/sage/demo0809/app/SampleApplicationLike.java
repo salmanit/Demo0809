@@ -27,6 +27,7 @@ import android.support.multidex.MultiDex;
 import android.widget.Toast;
 
 import com.sage.demo0809.Log.MyLogImp;
+import com.sage.demo0809.util.BlockDetectByPrinter;
 import com.sage.demo0809.util.SampleApplicationContext;
 import com.sage.demo0809.util.TinkerManager;
 import com.tencent.tinker.anno.DefaultLifeCycle;
@@ -111,4 +112,9 @@ public class SampleApplicationLike extends DefaultApplicationLike {
         getApplication().registerActivityLifecycleCallbacks(callback);
     }
 
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+    }
 }

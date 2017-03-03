@@ -75,7 +75,9 @@
         </service>
 
         <!--首页面，所有activity的列表-->
-        <activity android:name=".ui.ActivityLists">
+        <activity android:name=".ui.ActivityLists"
+            android:configChanges="orientation|screenSize|layoutDirection"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

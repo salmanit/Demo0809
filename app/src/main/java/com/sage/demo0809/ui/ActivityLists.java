@@ -60,16 +60,16 @@ public class ActivityLists extends ActivityBase {
 //        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
 
         //2017-01-19 09:00:33  2017-02-08 09:39:47
-        System.out.println("--------1--"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1486517987653l)));
+        System.out.println("--------11--"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1486517987653l)));
 
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
-        System.out.println("--------2--"+format.format(new Date(1486517987653l)));
+        System.out.println("--------22--"+format.format(new Date(1486517987653l)));
         format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-        System.out.println("--------2--"+format.format(new Date(1486517987653l)));
+        System.out.println("--------22--"+format.format(new Date(1486517987653l)));
 
         String result=SimpleDateFormat.getDateInstance().format(new Date(1486517987653l));
-        System.out.println("---------33--"+result);
+        System.out.println("---------333--"+result);
         int year=Calendar.getInstance().get(Calendar.YEAR);
         MyUtils.enabled(this,"");
 

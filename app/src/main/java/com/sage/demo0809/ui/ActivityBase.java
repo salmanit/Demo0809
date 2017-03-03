@@ -1,8 +1,10 @@
 package com.sage.demo0809.ui;
 
 import android.annotation.TargetApi;
+import android.app.ActivityManager;
 import android.app.ActivityOptions;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,6 +29,7 @@ public class ActivityBase extends AppCompatActivity {
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         ThemeHelper.statusBarLightMode(this);
         String intentTitle=getIntent().getStringExtra("title");
@@ -41,6 +44,11 @@ public class ActivityBase extends AppCompatActivity {
 //        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 //        Transition explode = TransitionInflater.from(this).inflateTransition(android.R.transition.explode);
 //        getWindow().setEnterTransition(explode);
+        if(Build.VERSION.SDK_INT>=21){
+            ActivityManager.TaskDescription v = new ActivityManager.TaskDescription(null, null,
+                    Color.parseColor("#00ffff"));
+            setTaskDescription(v);
+        }
     }
 
     public void initMyToolbar(){

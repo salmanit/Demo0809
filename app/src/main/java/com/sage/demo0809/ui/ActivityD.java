@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.os.Build;
@@ -41,11 +42,12 @@ public class ActivityD extends ActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        setSupportActionBar(toolbar);
         setTitle("");
-        toolbar.setFitsSystemWindows(false);
+//        toolbar.setFitsSystemWindows(false);
         iv_thumb= (ImageView) findViewById(R.id.iv_thumb);
-
+//        if(Build.VERSION.SDK_INT>=21)
+//            getWindow().setStatusBarColor(Color.WHITE);
         get(url);
         Observable.create(new Observable.OnSubscribe<Bitmap>() {
             @Override

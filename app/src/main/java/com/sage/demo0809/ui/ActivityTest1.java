@@ -2,6 +2,7 @@ package com.sage.demo0809.ui;
 
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -13,7 +14,9 @@ import android.webkit.WebView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
+import com.sage.demo0809.BuildConfig;
 import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
 import com.sage.demo0809.widget.MyChartView;
@@ -47,6 +50,8 @@ public class ActivityTest1 extends ActivityBase {
 
     RelativeLayoutWithBg rv;
     int count=1;
+    @BindView(R.id.wv)
+    WebView wv;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +77,9 @@ public class ActivityTest1 extends ActivityBase {
                 rv.setDirection(count%4);
             }
         });
-        showToast("version=="+getVerName());
+        showToast("version=="+getVerName()+"=="+ BuildConfig.DEBUG);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.loadUrl("rtmp://player.daniulive.com:1935/hls/stream546335");
     }
     public  String getVerName() {
         String verName = "0.1";
