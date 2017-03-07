@@ -55,7 +55,7 @@
             android:background="#ffffff"
             android:padding="5dp"
             android:id="@+id/tv_load"
-            android:text="加载补丁"
+            android:text="加载补丁2"
             android:textColor="#000000" />
     </com.sage.demo0809.widget.RelativeLayoutWithBg>
     <com.sage.demo0809.widget.RelativeLayoutWithBg

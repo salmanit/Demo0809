@@ -8,23 +8,16 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
-
-
     <uses-permission android:name="android.permission.DISABLE_KEYGUARD" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="android.permission.USE_FINGERPRINT" />
-
-
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
 
-    <!--<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>-->
-
+    <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> -->
     <application
         android:name=".AMSKY"
         android:allowBackup="true"
@@ -33,10 +26,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeMy">
 
-
-        <!--<meta-data android:value="5811ce78310c931cf7001229" android:name="UMENG_APPKEY"/>-->
-        <!--<meta-data android:value="DEFAULT" android:name="UMENG_CHANNEL"/>-->
-
+        <!-- <meta-data android:value="5811ce78310c931cf7001229" android:name="UMENG_APPKEY"/> -->
+        <!-- <meta-data android:value="DEFAULT" android:name="UMENG_CHANNEL"/> -->
 
         <meta-data
             android:name="com.samsung.android.health.platform_type"
@@ -48,7 +39,6 @@
         <service
             android:name=".service.SampleResultService"
             android:exported="false" />
-
         <service
             android:name=".service.RedAccessibilityService"
             android:enabled="true"
@@ -74,170 +64,170 @@
             </intent-filter>
         </service>
 
-        <!--首页面，所有activity的列表-->
-        <activity android:name=".ui.ActivityLists"
+        <!-- 首页面，所有activity的列表 -->
+        <activity
+            android:name=".ui.ActivityLists"
             android:configChanges="orientation|screenSize|layoutDirection"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <!--collapsing滚动测试-->
+        <!-- collapsing滚动测试 -->
         <activity android:name=".ui.Activity7Collapsing" />
 
-        <!--MPandroid图表库-->
+        <!-- MPandroid图表库 -->
         <activity android:name=".ui.ActivityChart" />
 
-        <!--hellocharts图表库-->
+        <!-- hellocharts图表库 -->
         <activity android:name=".ui.ActivityChartDemo" />
 
-        <!--心情选择库-->
+        <!-- 心情选择库 -->
         <activity android:name=".ui.ActivityChooseMood" />
 
-        <!--视频预览图-->
+        <!-- 视频预览图 -->
         <activity
             android:name=".ui.ActivityD"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
-        <!--输入法表情使用-->
+        <!-- 输入法表情使用 -->
         <activity
             android:name=".ui.ActivityDrawerLayout"
             android:windowSoftInputMode="adjustResize|stateHidden" />
 
-        <!--本地网页-->
+        <!-- 本地网页 -->
         <activity android:name=".ui.ActivityLocalWeb" />
 
-        <!--s健康读取数据页面。以及TextViewLCR-->
+        <!-- s健康读取数据页面。以及TextViewLCR -->
         <activity
             android:name=".ui.ActivityStep"
             android:label="@string/title_activity_activity_step" />
 
         <service android:name=".step.SHealthConnectService" />
 
-
-        <!--视频列表~全屏-->
+        <!-- 视频列表~全屏 -->
         <activity
             android:name=".ui.ActivityVideoList"
             android:configChanges="screenSize|orientation|layoutDirection"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
-        <!--默认生成的登陆页-->
+        <!-- 默认生成的登陆页 -->
         <activity
             android:name=".ui.LoginActivity"
             android:configChanges="screenSize|orientation|layoutDirection"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
-        <!--BottomSheetBehavior的测试。。。-->
+        <!-- BottomSheetBehavior的测试。。。 -->
         <activity
             android:name=".ui.ScrollingActivity"
-            android:label="@string/title_activity_scrolling">
-
-        </activity>
+            android:label="@string/title_activity_scrolling"></activity>
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/title_activity_main">
+            android:label="@string/title_activity_main"></activity>
 
-        </activity>
-
-        <!--BottomSheetDialogFragment 的测试。旋转测试-->
+        <!-- BottomSheetDialogFragment 的测试。旋转测试 -->
         <activity
             android:name=".ui.ScrollingActivity2"
             android:label="@string/title_activity_scrolling2">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
-
-
         <activity
             android:name=".ui.finger.MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
 
-        <!--设置页面-->
+        <!-- 设置页面 -->
         <activity
             android:name=".ui.finger.SettingsActivity"
             android:label="@string/action_settings" />
 
-        <!--锁屏页面-->
+        <!-- 锁屏页面 -->
         <activity
             android:name=".ui.guard.ActivityGuard"
             android:label="@string/app_name"
             android:launchMode="singleTask"
             android:screenOrientation="portrait">
-            <!--<intent-filter>-->
-            <!--<action android:name="android.intent.action.MAIN" />-->
 
-            <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
-        <!--手机所有的app-->
+        <!-- 手机所有的app -->
         <activity android:name=".ui.ActivityAllApplication" />
 
-        <!--手机所有的app-->
+        <!-- 手机所有的app -->
         <activity android:name=".ui.ActivityAllApplication2" />
 
-        <!--悬浮窗测试-->
+        <!-- 悬浮窗测试 -->
         <activity android:name=".ui.ActivitySuspension" />
 
-        <!--myandroid 图片在列表页的测试-->
+        <!-- myandroid 图片在列表页的测试 -->
         <activity android:name=".ui.ActivityMPAndroidList" />
 
-        <!--tablayout 的测试-->
+        <!-- tablayout 的测试 -->
         <activity
             android:name=".ui.ActivityTabLayout"
             android:configChanges="orientation|screenSize|keyboardHidden" />
-        <!--normal webview 的测试-->
+        <!-- normal webview 的测试 -->
         <activity
             android:name=".ui.ActivityWebTest"
             android:configChanges="orientation|screenSize|keyboardHidden" />
-        <!--转场动画测试-->
+        <!-- 转场动画测试 -->
         <activity
             android:name=".ui.ActivityTransitionParent"
             android:configChanges="orientation|screenSize|keyboardHidden" />
-        <!--转场动画测试子页面-->
+        <!-- 转场动画测试子页面 -->
         <activity
             android:name=".ui.ActivityTransitionChild"
             android:configChanges="orientation|screenSize|keyboardHidden" />
-        <!--behavior-->
+        <!-- behavior -->
         <activity
             android:name=".ui.ActivityBehaviorTest"
             android:screenOrientation="portrait" />
-        <!--test1-->
+        <!-- test1 -->
         <activity
             android:name=".ui.ActivityTest1"
             android:screenOrientation="portrait" />
-        <!--test2-->
+        <!-- test2 -->
         <activity
             android:name=".ui.ActivityTest2"
             android:screenOrientation="portrait" />
-        <!--vector path anim-->
+        <!-- vector path anim -->
         <activity
             android:name=".ui.ActivityPathAnima"
             android:screenOrientation="portrait" />
 
         <receiver android:name=".receiver.ReceiverShotdown">
             <intent-filter>
+
                 <!-- 关机广播 -->
                 <action android:name="android.intent.action.ACTION_SHUTDOWN" />
             </intent-filter>
         </receiver>
 
-        <!--for suspension window show-->
+        <!-- for suspension window show -->
         <service android:name=".service.ServiceSuspension" />
-
         <service android:name=".ui.guard.FantasticLockService">
             <intent-filter>
                 <action android:name="com.fantastic.keygard.FantasticLockService" />
             </intent-filter>
         </service>
-
         <service android:name=".step.ServiceTick" />
         <service android:name=".service.TestService" />
+
+        <activity android:name=".ui.ActivityTestStepLine"></activity>
     </application>
 
 </manifest>

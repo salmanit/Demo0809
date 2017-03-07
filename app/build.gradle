@@ -44,11 +44,14 @@ android {
     }
     buildTypes {
         release {
-            // 移除无用的resource文件
-            shrinkResources false
-            //开启代码混淆
             minifyEnabled false
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            debuggable true
+            minifyEnabled false
+            signingConfig signingConfigs.debug
         }
     }
 }
@@ -78,11 +81,11 @@ ext {
 
     //for normal build
     //old apk file to build patch apk
-    tinkerOldApkPath = "${bakPath}/app-release-0301-14-23-49.apk"
+    tinkerOldApkPath = "${bakPath}/app-release-0303-17-48-26.apk"
     //proguard mapping file to build patch apk
 //    tinkerApplyMappingPath = "${bakPath}/app-debug-1018-17-32-47-mapping.txt"
     //resource R.txt to build patch apk, must input if there is resource changed
-    tinkerApplyResourcePath = "${bakPath}/app-release-0301-14-23-49-R.txt"
+    tinkerApplyResourcePath = "${bakPath}/app-release-0303-17-48-26-R.txt"
 
     //only use for build all flavor, if not, just ignore this field
 //    tinkerBuildFlavorDirectory = "${bakPath}/app-1018-17-32-47"
@@ -311,7 +314,7 @@ if (buildWithTinker()) {
         /**
          * task type, you want to bak
          */
-        def taskName = variant.name
+        def taskName = variant.flavorName
         def date = new Date().format("MMdd-HH-mm-ss")
 
         tasks.all {

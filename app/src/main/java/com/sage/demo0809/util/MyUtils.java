@@ -3,11 +3,18 @@ package com.sage.demo0809.util;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Environment;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.accessibility.AccessibilityManager;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -71,4 +78,29 @@ public class MyUtils {
         }
         return false;
     }
+
+
+
+
+    public static void writeLog(String tag) {
+        File file = new File(Environment.getExternalStorageDirectory(),  "demo0809Log.txt");
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            FileOutputStream fos = new FileOutputStream(file, true);
+            String date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date()) + " " + tag + "\n";
+            fos.write(date.getBytes("utf-8"));
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

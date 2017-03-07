@@ -80,6 +80,8 @@ public class ActivityTest1 extends ActivityBase {
         showToast("version=="+getVerName()+"=="+ BuildConfig.DEBUG);
         wv.getSettings().setJavaScriptEnabled(true);
         wv.loadUrl("rtmp://player.daniulive.com:1935/hls/stream546335");
+
+        showToast("开始更新,新版本20170306 14:07");
     }
     public  String getVerName() {
         String verName = "0.1";
@@ -141,7 +143,7 @@ public class ActivityTest1 extends ActivityBase {
     public  void clickView(View view){
         switch (view.getId()){
             case R.id.tv_load:
-                showToast("开始更新,新版本0207");
+
                 File file = new File(Environment.getExternalStorageDirectory(), "/p.apk");
                 MyLog.i("p.apk path=======" + file.getAbsolutePath());
                 if(file.exists())

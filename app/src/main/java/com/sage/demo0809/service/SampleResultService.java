@@ -24,6 +24,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.widget.Toast;
 
+import com.sage.demo0809.util.MyUtils;
 import com.sage.demo0809.util.Utils;
 import com.tencent.tinker.lib.service.DefaultTinkerResultService;
 import com.tencent.tinker.lib.service.PatchResult;
@@ -65,6 +66,7 @@ public class SampleResultService extends DefaultTinkerResultService {
                 }
             }
         });
+        MyUtils.writeLog("=0="+result.isSuccess);
         // is success and newPatch, it is nice to delete the raw file, and restart at once
         // for old patch, you can't delete the patch file
         if (result.isSuccess) {
@@ -76,6 +78,7 @@ public class SampleResultService extends DefaultTinkerResultService {
             //not like TinkerResultService, I want to restart just when I am at background!
             //if you have not install tinker this moment, you can use TinkerApplicationHelper api
             if (checkIfNeedKill(result)) {
+                MyUtils.writeLog("=checkIfNeedKill1=");
                 if (Utils.isBackground()) {
                     TinkerLog.i(TAG, "it is in background, just restart process");
                     restartProcess();
@@ -91,6 +94,7 @@ public class SampleResultService extends DefaultTinkerResultService {
                     });
                 }
             } else {
+                MyUtils.writeLog("=checkIfNeedKill2=");
                 TinkerLog.i(TAG, "I have already install the newly patch version!");
             }
         }
