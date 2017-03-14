@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Rect;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
@@ -15,7 +16,7 @@ import com.sage.demo0809.R;
  * Created by Sage on 2015/9/28.
  * 不考虑padding的，感觉考虑padding有点麻烦，就不管了，所以这个控件别加padding额
  */
-public class TextViewLCR extends TextView {
+public class TextViewLCR extends AppCompatTextView {
     public TextViewLCR(Context context) {
         super(context);
     }

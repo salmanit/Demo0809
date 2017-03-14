@@ -21,6 +21,7 @@ import com.sage.demo0809.R;
 
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.CancellationSignal;
+import android.support.annotation.RequiresPermission;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -33,6 +34,7 @@ public class FingerprintUiHelper extends FingerprintManager.AuthenticationCallba
 
     @VisibleForTesting static final long ERROR_TIMEOUT_MILLIS = 1600;
     @VisibleForTesting static final long SUCCESS_DELAY_MILLIS = 1300;
+
 
     private final FingerprintManager mFingerprintManager;
     private final ImageView mIcon;

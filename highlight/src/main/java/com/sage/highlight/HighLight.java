@@ -38,12 +38,12 @@ public class HighLight
 
     }
 
-    public static interface OnPosCallback
+    public interface OnPosCallback
     {
         void getPos(float rightMargin, float bottomMargin, RectF rectF, MarginInfo marginInfo);
     }
 
-    public static interface OnClickCallback
+    public interface OnClickCallback
     {
         void onClick();
     }

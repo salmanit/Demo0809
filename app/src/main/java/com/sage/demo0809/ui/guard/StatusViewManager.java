@@ -148,8 +148,8 @@ public class StatusViewManager
                 }
             }
         }
-    };
-    
+    }
+
     /*监听URI为Settings.System.CONTENT_URI的数据变化，即12小时制还是24小时制
      * 的变化(一般来自用户在设置里对时间显示的设置)
      */

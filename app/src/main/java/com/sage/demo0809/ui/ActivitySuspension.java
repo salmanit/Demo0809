@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.PixelFormat;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,6 +18,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -86,13 +88,21 @@ public class ActivitySuspension extends ActivityBase {
                 stopService(new Intent(this, ServiceSuspension.class));
                 break;
             case R.id.btn_open:
-                createFloatView();
-                showNotification();
+                try {
+                    createFloatView();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+//                showNotification();
                 break;
             case R.id.btn_close:
                 NotificationManagerCompat.from(this).cancel(999);
                 if (mFloatLayout != null) {
-                    mWindowManager.removeView(mFloatLayout);
+                    try {
+                        mWindowManager.removeView(mFloatLayout);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
 
                 break;
@@ -131,6 +141,7 @@ public class ActivitySuspension extends ActivityBase {
     View mFloatView;
     int[] location;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void createFloatView() {
         //获取LayoutParams对象
         wmParams = new WindowManager.LayoutParams();
@@ -143,25 +154,24 @@ public class ActivitySuspension extends ActivityBase {
 
         //获取的是CompatModeWrapper对象
         //mWindowManager = (WindowManager) getApplication().getSystemService(Context.WINDOW_SERVICE);
-        Log.i(TAG, "mWindowManager3--->" + mWindowManager);
+        Log.i(TAG, "mWindowManager3--->" + getApplication().getSystemService(Context.WINDOW_SERVICE));
         wmParams.type = WindowManager.LayoutParams.TYPE_TOAST;
         wmParams.format = PixelFormat.RGBA_8888;
-        ;
         wmParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE;
         wmParams.gravity = Gravity.CENTER;
         wmParams.x = 0;
         wmParams.y = 0;
-        wmParams.width = WindowManager.LayoutParams.WRAP_CONTENT;
-        wmParams.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        wmParams.width = 500;
+        wmParams.height = 500;
 
         LayoutInflater inflater = this.getLayoutInflater();//LayoutInflater.from(getApplication());
 
         mFloatLayout = (LinearLayout) inflater.inflate(R.layout.layout_suspension_for_activty, null);
         mWindowManager.addView(mFloatLayout, wmParams);
         //setContentView(R.layout.main);
-        mFloatView = (View) mFloatLayout.findViewById(R.id.btn_activity);
+        mFloatView = mFloatLayout.findViewById(R.id.btn_activity);
 
-        Log.i(TAG, "mFloatView" + mFloatView);
+        Log.i(TAG, "mFloatView-->" + mFloatView);
         Log.i(TAG, "mFloatView--parent-->" + mFloatView.getParent());
         Log.i(TAG, "mFloatView--parent--parent-->" + mFloatView.getParent().getParent());
         //绑定触摸移动监听
@@ -174,9 +184,9 @@ public class ActivitySuspension extends ActivityBase {
                     location = new int[2];
                     mFloatLayout.getLocationOnScreen(location);
                 }
-                wmParams.x = (int) ((int) event.getRawX() - mFloatLayout.getWidth() / 2 - location[0]);
+                wmParams.x = (int) event.getRawX() - mFloatLayout.getWidth() / 2 - location[0];
                 //25为状态栏高度
-                wmParams.y = (int) ((int) event.getRawY() - mFloatLayout.getHeight() / 2 - 40 - location[1]);
+                wmParams.y = (int) event.getRawY() - mFloatLayout.getHeight() / 2 - 40 - location[1];
                 mWindowManager.updateViewLayout(mFloatLayout, wmParams);
                 return false;
             }
@@ -190,9 +200,37 @@ public class ActivitySuspension extends ActivityBase {
                 showToast("click for what");
             }
         });
+        System.out.println("visible===="+mFloatLayout.getVisibility());
+        mFloatLayout.getViewTreeObserver().addOnWindowAttachListener(new ViewTreeObserver.OnWindowAttachListener() {
+            @Override
+            public void onWindowAttached() {
+                mFloatLayout.getParent().requestLayout();
+                System.out.println("onWindowAttached====");
+                System.out.println("width===="+mFloatLayout.getWidth()+"==="+mFloatLayout.getHeight());
+                mWindowManager.updateViewLayout(mFloatLayout,wmParams);//无效，不知道底层咋做的。
+            }
 
+            @Override
+            public void onWindowDetached() {
+                System.out.println("onWindowDetached====");
+            }
+        });
+        mFloatLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mFloatLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                System.out.println(mFloatLayout.getVisibility()+"onGlobalLayout===="+mFloatLayout.getWidth()+"==="+mFloatLayout.getHeight());
+                mWindowManager.updateViewLayout(mFloatLayout,wmParams);//无效，不知道底层咋做的。
+            }
+        });
     }
-
+    private void getAppDetailSettingIntent(Context context) {
+        Intent localIntent = new Intent();
+        localIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            localIntent.setAction("android.settings.APPLICATION_DETAILS_SETTINGS");
+            localIntent.setData(Uri.fromParts("package", getPackageName(), null));
+        startActivity(localIntent);
+    }
 
     @OnClick({R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4})
     public void onClick2(View view) {
@@ -209,6 +247,7 @@ public class ActivitySuspension extends ActivityBase {
                 tv4.setText("step"+step);
                 break;
             case R.id.tv4:
+                getAppDetailSettingIntent(this);
                 break;
         }
     }

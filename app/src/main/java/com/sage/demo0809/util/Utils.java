@@ -100,10 +100,7 @@ public class Utils {
             allSize = 0;
         }
 
-        if (allSize != 0 && availableSize > limitSize) {
-            return true;
-        }
-        return false;
+        return allSize != 0 && availableSize > limitSize;
     }
 
     public static String getExceptionCauseString(final Throwable ex) {

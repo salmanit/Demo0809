@@ -115,11 +115,7 @@ public class InjectedApplication extends MultiDexApplication {
                 Class<?> clazz = Class.forName("android.content.Context");
                 Method method = clazz.getMethod("checkSelfPermission", String.class);
                 int rest = (Integer) method.invoke(context, permission);
-                if (rest == PackageManager.PERMISSION_GRANTED) {
-                    result = true;
-                } else {
-                    result = false;
-                }
+                result = rest == PackageManager.PERMISSION_GRANTED;
             } catch (Exception e) {
                 result = false;
             }

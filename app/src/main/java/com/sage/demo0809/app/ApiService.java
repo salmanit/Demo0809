@@ -29,7 +29,7 @@ import rx.Observable;
  */
 public interface ApiService {
 
-    public static  String HOST_ADDRESS="http://hrv.kuailexinli.com/";
+    String HOST_ADDRESS="http://hrv.kuailexinli.com/";
 //    public static  String HOST_ADDRESS="http://www.sunrisin.com:8088/";
 
     @Multipart

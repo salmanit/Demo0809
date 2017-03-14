@@ -116,7 +116,7 @@ public abstract class MySimpleRvAdapter<T> extends RecyclerView.Adapter<MyRvView
 
 
     public interface OnRvItemClickListener<T>{
-        public abstract void onItemClick(int position, T data);
+        void onItemClick(int position, T data);
     }
 
     public OnRvItemClickListener<T> mOnRvItemClickListener;
@@ -130,7 +130,7 @@ public abstract class MySimpleRvAdapter<T> extends RecyclerView.Adapter<MyRvView
     }
 
     public interface OnRvItemLongClickListener<T>{
-        public abstract void onItemLongClick(int position, T data);
+        void onItemLongClick(int position, T data);
     }
 
     public OnRvItemLongClickListener<T> mOnRvItemLongClickListener;

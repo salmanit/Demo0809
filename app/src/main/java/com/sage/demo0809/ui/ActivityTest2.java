@@ -163,7 +163,7 @@ public class ActivityTest2 extends ActivityBase {
         }
         return count;
     }
-    public int upZipFile(File zipFile, String folderPath)throws ZipException,IOException {
+    public int upZipFile(File zipFile, String folderPath)throws IOException {
         //public static void upZipFile() throws Exception{
         ZipFile zfile=new ZipFile(zipFile);
         Enumeration zList=zfile.entries();
@@ -273,8 +273,8 @@ public class ActivityTest2 extends ActivityBase {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void hideImageCircular() {
-        int x = (int) ivScale.getWidth();
-        int y = (int) ivScale.getHeight();
+        int x = ivScale.getWidth();
+        int y = ivScale.getHeight();
         int radius = (int) Math.sqrt(x * x / 4 + y * y / 4);
 
         Animator anim =
@@ -298,8 +298,8 @@ public class ActivityTest2 extends ActivityBase {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void revealImageCircular() {
-        int x = (int) ivScale.getWidth();
-        int y = (int) ivScale.getHeight();
+        int x = ivScale.getWidth();
+        int y = ivScale.getHeight();
         int radius = (int) Math.sqrt(x * x / 4 + y * y / 4);
 
         Animator anim =

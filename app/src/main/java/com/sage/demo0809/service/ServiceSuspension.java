@@ -8,8 +8,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PixelFormat;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.annotation.UiThread;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.view.GestureDetectorCompat;
 import android.util.Log;
@@ -19,6 +21,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewParent;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -54,8 +58,8 @@ public class ServiceSuspension extends Service {
         super.onCreate();
         Log.i(TAG, "oncreat");
         try {
-            showNotification();
             createFloatView();
+//            showNotification();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -71,10 +75,7 @@ public class ServiceSuspension extends Service {
         int baseGreen=Color.green(simpleBaseColor)-Color.green(simpleColor);
         int baseBlue=Color.blue(simpleBaseColor)-Color.blue(simpleColor);
         double value=Math.sqrt(baseRed*baseRed+baseGreen*baseGreen+baseBlue*baseBlue);
-        if (value<180.0) {
-            return true;
-        }
-        return false;
+        return value < 180.0;
     }
 
     private void showNotification() {
@@ -182,11 +183,11 @@ public class ServiceSuspension extends Service {
         //浮动窗口按钮
         mFloatView = mFloatLayout.findViewById(R.id.btn_click);
 
-        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0,
-                View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
-                .makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
-        Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
-        Log.i(TAG, "Height/2--->" + mFloatView.getMeasuredHeight()/2);
+//        mFloatLayout.measure(View.MeasureSpec.makeMeasureSpec(0,
+//                View.MeasureSpec.UNSPECIFIED), View.MeasureSpec
+//                .makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED));
+//        Log.i(TAG, "Width/2--->" + mFloatView.getMeasuredWidth()/2);
+//        Log.i(TAG, "Height/2--->" + mFloatView.getMeasuredHeight()/2);
         //设置监听浮动窗口的触摸移动
         mFloatLayout.setOnTouchListener(new View.OnTouchListener()
         {
@@ -219,8 +220,27 @@ public class ServiceSuspension extends Service {
                 Toast.makeText(getApplication(), "onClick", Toast.LENGTH_SHORT).show();
             }
         });
-    }
 
+        mFloatLayout.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                mFloatLayout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
+                System.out.println(mFloatLayout.getVisibility()+"==onGlobalLayout===="+mFloatLayout.getWidth()+"==="+mFloatLayout.getHeight());
+//                update();
+                System.out.println("onGlobalLayout===");
+            }
+        });
+    }
+    @UiThread
+    private void update(){
+        wmParams.alpha=0.5f;
+        wmParams.x=0;
+        wmParams.y=500;
+        wmParams.width=500;
+        wmParams.height=600;
+        mWindowManager.updateViewLayout(mFloatLayout,wmParams);//无效，不知道底层咋做的。
+        System.out.println(mFloatLayout.getVisibility()+"==onGlobalLayout2===="+mFloatLayout.getWidth()+"==="+mFloatLayout.getHeight());
+    }
     @Override
     public void onDestroy()
     {
@@ -229,7 +249,11 @@ public class ServiceSuspension extends Service {
         if(mFloatLayout != null)
         {
             //移除悬浮窗口
-            mWindowManager.removeView(mFloatLayout);
+            try {
+                mWindowManager.removeView(mFloatLayout);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         try {

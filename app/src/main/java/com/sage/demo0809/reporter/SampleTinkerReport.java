@@ -141,7 +141,7 @@ public class SampleTinkerReport {
     private static Reporter reporter = null;
 
     public void setReporter(Reporter reporter) {
-        this.reporter = reporter;
+        SampleTinkerReport.reporter = reporter;
     }
 
     public static void onTryApply(boolean success) {

@@ -5,10 +5,15 @@ import android.content.ComponentName;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Rect;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.os.Build;
+import android.os.Environment;
 import android.os.IBinder;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +29,7 @@ import com.sage.demo0809.step.SHealthConnectService;
 
 import org.simple.eventbus.EventBus;
 
+import java.io.File;
 import java.util.HashMap;
 
 import rx.Observable;
@@ -48,11 +54,10 @@ public class ActivityD extends ActivityBase {
         iv_thumb= (ImageView) findViewById(R.id.iv_thumb);
 //        if(Build.VERSION.SDK_INT>=21)
 //            getWindow().setStatusBarColor(Color.WHITE);
-        get(url);
         Observable.create(new Observable.OnSubscribe<Bitmap>() {
             @Override
             public void call(Subscriber<? super Bitmap> subscriber) {
-               Bitmap bitmap= createVideoThumbnail(url,272,178);
+               Bitmap bitmap= createVideoThumbnail(url, MediaStore.Video.Thumbnails.MINI_KIND);
                 subscriber.onNext(bitmap);
             }
         })
@@ -67,7 +72,8 @@ public class ActivityD extends ActivityBase {
         Observable.create(new Observable.OnSubscribe<Bitmap>() {
             @Override
             public void call(Subscriber<? super Bitmap> subscriber) {
-               Bitmap bitmap= get(url);
+               Bitmap bitmap= get(new File(Environment.getExternalStorageDirectory(),
+                       "device-2016-12-14-143818.mp4").getAbsolutePath());
                 subscriber.onNext(bitmap);
             }
         })
@@ -77,6 +83,7 @@ public class ActivityD extends ActivityBase {
                     @Override
                     public void call(Bitmap bitmap) {
                     MyLog.i("=============");
+                        et1.setBackground(new BitmapDrawable(getResources(),bitmap));
                     }
                 });
 
@@ -91,7 +98,7 @@ public class ActivityD extends ActivityBase {
     }
 
     private void startStep() {
-        bindService(new Intent(this,SHealthConnectService.class),conn,BIND_AUTO_CREATE);
+//        bindService(new Intent(this,SHealthConnectService.class),conn,BIND_AUTO_CREATE);
     }
     SHealthConnectService.MySHealthBind binder;
     private ServiceConnection conn=new ServiceConnection() {
@@ -123,18 +130,16 @@ public class ActivityD extends ActivityBase {
         et1.setText("步数"+step);
     }
 
-    private Bitmap get(String url){
-       Bitmap bitmap= ThumbnailUtils.createVideoThumbnail(url, MediaStore.Images.Thumbnails.MINI_KIND);
+    private Bitmap get(String filePath){
+       Bitmap bitmap= ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Images.Thumbnails.MINI_KIND);
         MyLog.i("======"+(bitmap==null));
         return bitmap;
     }
 
-
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private Bitmap createVideoThumbnail(String url, int width, int height) {
+    private Bitmap createVideoThumbnail(String url,int kind) {
         Bitmap bitmap = null;
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
-        int kind = MediaStore.Video.Thumbnails.MINI_KIND;
         try {
             if (Build.VERSION.SDK_INT >= 14) {
                 retriever.setDataSource(url, new HashMap<String, String>());
@@ -153,8 +158,20 @@ public class ActivityD extends ActivityBase {
                 // Ignore failures while cleaning up.
             }
         }
-        if (kind == MediaStore.Images.Thumbnails.MICRO_KIND && bitmap != null) {
-            bitmap = ThumbnailUtils.extractThumbnail(bitmap, width, height,
+        if (bitmap == null) return null;
+        if (kind == MediaStore.Images.Thumbnails.MINI_KIND) {
+            // Scale down the bitmap if it's too large.
+            int width = bitmap.getWidth();
+            int height = bitmap.getHeight();
+            int max = Math.max(width, height);
+            if (max > 512) {
+                float scale = 512f / max;
+                int w = Math.round(scale * width);
+                int h = Math.round(scale * height);
+                bitmap = Bitmap.createScaledBitmap(bitmap, w, h, true);
+            }
+        } else if (kind == MediaStore.Images.Thumbnails.MICRO_KIND) {
+            bitmap = ThumbnailUtils.extractThumbnail(bitmap,96,96,
                     ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
         }
         return bitmap;

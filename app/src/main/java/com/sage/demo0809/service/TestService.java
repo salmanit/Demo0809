@@ -91,7 +91,7 @@ public class TestService extends Service implements SensorEventListener {
     private SensorEventListener tempListener = new SensorEventListener() {
         @Override
         public void onSensorChanged(SensorEvent event) {
-            System.out.println("temp===========" + Arrays.toString(event.values)+"===="+countSensor.isWakeUpSensor()+"=="+detectorSensor.isWakeUpSensor());
+            System.out.println("temp===========" + Arrays.toString(event.values));
             mySensorManager.unregisterListener(tempListener);
         }
 

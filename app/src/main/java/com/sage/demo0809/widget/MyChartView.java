@@ -190,11 +190,11 @@ public class MyChartView extends View {
                 //偶数
                 if (i % 2 == 0) {
                     LinearGradient lg = new LinearGradient(mChartWidth, mChartWidth + mSize, mHeight - 100,
-                            (float) (mHeight - 100 - list.get(i) * size), lefrColorBottom, leftColor, Shader.TileMode.MIRROR);
+                            mHeight - 100 - list.get(i) * size, lefrColorBottom, leftColor, Shader.TileMode.MIRROR);
                     mChartPaint.setShader(lg);
                 } else {
                     LinearGradient lg = new LinearGradient(mChartWidth, mChartWidth + mSize, mHeight - 100,
-                            (float) (mHeight - 100 - list.get(i) * size), rightColorBottom, rightColor, Shader.TileMode.MIRROR);
+                            mHeight - 100 - list.get(i) * size, rightColorBottom, rightColor, Shader.TileMode.MIRROR);
                     mChartPaint.setShader(lg);
                 }
             }
@@ -212,7 +212,7 @@ public class MyChartView extends View {
             rectF.left = mChartWidth;
             rectF.right = mChartWidth + mSize;
             rectF.bottom = mHeight - 100;
-            rectF.top = (float) (mHeight - 100 - list.get(i) * size);
+            rectF.top = mHeight - 100 - list.get(i) * size;
             canvas.drawRoundRect(rectF, 10, 10, mChartPaint);
             //canvas.drawRect(mChartWidth, mHeight - 100 - list.get(i) * size, mChartWidth + mSize, mHeight - 100, mChartPaint)
             // ;// 长方形
@@ -269,7 +269,6 @@ public class MyChartView extends View {
                         number = i;
                         selectIndex = i;
                         selectIndexRoles.clear();
-                        ;
                         selectIndexRoles.add(selectIndex * 2 + 1);
                         selectIndexRoles.add(selectIndex * 2);
                         invalidate();

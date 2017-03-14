@@ -6,6 +6,7 @@ import android.graphics.BitmapShader;
 import android.graphics.Color;
 import android.graphics.Shader;
 import android.graphics.drawable.ColorDrawable;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextPaint;
@@ -22,7 +23,7 @@ import com.sage.demo0809.bean.SimpleUser;
  * Created by Sage on 2016/9/27.
  */
 
-public class TextViewReply extends TextView {
+public class TextViewReply extends AppCompatTextView {
     public TextViewReply(Context context) {
         super(context);
     }
@@ -83,6 +84,6 @@ public class TextViewReply extends TextView {
     }
 
     public interface  TextViewReplyClickListener{
-        public void spanClick(SimpleUser simpleUser);
+        void spanClick(SimpleUser simpleUser);
     }
 }

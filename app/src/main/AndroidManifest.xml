@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> -->
     <application
         android:name=".AMSKY"
@@ -123,10 +123,10 @@
         <!-- BottomSheetBehavior的测试。。。 -->
         <activity
             android:name=".ui.ScrollingActivity"
-            android:label="@string/title_activity_scrolling"></activity>
+            android:label="@string/title_activity_scrolling" />
         <activity
             android:name=".ui.MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
 
         <!-- BottomSheetDialogFragment 的测试。旋转测试 -->
         <activity
@@ -227,7 +227,8 @@
         <service android:name=".step.ServiceTick" />
         <service android:name=".service.TestService" />
 
-        <activity android:name=".ui.ActivityTestStepLine"></activity>
+        <activity android:name=".ui.ActivityTestStepLine" />
+        <activity android:name=".ui.ActivityRxTest"></activity>
     </application>
 
 </manifest>

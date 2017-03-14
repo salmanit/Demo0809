@@ -1,9 +1,18 @@
 package com.sage.demo0809.ui;
 
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.BinderThread;
+import android.support.annotation.FloatRange;
+import android.support.annotation.IntRange;
 import android.support.annotation.Nullable;
+import android.support.annotation.Size;
+import android.support.annotation.StringDef;
+import android.support.annotation.UiThread;
+import android.support.annotation.WorkerThread;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.sage.demo0809.R;
 import com.sage.demo0809.adapter.MyRvViewHolder;
@@ -13,12 +22,14 @@ import com.sage.demo0809.app.InjectedApplication;
 import com.sage.demo0809.bean.BeanActivity;
 import com.sage.demo0809.service.OtherAccessibilityService;
 import com.sage.demo0809.service.RedAccessibilityService;
+import com.sage.demo0809.test.Test;
 import com.sage.demo0809.ui.finger.SettingsActivity;
 import com.sage.demo0809.ui.guard.ActivityGuard;
 import com.sage.demo0809.util.MyUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -36,7 +47,6 @@ public class ActivityLists extends ActivityBase {
     @BindView(R.id.rv)
     RecyclerView rv;
     public ArrayList<BeanActivity>  lists=new ArrayList<>();
-
     /**
      02-13 16:55:10.166 9709-9709/com.sage.demo0809 I/System.out: 2017-01-20 14:04:30--------2017-01-20 15:04:30
      02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-22 14:57:34--------2017-01-22 15:57:34
@@ -61,7 +71,10 @@ public class ActivityLists extends ActivityBase {
 
         //2017-01-19 09:00:33  2017-02-08 09:39:47
         System.out.println("--------11--"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1486517987653l)));
-
+       String result1= getResources().getDisplayMetrics().widthPixels+"=="+getResources().getDisplayMetrics().heightPixels+"==="+
+                getResources().getDisplayMetrics().density+"=="+
+        getResources().getDisplayMetrics().densityDpi;
+        System.out.println("screen===="+result1);
         SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
         System.out.println("--------22--"+format.format(new Date(1486517987653l)));
@@ -75,6 +88,7 @@ public class ActivityLists extends ActivityBase {
 
         System.err.println("7.1.9".compareTo("7.1.90")+"================"+year);
         ButterKnife.bind(this);
+        lists.add(new BeanActivity("Rx练习",ActivityRxTest.class));
         lists.add(new BeanActivity("测试7日曲线",ActivityTestStepLine.class));
         lists.add(new BeanActivity("vector的path动画14:06",ActivityPathAnima.class));
         lists.add(new BeanActivity("collapsing滚动测试",Activity7Collapsing.class));
@@ -131,7 +145,58 @@ public class ActivityLists extends ActivityBase {
             }
         });
 
+    test3("aa");
     }
 
 
+    private void test(@Size(4) int[] array){
+        System.out.println(Arrays.toString(array));
+    }
+
+    private void test2(@Size(min = 10,max = 100) ArrayList<String>  list){
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... params) {
+                return null;
+            }
+        }.execute();
+    }
+
+    private void test3(@Size(multiple = 2) String hello){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        test4(3);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+    }
+
+    @UiThread
+    private void test4(@IntRange(from = 1,to = 100) int number){
+        TextView toolbar_title= (TextView) findViewById(R.id.toolbar_title);
+        if(toolbar_title!=null){
+            toolbar_title.setText("修改后的标题");
+        }
+    }
+
+    private void test5(@FloatRange(from = 0.1f,to = 1f) float percent){
+
+    }
+
+
+    @StringDef({"aaa","bbb"})
+    public @interface  ServiceName{}
+
+    private void test6(@ServiceName String myName){
+        String[] arr={"ddd","ddd","dddd"};
+        test7("1");
+    }
+
+    private void test7(@Test(odd= 4) String my){
+
+    }
 }
