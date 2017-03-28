@@ -26,7 +26,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -105,7 +104,7 @@ public class ActivityAllApplication extends ActivityBase {
                 subscriber.onNext(resolveInfos);
             }
         }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+//                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<ResolveInfo>>() {
                     @Override
                     public void call(List<ResolveInfo> resolveInfos) {

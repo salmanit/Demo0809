@@ -1,9 +1,13 @@
 package com.sage.demo0809.ui;
 
+import android.os.Looper;
+import android.support.annotation.NonNull;
+import android.support.annotation.UiThread;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.sage.demo0809.R;
@@ -11,9 +15,16 @@ import com.sage.demo0809.adapter.MyRvViewHolder;
 import com.sage.demo0809.adapter.MySimpleRvAdapter;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class ActivityRxTest extends ActivityBase {
 
@@ -45,7 +56,53 @@ public class ActivityRxTest extends ActivityBase {
 
             }
         });
+
+
+//        test1();
     }
 
+    @OnClick(R.id.iv_show)
+    public void hello_click(View view){
+    }
+    public void test1(){
+        Observable.create(new Observable.OnSubscribe<Integer>() {
+            @Override
+            public void call(Subscriber<? super Integer> subscriber) {
+                System.out.println("!===1");
+                subscriber.onNext(1);
+                System.out.println("!===2");
+                subscriber.onNext(2);
+                System.out.println("!===3");
+                subscriber.onNext(3);
+                System.out.println("!===complete");
+                subscriber.onCompleted();
+                System.out.println("!===4");
+                subscriber.onNext(4);
+            }
+        })
+        .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(Schedulers.io())
+                .subscribe(new Observer<Integer>() {
+
+
+
+                    @Override
+                    public void onNext(Integer value) {
+                        System.out.println("!===onNext"+value);
+
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        System.out.println("!===onComplete");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        System.out.println("!===onError");
+                    }
+
+                });
+    }
 
 }

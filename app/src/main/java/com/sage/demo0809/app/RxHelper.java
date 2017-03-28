@@ -6,6 +6,7 @@ import com.sage.demo0809.bean.BaseReply;
 
 import rx.Observable;
 import rx.Subscriber;
+
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
@@ -22,7 +23,11 @@ public class RxHelper<T> {
                 return tObservable.flatMap(new Func1<T, Observable<T>>() {
                     @Override
                     public Observable<T> call(final T t) {
-                        MyLog.i("1111======="+t.toString());
+//                        MyLog.i("1111======="+t.toString());
+                        String result=t.toString();
+                        for(int i=0;i<result.length();i+=3500){
+                            MyLog.i("result=" + result.substring(i,Math.min(i+3500,result.length())));
+                        }
                         if(t instanceof BaseError){
                             BaseError temp= (BaseError) t;
                             if(temp.getErrcode()!=0){
@@ -44,7 +49,7 @@ public class RxHelper<T> {
                         }
                         return null;
                     }
-                }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
+                }).subscribeOn(Schedulers.io());
             }
         };
     }
@@ -76,7 +81,8 @@ public class RxHelper<T> {
                         });
                     }
                 }).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread());
+                        .observeOn(AndroidSchedulers.mainThread())
+                        ;
             }
         };
     }

@@ -24,7 +24,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import rx.Observable;
 import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
@@ -99,7 +98,7 @@ public class ActivityAllApplication2 extends ActivityBase {
                 subscriber.onNext(applicationList);
             }
         }).subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+//                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<ApplicationInfo> >() {
                     @Override
                     public void call(List<ApplicationInfo> resolveInfos) {

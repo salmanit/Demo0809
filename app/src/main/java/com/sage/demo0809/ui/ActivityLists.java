@@ -46,21 +46,23 @@ public class ActivityLists extends ActivityBase {
 
     @BindView(R.id.rv)
     RecyclerView rv;
-    public ArrayList<BeanActivity>  lists=new ArrayList<>();
+    public ArrayList<BeanActivity> lists = new ArrayList<>();
+
     /**
-     02-13 16:55:10.166 9709-9709/com.sage.demo0809 I/System.out: 2017-01-20 14:04:30--------2017-01-20 15:04:30
-     02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-22 14:57:34--------2017-01-22 15:57:34
-     02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-23 18:27:25--------2017-01-23 19:27:25
-     02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-27 11:35:15--------2017-01-27 11:35:15
-     02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-29 18:33:50--------2017-01-29 18:33:50
-     02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-30 13:25:11--------2017-01-30 13:25:11
-     02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-31 16:11:17--------2017-01-31 16:11:17
-     02-13 16:55:10.169 9709-9709/com.sage.demo0809 I/System.out: 2017-02-09 19:08:11--------2017-02-09 19:08:11
-     02-13 16:55:10.169 9709-9709/com.sage.demo0809 I/System.out: 2017-02-08 09:39:47--------2017-02-08 09:39:47
-     * */
-    private void sout(String showTime,long time){
-        System.out.println(showTime+"--------"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(time)));
+     * 02-13 16:55:10.166 9709-9709/com.sage.demo0809 I/System.out: 2017-01-20 14:04:30--------2017-01-20 15:04:30
+     * 02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-22 14:57:34--------2017-01-22 15:57:34
+     * 02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-23 18:27:25--------2017-01-23 19:27:25
+     * 02-13 16:55:10.167 9709-9709/com.sage.demo0809 I/System.out: 2017-01-27 11:35:15--------2017-01-27 11:35:15
+     * 02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-29 18:33:50--------2017-01-29 18:33:50
+     * 02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-30 13:25:11--------2017-01-30 13:25:11
+     * 02-13 16:55:10.168 9709-9709/com.sage.demo0809 I/System.out: 2017-01-31 16:11:17--------2017-01-31 16:11:17
+     * 02-13 16:55:10.169 9709-9709/com.sage.demo0809 I/System.out: 2017-02-09 19:08:11--------2017-02-09 19:08:11
+     * 02-13 16:55:10.169 9709-9709/com.sage.demo0809 I/System.out: 2017-02-08 09:39:47--------2017-02-08 09:39:47
+     */
+    private void sout(String showTime, long time) {
+        System.out.println(showTime + "--------" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(time)));
     }
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,53 +72,53 @@ public class ActivityLists extends ActivityBase {
 //        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
 
         //2017-01-19 09:00:33  2017-02-08 09:39:47
-        System.out.println("--------11--"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1486517987653l)));
-       String result1= getResources().getDisplayMetrics().widthPixels+"=="+getResources().getDisplayMetrics().heightPixels+"==="+
-                getResources().getDisplayMetrics().density+"=="+
-        getResources().getDisplayMetrics().densityDpi;
-        System.out.println("screen===="+result1);
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println("--------11--" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1486517987653l)));
+        String result1 = getResources().getDisplayMetrics().widthPixels + "==" + getResources().getDisplayMetrics().heightPixels + "===" +
+                getResources().getDisplayMetrics().density + "==" +
+                getResources().getDisplayMetrics().densityDpi;
+        System.out.println("screen====" + result1);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         format.setTimeZone(TimeZone.getTimeZone("Asia/Tokyo"));
-        System.out.println("--------22--"+format.format(new Date(1486517987653l)));
+        System.out.println("--------22--" + format.format(new Date(1486517987653l)));
         format.setTimeZone(TimeZone.getTimeZone("Asia/Shanghai"));
-        System.out.println("--------22--"+format.format(new Date(1486517987653l)));
+        System.out.println("--------22--" + format.format(new Date(1486517987653l)));
 
-        String result=SimpleDateFormat.getDateInstance().format(new Date(1486517987653l));
-        System.out.println("---------333--"+result);
-        int year=Calendar.getInstance().get(Calendar.YEAR);
-        MyUtils.enabled(this,"");
+        String result = SimpleDateFormat.getDateInstance().format(new Date(1486517987653l));
+        System.out.println("---------333--" + result);
+        int year = Calendar.getInstance().get(Calendar.YEAR);
+        MyUtils.enabled(this, "");
 
-        System.err.println("7.1.9".compareTo("7.1.90")+"================"+year);
+        System.err.println("7.1.9".compareTo("7.1.90") + "================" + year);
         ButterKnife.bind(this);
-        lists.add(new BeanActivity("Rx练习",ActivityRxTest.class));
-        lists.add(new BeanActivity("测试7日曲线",ActivityTestStepLine.class));
-        lists.add(new BeanActivity("vector的path动画14:06",ActivityPathAnima.class));
-        lists.add(new BeanActivity("collapsing滚动测试",Activity7Collapsing.class));
-        lists.add(new BeanActivity("MPandroid图表库1036",ActivityChart.class));
-        lists.add(new BeanActivity("MPandroid图表库列表里的测试",ActivityMPAndroidList.class));
-        lists.add(new BeanActivity("hellocharts图表库",ActivityChartDemo.class));
-        lists.add(new BeanActivity("心情选择库",ActivityChooseMood.class));
-        lists.add(new BeanActivity("视频预览图",ActivityD.class));
-        lists.add(new BeanActivity("输入法表情使用",ActivityDrawerLayout.class));
-        lists.add(new BeanActivity("本地网页",ActivityLocalWeb.class));
-        lists.add(new BeanActivity("s健康",ActivityStep.class));
-        lists.add(new BeanActivity("视频列表~全屏",ActivityVideoList.class));
-        lists.add(new BeanActivity("默认登陆页",LoginActivity.class));
-        lists.add(new BeanActivity("Retrofit测",MainActivity.class));
-        lists.add(new BeanActivity("BottomSheetBehavior",ScrollingActivity.class));
-        lists.add(new BeanActivity("BottomSheetDialogFragment",ScrollingActivity2.class));
-        lists.add(new BeanActivity("设置页面xml写的",SettingsActivity.class));
-        lists.add(new BeanActivity("锁屏页面",ActivityGuard.class));
-        lists.add(new BeanActivity("手机所有的app",ActivityAllApplication.class));
-        lists.add(new BeanActivity("手机所有的app2",ActivityAllApplication2.class));
-        lists.add(new BeanActivity("悬浮窗测试",ActivitySuspension.class));
-        lists.add(new BeanActivity("tablayout测试",ActivityTabLayout.class));
-        lists.add(new BeanActivity("normal webview测试",ActivityWebTest.class));
-        lists.add(new BeanActivity("自定义转场动画",ActivityTransitionParent.class));
-        lists.add(new BeanActivity("behavior学习",ActivityBehaviorTest.class));
-        lists.add(new BeanActivity("test1",ActivityTest1.class));
-        lists.add(new BeanActivity("test2",ActivityTest2.class));
-        LinearLayoutManager manager=new LinearLayoutManager(this);
+        lists.add(new BeanActivity("Rx1.x版本练习0", ActivityRxTest.class));
+        lists.add(new BeanActivity("测试7日曲线", ActivityTestStepLine.class));
+        lists.add(new BeanActivity("vector的path动画14:06", ActivityPathAnima.class));
+        lists.add(new BeanActivity("collapsing滚动测试", Activity7Collapsing.class));
+        lists.add(new BeanActivity("MPandroid图表库1036", ActivityChart.class));
+        lists.add(new BeanActivity("MPandroid图表库列表里的测试", ActivityMPAndroidList.class));
+        lists.add(new BeanActivity("hellocharts图表库", ActivityChartDemo.class));
+        lists.add(new BeanActivity("心情选择库", ActivityChooseMood.class));
+        lists.add(new BeanActivity("视频预览图", ActivityD.class));
+        lists.add(new BeanActivity("输入法表情使用", ActivityDrawerLayout.class));
+        lists.add(new BeanActivity("本地网页", ActivityLocalWeb.class));
+        lists.add(new BeanActivity("s健康", ActivityStep.class));
+        lists.add(new BeanActivity("视频列表~全屏", ActivityVideoList.class));
+        lists.add(new BeanActivity("默认登陆页", LoginActivity.class));
+        lists.add(new BeanActivity("Retrofit测", MainActivity.class));
+        lists.add(new BeanActivity("BottomSheetBehavior", ScrollingActivity.class));
+        lists.add(new BeanActivity("BottomSheetDialogFragment", ScrollingActivity2.class));
+        lists.add(new BeanActivity("设置页面xml写的", SettingsActivity.class));
+        lists.add(new BeanActivity("锁屏页面", ActivityGuard.class));
+        lists.add(new BeanActivity("手机所有的app", ActivityAllApplication.class));
+        lists.add(new BeanActivity("手机所有的app2", ActivityAllApplication2.class));
+        lists.add(new BeanActivity("悬浮窗测试", ActivitySuspension.class));
+        lists.add(new BeanActivity("tablayout测试", ActivityTabLayout.class));
+        lists.add(new BeanActivity("normal webview测试", ActivityWebTest.class));
+        lists.add(new BeanActivity("自定义转场动画", ActivityTransitionParent.class));
+        lists.add(new BeanActivity("behavior学习", ActivityBehaviorTest.class));
+        lists.add(new BeanActivity("test1", ActivityTest1.class));
+        lists.add(new BeanActivity("test2", ActivityTest2.class));
+        LinearLayoutManager manager = new LinearLayoutManager(this);
         rv.setLayoutManager(manager);
         rv.setAdapter(new MySimpleRvAdapter<BeanActivity>(lists) {
             @Override
@@ -126,9 +128,9 @@ public class ActivityLists extends ActivityBase {
 
             @Override
             public void handleData(MyRvViewHolder holder, int position, BeanActivity data) {
-                holder.setText(R.id.tv_position,""+position);
-                holder.setText(R.id.tv_name,data.name);
-                holder.setText(R.id.tv_class,data.cla.getSimpleName());
+                holder.setText(R.id.tv_position, "" + position);
+                holder.setText(R.id.tv_name, data.name);
+                holder.setText(R.id.tv_class, data.cla.getSimpleName());
             }
         });
 
@@ -141,19 +143,19 @@ public class ActivityLists extends ActivityBase {
 //                }else{
 //                    InjectedApplication.app.changeUMappKey("5819a8f2c62dca269700218f");//test test
 //                }
-                goNext(lists.get(position).cla,lists.get(position).name);
+                goNext(lists.get(position).cla, lists.get(position).name);
             }
         });
 
-    test3("aa");
+        test3("aa");
     }
 
 
-    private void test(@Size(4) int[] array){
+    private void test(@Size(4) int[] array) {
         System.out.println(Arrays.toString(array));
     }
 
-    private void test2(@Size(min = 10,max = 100) ArrayList<String>  list){
+    private void test2(@Size(min = 10, max = 100) ArrayList<String> list) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... params) {
@@ -162,41 +164,42 @@ public class ActivityLists extends ActivityBase {
         }.execute();
     }
 
-    private void test3(@Size(multiple = 2) String hello){
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        test4(3);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+    private void test3(@Size(multiple = 2) String hello) {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    test4(3);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }).start();
+            }
+        }).start();
     }
 
     @UiThread
-    private void test4(@IntRange(from = 1,to = 100) int number){
-        TextView toolbar_title= (TextView) findViewById(R.id.toolbar_title);
-        if(toolbar_title!=null){
+    private void test4(@IntRange(from = 1, to = 100) int number) {
+        TextView toolbar_title = (TextView) findViewById(R.id.toolbar_title);
+        if (toolbar_title != null) {
             toolbar_title.setText("修改后的标题");
         }
     }
 
-    private void test5(@FloatRange(from = 0.1f,to = 1f) float percent){
+    private void test5(@FloatRange(from = 0.1f, to = 1f) float percent) {
 
     }
 
 
-    @StringDef({"aaa","bbb"})
-    public @interface  ServiceName{}
+    @StringDef({"aaa", "bbb"})
+    public @interface ServiceName {
+    }
 
-    private void test6(@ServiceName String myName){
-        String[] arr={"ddd","ddd","dddd"};
+    private void test6(@ServiceName String myName) {
+        String[] arr = {"ddd", "ddd", "dddd"};
         test7("1");
     }
 
-    private void test7(@Test(odd= 4) String my){
+    private void test7(@Test(odd = 4) String my) {
 
     }
 }

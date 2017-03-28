@@ -6,7 +6,6 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
@@ -17,11 +16,11 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Region;
-import android.graphics.Shader;
+import android.support.annotation.ColorInt;
+import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
 import com.sage.demo0809.R;
 
 /**
@@ -43,7 +42,22 @@ public class StepLineChart extends View implements View.OnTouchListener {
         super(context, attrs, defStyleAttr);
         initDefaultData();
     }
-
+    public StepLineChart setToastTextColor(@ColorInt int color){
+        paintText.setColor(color);
+        return this;
+    }
+    public StepLineChart setAxisLineColor(@ColorInt int color){
+        paintAxis.setColor(color);
+        return this;
+    }
+    public StepLineChart setCurveLineColor(@ColorInt int color){
+        paintCurve.setColor(color);
+        return this;
+    }
+    public StepLineChart setDotPic(@DrawableRes int drawRes){
+        dotbp = BitmapFactory.decodeResource(getResources(), drawRes);
+        return this;
+    }
     private Paint paintCurve;//曲线
     private Paint paintAxis;//坐标轴，竖线和横线
     private Paint paintPoint;//数据点
@@ -60,8 +74,12 @@ public class StepLineChart extends View implements View.OnTouchListener {
         padding = (int) (getResources().getDisplayMetrics().density * 10);
         paddingLeft = paddingRight = paddingTop = paddingBottom = padding;
         dotRadius = padding / 3;
+        paddingLeft+=getPaddingLeft();
+        paddingRight+=getPaddingRight();
+        paddingTop+=getPaddingTop();
+        paddingBottom+=getPaddingBottom();
         paintAxis = new Paint();
-        paintAxis.setPathEffect(new DashPathEffect(new float[]{10, 5, 10, 5}, 1));
+        paintAxis.setPathEffect(new DashPathEffect(new float[]{20, 5, 20, 5}, 1));
         paintAxis.setColor(Color.WHITE);
 
         paintPoint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -192,7 +210,7 @@ public class StepLineChart extends View implements View.OnTouchListener {
         for (int i = 0; i < points.length; i++) {
             points[i] = new Point(axisX + intervalX * i, (int) (axisY - heightDraw * data[i] / maxFloat));
 //            canvas.drawBitmap(dotbp, points[i].x - dotbp.getWidth() / 2, points[i].y - dotbp.getHeight() / 2, paintPoint);
-            System.out.println("position=" + i + "===" + points[i].toString());
+//            System.out.println("position=" + i + "===" + points[i].toString());
         }
 
         //画曲线

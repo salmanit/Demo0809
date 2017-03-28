@@ -10,7 +10,26 @@
     <com.sage.demo0809.widget.StepLineChart
         android:id="@+id/stepChart"
         android:layerType="software"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:background="@mipmap/jianbuzou_bg"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
+    <com.sage.demo0809.widget.StepLineChart
+        android:layout_marginTop="20dp"
+        android:id="@+id/stepChart2"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layerType="software"
+        android:background="#f4f4f4"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <com.sage.demo0809.widget.StepPillarChart
+        android:id="@+id/stepPillar"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="#ffffff"
+        android:layout_width="match_parent"
+        android:layout_height="150dp" />
 </LinearLayout>

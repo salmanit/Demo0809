@@ -26,20 +26,14 @@ import com.umeng.analytics.MobclickAgent;
  */
 
 public class ActivityBase extends AppCompatActivity {
-
+    TextView toolbar_title;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         ThemeHelper.statusBarLightMode(this);
         String intentTitle=getIntent().getStringExtra("title");
-        if(!TextUtils.isEmpty(intentTitle)){
-            title=intentTitle;
-            TextView toolbar_title= (TextView) findViewById(R.id.toolbar_title);
-            if(toolbar_title!=null){
-                toolbar_title.setText(title);
-            }
-        }
+
         // 设置contentFeature,可使用切换动画
 //        getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
 //        Transition explode = TransitionInflater.from(this).inflateTransition(android.R.transition.explode);
@@ -51,6 +45,14 @@ public class ActivityBase extends AppCompatActivity {
         }
     }
 
+    public void setToolbar_title(String title){
+        toolbar_title= (TextView) findViewById(R.id.toolbar_title);
+        if(toolbar_title!=null){
+            toolbar_title.setText(title);
+        }else{
+            System.out.println("=======null");
+        }
+    }
     public void initMyToolbar(){
         Toolbar toolbar= (Toolbar) findViewById(R.id.toolbar);
         if(toolbar!=null){
