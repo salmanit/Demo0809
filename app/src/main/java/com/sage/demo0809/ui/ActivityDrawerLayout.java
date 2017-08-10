@@ -44,8 +44,10 @@ public class ActivityDrawerLayout extends ActivityBase {
         MyLog.i("----------------"+new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(1475886888000l)));
         final EditText et= (EditText) findViewById(R.id.et_test);
         final TextView tvmain2= (TextView) findViewById(R.id.tv_main2);
+        final TextView tvmain3= (TextView) findViewById(R.id.tv_main3);
         String temp="&#128176;&#128531;&#128176;&#128516;&#22909;&#21543;&#22909;&#21543;&#128522;";
 //        et.setText(Html.fromHtml("&amp;#128563;&amp;#128516;&amp;#9917;&amp;#128516;"));
+        temp="<p style=\"font-size: 16px;color: red\">1减肥时阶段性暴食，怎么治?<br/>5月不减肥，6月徒伤悲。<br/>天气一天天热起来，想必大家早已开始各自的减肥计划，想美美地迎接夏天了吧.我们都知道减肥的秘诀是管住嘴迈开腿，还需要</p>\n";
         et.setText(Html.fromHtml(temp));
 
         findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
@@ -72,6 +74,7 @@ public class ActivityDrawerLayout extends ActivityBase {
 //                tvmain2.setText(Html.fromHtml(StringEscapeUtils.unescapeHtml4(result2)));
 
                 String send=Html.escapeHtml(et.getText().toString());
+                tvmain3.setText(send);
                 tvmain2.setText(Html.fromHtml(send));
             }
         });

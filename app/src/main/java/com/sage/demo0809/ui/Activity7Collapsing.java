@@ -27,18 +27,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
-import com.sage.demo0809.app.BaseBuildInfo;
-import com.sage.demo0809.app.BuildInfo;
 import com.sage.demo0809.fragment.FragmentVideoList;
-import com.sage.demo0809.util.Utils;
-import com.tencent.tinker.lib.tinker.Tinker;
-import com.tencent.tinker.lib.tinker.TinkerInstaller;
-import com.tencent.tinker.loader.shareutil.ShareConstants;
-import com.tencent.tinker.loader.shareutil.ShareTinkerInternals;
 
-import java.io.File;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -99,10 +90,6 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
         findViewById(R.id.iv_next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showToast("开始更新,新版本0214");
-                File file = new File(Environment.getExternalStorageDirectory(), "/p.apk");
-                MyLog.i("p.apk path=======" + file.getAbsolutePath());
-                TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), file.getAbsolutePath());
             }
         });
     }
@@ -110,14 +97,12 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
     @Override
     protected void onResume() {
         super.onResume();
-        Utils.setBackground(false);
         appBarLayout.addOnOffsetChangedListener(this);
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        Utils.setBackground(true);
         appBarLayout.removeOnOffsetChangedListener(this);
     }
 
@@ -147,65 +132,16 @@ public class Activity7Collapsing extends ActivityBase implements AppBarLayout.On
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv1://load
-                File patch=new File(Environment.getExternalStorageDirectory(),"/apk/patch_signed_7zip.apk");
-                if(patch.exists()){
-                    TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), patch.getAbsolutePath());
-                }
 
                 break;
             case R.id.tv2://show
-                showInfo(this);
                 break;
             case R.id.tv3://kill
-                ShareTinkerInternals.killAllOtherProcess(getApplicationContext());
-                android.os.Process.killProcess(android.os.Process.myPid());
                 break;
             case R.id.tv4://clean
-                Tinker.with(getApplicationContext()).cleanPatch();
                 break;
         }
     }
 
-    public boolean showInfo(Context context) {
-        // add more Build Info
-        final StringBuilder sb = new StringBuilder();
-        Tinker tinker = Tinker.with(getApplicationContext());
-        if (tinker.isTinkerLoaded()) {
-            sb.append(String.format("[220000220009999990000patch is loaded] \n"));
-            sb.append(String.format("[buildConfig TINKER_ID] %s \n", BuildInfo.TINKER_ID));
-            sb.append(String.format("[buildConfig BASE_TINKER_ID] %s \n", BaseBuildInfo.BASE_TINKER_ID));
-
-            sb.append(String.format("[buildConfig MESSSAGE] %s \n", BuildInfo.MESSAGE));
-            sb.append(String.format("[TINKER_ID] %s \n", tinker.getTinkerLoadResultIfPresent().getPackageConfigByName(ShareConstants.TINKER_ID)));
-            sb.append(String.format("[packageConfig patchMessage] %s \n", tinker.getTinkerLoadResultIfPresent().getPackageConfigByName("patchMessage")));
-            sb.append(String.format("[TINKER_ID Rom Space] %d k \n", tinker.getTinkerRomSpace()));
-
-        } else {
-            sb.append(String.format("[2200002200099999990000patch is not loaded] \n"));
-            sb.append(String.format("[buildConfig TINKER_ID] %s \n", BuildInfo.TINKER_ID));
-            sb.append(String.format("[buildConfig BASE_TINKER_ID] %s \n", BaseBuildInfo.BASE_TINKER_ID));
-
-            sb.append(String.format("[buildConfig MESSSAGE] %s \n", BuildInfo.MESSAGE));
-            sb.append(String.format("[TINKER_ID] %s \n", ShareTinkerInternals.getManifestTinkerID(getApplicationContext())));
-        }
-        sb.append(String.format("[BaseBuildInfo Message] %s \n", BaseBuildInfo.TEST_MESSAGE));
-
-        final TextView v = new TextView(context);
-        v.setText(sb);
-        v.setGravity(Gravity.LEFT | Gravity.CENTER_VERTICAL);
-        v.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 10);
-        v.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        v.setTextColor(0xFF000000);
-        v.setTypeface(Typeface.MONOSPACE);
-        final int padding = 16;
-        v.setPadding(padding, padding, padding, padding);
-
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setCancelable(true);
-        builder.setView(v);
-        final AlertDialog alert = builder.create();
-        alert.show();
-        return true;
-    }
 
 }

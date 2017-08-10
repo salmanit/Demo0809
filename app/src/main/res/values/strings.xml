@@ -140,4 +140,7 @@
   "shoujihao" : "15021819629"
 }&charset=utf-8&format=json&sign_type=MD5&timestamp=2016-12-22 16:19:28&version=1.0E6FD3976A207F4B269918DEB30223A28
 ]]></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

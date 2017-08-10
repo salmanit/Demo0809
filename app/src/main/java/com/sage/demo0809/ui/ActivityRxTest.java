@@ -45,7 +45,7 @@ public class ActivityRxTest extends ActivityBase {
             urls.add(url);
         }
         rv.setLayoutManager(new LinearLayoutManager(this));
-        rv.setAdapter(adapter=new MySimpleRvAdapter<String>() {
+        rv.setAdapter(adapter=new MySimpleRvAdapter<String>(urls) {
             @Override
             public int layoutId(int viewType) {
                 return R.layout.item_video_list;

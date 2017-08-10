@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewAnimationUtils;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
@@ -25,6 +26,7 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 
 import com.sage.demo0809.R;
+import com.sage.demo0809.widget.RelativeLayoutCustomState;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -35,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipException;
@@ -67,6 +70,10 @@ public class ActivityTest2 extends ActivityBase {
     @BindView(R.id.rb2)
     RadioButton rb2;
 
+    @BindView(R.id.rv_layout1)
+    RelativeLayoutCustomState rv_layout1;
+    @BindView(R.id.rv_layout2)
+    RelativeLayoutCustomState rv_layout2;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +88,17 @@ public class ActivityTest2 extends ActivityBase {
 //        unzip(new File(Environment.getExternalStorageDirectory(),"CareAdd/zip/87000001_7.7_android.zip"));
 //        mOutput=new File(Environment.getExternalStorageDirectory(),"/aaaaa");
 //        unzip(new File(Environment.getExternalStorageDirectory(),"/87000007.zip"));
+
+
+        rv_layout1.setMessageReaded(true);
+        String[] arry1={"aaaa","bbbb"};
+        String[] arry2={"cccc","ddddd","eeeee"};
+        try {
+            System.arraycopy(arry1,0,arry2,1,arry1.length);
+            System.out.println("======="+ Arrays.toString(arry2));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     File mOutput=new File(Environment.getExternalStorageDirectory(),"/aaa");

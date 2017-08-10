@@ -6,6 +6,38 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <include layout="@layout/layout_toolbar_test"/>
+    <com.sage.demo0809.widget.RelativeLayoutCustomState
+        android:id="@+id/rv_layout1"
+        android:background="@drawable/custom_state_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <TextView
+            android:background="@drawable/email_read_state"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:text="hello"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.sage.demo0809.widget.RelativeLayoutCustomState>
+    <com.sage.demo0809.widget.RelativeLayoutCustomState
+        android:id="@+id/rv_layout2"
+        android:background="@drawable/custom_state_bg_color"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+        <ImageView
+            android:src="@drawable/email_read_state"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
+        <TextView
+            android:text="hello"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </com.sage.demo0809.widget.RelativeLayoutCustomState>
     <RadioGroup
         android:orientation="horizontal"
         android:layout_width="match_parent"

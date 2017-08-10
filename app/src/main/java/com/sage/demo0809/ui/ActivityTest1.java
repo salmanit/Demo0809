@@ -21,8 +21,6 @@ import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
 import com.sage.demo0809.widget.MyChartView;
 import com.sage.demo0809.widget.RelativeLayoutWithBg;
-import com.tencent.tinker.lib.tinker.Tinker;
-import com.tencent.tinker.lib.tinker.TinkerInstaller;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -144,13 +142,8 @@ public class ActivityTest1 extends ActivityBase {
         switch (view.getId()){
             case R.id.tv_load:
 
-                File file = new File(Environment.getExternalStorageDirectory(), "/p.apk");
-                MyLog.i("p.apk path=======" + file.getAbsolutePath());
-                if(file.exists())
-                    TinkerInstaller.onReceiveUpgradePatch(getApplicationContext(), file.getAbsolutePath());
                 break;
             case R.id.tv_cancel_:
-                Tinker.with(getApplicationContext()).cleanPatch();
                 break;
         }
     }

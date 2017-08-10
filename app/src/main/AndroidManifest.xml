@@ -17,18 +17,21 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+
     <!-- <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/> -->
     <application
-        android:name=".AMSKY"
+        android:name=".app.InjectedApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppThemeMy">
-
-        <!-- <meta-data android:value="5811ce78310c931cf7001229" android:name="UMENG_APPKEY"/> -->
-        <!-- <meta-data android:value="DEFAULT" android:name="UMENG_CHANNEL"/> -->
-
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5976eb3f1061d2294e001367" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="DEFAULT" />
         <meta-data
             android:name="com.samsung.android.health.platform_type"
             android:value="rel" />
@@ -36,9 +39,6 @@
             android:name="com.samsung.android.health.permission.read"
             android:value="com.samsung.health.step_count" />
 
-        <service
-            android:name=".service.SampleResultService"
-            android:exported="false" />
         <service
             android:name=".service.RedAccessibilityService"
             android:enabled="true"
@@ -228,7 +228,20 @@
         <service android:name=".service.TestService" />
 
         <activity android:name=".ui.ActivityTestStepLine" />
-        <activity android:name=".ui.ActivityRxTest"></activity>
+        <activity android:name=".ui.ActivityRxTest" />
+
+        <!-- servicelaoder使用测试 -->
+        <activity android:name=".ui.ActivityServiceLoader" />
+        <activity android:name=".ui.ActivityChipsLayout" />
+        <activity android:name=".ui.ActivityRecyclerViewHandle" />
+        <activity android:name=".ui.ActivityFloatingCollspsing" />
+        <activity android:name=".ui.ActivityLondonEyeLayout" />
+        <activity android:name=".ui.ActivityFragmentTransitionTest" />
+        <activity android:name=".ui.ActivityOutLineTest" />
+        <activity android:name=".ui.ActivityTabLayoutCustom" />
+        <activity android:name=".ui.aliplayer.ActivityAliPlayerHome" />
+        <activity android:name=".ui.ActivityMoodAnim" />
+        <activity android:name=".ui.Activity9Check"></activity>
     </application>
 
 </manifest>

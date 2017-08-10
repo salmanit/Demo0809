@@ -12,6 +12,7 @@ import android.support.annotation.UiThread;
 import android.support.annotation.WorkerThread;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.TextView;
 
 import com.sage.demo0809.R;
@@ -23,9 +24,11 @@ import com.sage.demo0809.bean.BeanActivity;
 import com.sage.demo0809.service.OtherAccessibilityService;
 import com.sage.demo0809.service.RedAccessibilityService;
 import com.sage.demo0809.test.Test;
+import com.sage.demo0809.ui.aliplayer.ActivityAliPlayerHome;
 import com.sage.demo0809.ui.finger.SettingsActivity;
 import com.sage.demo0809.ui.guard.ActivityGuard;
 import com.sage.demo0809.util.MyUtils;
+import com.sage.demo0809.widget.RelativeLayoutCustomState;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -67,7 +70,7 @@ public class ActivityLists extends ActivityBase {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lists);
-
+//https://github.com/google/flexbox-layout
 //        MyUtils.isAccessibilitySettingsOn(this, RedAccessibilityService.class);
 //        MyUtils.isAccessibilitySettingsOn(this, OtherAccessibilityService.class);
 
@@ -90,6 +93,16 @@ public class ActivityLists extends ActivityBase {
 
         System.err.println("7.1.9".compareTo("7.1.90") + "================" + year);
         ButterKnife.bind(this);
+
+        lists.add(new BeanActivity("九宫格解锁测试", Activity9Check.class));
+        lists.add(new BeanActivity("动画测试", ActivityMoodAnim.class));
+        lists.add(new BeanActivity("阿里直播播放器测试", ActivityAliPlayerHome.class));
+        lists.add(new BeanActivity("tabLayout自定义", ActivityTabLayoutCustom.class));
+        lists.add(new BeanActivity("ViewOutlineProvider学习", ActivityOutLineTest.class));
+        lists.add(new BeanActivity("fragment的transition学习", ActivityFragmentTransitionTest.class));
+        lists.add(new BeanActivity("floatingCollpsing", ActivityFloatingCollspsing.class));
+        lists.add(new BeanActivity("RecyclerView联动处理学习", ActivityRecyclerViewHandle.class));
+        lists.add(new BeanActivity("ChipsLayoutManager学习", ActivityChipsLayout.class));
         lists.add(new BeanActivity("Rx1.x版本练习0", ActivityRxTest.class));
         lists.add(new BeanActivity("测试7日曲线", ActivityTestStepLine.class));
         lists.add(new BeanActivity("vector的path动画14:06", ActivityPathAnima.class));
@@ -131,6 +144,8 @@ public class ActivityLists extends ActivityBase {
                 holder.setText(R.id.tv_position, "" + position);
                 holder.setText(R.id.tv_name, data.name);
                 holder.setText(R.id.tv_class, data.cla.getSimpleName());
+                RelativeLayoutCustomState layout=holder.getView(R.id.item_root);
+                layout.setMessageReaded(position%2==0);
             }
         });
 
@@ -147,59 +162,10 @@ public class ActivityLists extends ActivityBase {
             }
         });
 
-        test3("aa");
-    }
-
-
-    private void test(@Size(4) int[] array) {
-        System.out.println(Arrays.toString(array));
-    }
-
-    private void test2(@Size(min = 10, max = 100) ArrayList<String> list) {
-        new AsyncTask<Void, Void, Void>() {
-            @Override
-            protected Void doInBackground(Void... params) {
-                return null;
-            }
-        }.execute();
-    }
-
-    private void test3(@Size(multiple = 2) String hello) {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    test4(3);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    @UiThread
-    private void test4(@IntRange(from = 1, to = 100) int number) {
-        TextView toolbar_title = (TextView) findViewById(R.id.toolbar_title);
-        if (toolbar_title != null) {
-            toolbar_title.setText("修改后的标题");
-        }
-    }
-
-    private void test5(@FloatRange(from = 0.1f, to = 1f) float percent) {
 
     }
 
 
-    @StringDef({"aaa", "bbb"})
-    public @interface ServiceName {
-    }
 
-    private void test6(@ServiceName String myName) {
-        String[] arr = {"ddd", "ddd", "dddd"};
-        test7("1");
-    }
 
-    private void test7(@Test(odd = 4) String my) {
-
-    }
 }

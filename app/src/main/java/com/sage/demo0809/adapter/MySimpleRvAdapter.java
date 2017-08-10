@@ -54,7 +54,7 @@ public abstract class MySimpleRvAdapter<T> extends RecyclerView.Adapter<MyRvView
     }
 
     public abstract int layoutId(int viewType);
-    public abstract void handleData(MyRvViewHolder holder, int position, T data);
+    public abstract void handleData(MyRvViewHolder holder, int position, T t);
     @Override
     public int getItemViewType(int position) {
         for(int i=0;i<headViews.size();i++){

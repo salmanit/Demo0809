@@ -24,6 +24,11 @@
         android:background="#f4f4f4"
         android:layout_width="match_parent"
         android:layout_height="200dp" />
+    <Button
+        android:id="@+id/btn_refresh"
+        android:text="刷新数据"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <com.sage.demo0809.widget.StepPillarChart
         android:id="@+id/stepPillar"
         android:paddingLeft="10dp"

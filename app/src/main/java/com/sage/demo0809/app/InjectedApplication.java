@@ -50,23 +50,27 @@ public class InjectedApplication extends MultiDexApplication {
     private ObjectGraph mObjectGraph;
 
     public static InjectedApplication app;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        app=this;
+        app = this;
         SkinManager.getInstance().init(this);
         initObjectGraph(new FingerprintModule(this));
 
 
-        MyLog.i("==========="+getDeviceInfo(this));
-
+        MyLog.i("===========" + getDeviceInfo(this));
+        MobclickAgent.setDebugMode(true);
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.setScenarioType(app, MobclickAgent.EScenarioType.E_UM_NORMAL);
     }
 
-    int position=1;
-    public void changeUMappKey(String appKey){
-        MobclickAgent.onProfileSignOff();
-        MobclickAgent.UMAnalyticsConfig config=new MobclickAgent.UMAnalyticsConfig(this,appKey,"default", MobclickAgent.EScenarioType.E_UM_NORMAL,true);
-        MobclickAgent.startWithConfigure(config);
+    int position = 1;
+
+    public void changeUMappKey(String appKey) {
+//        MobclickAgent.onProfileSignOff();
+//        MobclickAgent.UMAnalyticsConfig config=new MobclickAgent.UMAnalyticsConfig(this,appKey,"default", MobclickAgent.EScenarioType.E_UM_NORMAL,true);
+//        MobclickAgent.startWithConfigure(config);
 
         /**String appkey:官方申请的Appkey
          String channel: 渠道号
@@ -75,7 +79,7 @@ public class InjectedApplication extends MultiDexApplication {
         MobclickAgent.setDebugMode(true);
         MobclickAgent.openActivityDurationTrack(false);
 
-        MobclickAgent.onProfileSignIn(appKey+position);
+        MobclickAgent.onProfileSignIn(appKey + position);
         position++;
     }
 //    @Override
@@ -103,11 +107,6 @@ public class InjectedApplication extends MultiDexApplication {
     }
 
 
-
-
-
-
-
     public static boolean checkPermission(Context context, String permission) {
         boolean result = false;
         if (Build.VERSION.SDK_INT >= 23) {
@@ -127,6 +126,7 @@ public class InjectedApplication extends MultiDexApplication {
         }
         return result;
     }
+
     public static String getDeviceInfo(Context context) {
         try {
             org.json.JSONObject json = new org.json.JSONObject();
@@ -181,10 +181,6 @@ public class InjectedApplication extends MultiDexApplication {
         }
         return null;
     }
-
-
-
-
 
 
 }

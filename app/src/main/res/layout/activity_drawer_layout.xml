@@ -23,6 +23,13 @@ android:orientation="vertical"
             android:gravity="center"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/tv_main3"
+            android:textSize="22sp"
+            android:text="发送出去的代码"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <EditText
             android:id="@+id/et_test"
             android:layout_width="match_parent"
