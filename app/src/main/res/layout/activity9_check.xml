@@ -36,8 +36,8 @@
     </LinearLayout>
     <com.sage.demo0809.widget.lock.LockPatternView
         android:id="@+id/lock_view"
-        android:layout_width="200dp"
-        android:layout_height="200dp" />
+        android:layout_width="250dp"
+        android:layout_height="250dp" />
     <com.sage.demo0809.widget.lock.LockPatternView2
         android:id="@+id/lock_view2"
         android:layout_width="200dp"

@@ -4,24 +4,16 @@ package com.sage.demo0809.widget.lock;
  * Created by Sage on 2017/8/10.
  * Description:
  */
-
-
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-
-import com.sage.demo0809.R;
-
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class LockPatternView2 extends View {
     //判断线的状态
@@ -30,8 +22,6 @@ public class LockPatternView2 extends View {
     private static boolean isInitPoint = false;
     //判断手指是否离开屏幕
     private static boolean isFinish = false;
-    //判断手指点击屏幕时是否选中了九宫格中的点
-    private static boolean isSelect = false;
     // 创建MyPoint的数组
     // 声明屏幕的宽和高
     private int mScreenHeight;
@@ -88,7 +78,7 @@ public class LockPatternView2 extends View {
             mScreenWidth = mScreenHeight;
         }
 
-        mPointRadius = mScreenWidth / 12;//宽或高四等分，去中间的为中心点，完事两点之间为3个半径
+        mPointRadius = mScreenWidth / 9;//宽或高3等分，中间的为中心点，完事两点之间为3个半径
 
         mPaintFill.setStyle(Paint.Style.FILL);
         mPaint.setStyle(Paint.Style.STROKE);
@@ -96,8 +86,8 @@ public class LockPatternView2 extends View {
          * 开始实例化九宫格中点
          */
         for (int i = 0; i < pointLocks.length; i++) {
-            pointLocks[i] = new PointLock(mScreenWidthOffSet + mScreenWidth * (i % 3 + 1) / 4,
-                    mScreenHeightOffSet + mScreenHeight * (i / 3 + 1) / 4);
+            pointLocks[i] = new PointLock(mScreenWidthOffSet + mScreenWidth * ((i % 3)*2 + 1) / 6,
+                    mScreenHeightOffSet + mScreenHeight * ((i / 3)*2 + 1) / 6);
             pointLocks[i].setIndex("" + (i + 1));
             pointLocks[i].setState(PointLock.BITMAP_NORMAL);
         }
@@ -172,6 +162,10 @@ public class LockPatternView2 extends View {
      * @param canvas 画布
      */
     private void canvasLine(PointLock a, PointLock b, Canvas canvas) {
+        PointLock center=null;
+        if(!TextUtils.isEmpty(b.getIndex())){
+            center=getIsSelectedPoint(a.getX()/2+b.getX()/2,a.getY()/2+b.getY()/2);
+        }
         float abInstance = (float) Math.sqrt(
                 (a.getX() - b.getX()) * (a.getX() - b.getX())
                         + (a.getY() - b.getY()) * (a.getY() - b.getY())
@@ -183,14 +177,16 @@ public class LockPatternView2 extends View {
         canvas.rotate(degree, 0, 0);
         mPaint.setStrokeWidth(strokeWidth);
         mPaint.setColor(isLineState ? colorPress : colorError);
-        canvas.drawLine(mPointRadius, 0, abInstance - mPointRadius, 0, mPaint);
+        if(null==center)
+            canvas.drawLine(mPointRadius, 0, abInstance - mPointRadius, 0, mPaint);
+        else{
+            canvas.drawLine(mPointRadius, 0, abInstance/2 - mPointRadius, 0, mPaint);
+            canvas.drawLine(abInstance/2 + mPointRadius, 0, abInstance - mPointRadius, 0, mPaint);
+        }
         canvas.restore();
         //save()和restore()的作用就是将save之后画布进行了平移缩放等操作之后通过restore还原，而不用在反向平移缩放
     }
 
-    /**
-     * 手指点击手机屏幕
-     */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         mMoveX = event.getX();
@@ -211,19 +207,19 @@ public class LockPatternView2 extends View {
                 mPointList.clear();
                 // 判断是否点中了九宫格中的点
                 mPoint = getIsSelectedPoint(mMoveX, mMoveY);
-                if (mPoint != null) {
-                    isSelect = true;
-                }
+//                if (mPoint != null) {
+//                    isSelect = true;
+//                }
                 break;
             case MotionEvent.ACTION_MOVE:
-                if (isSelect) {
-                    mPoint = getIsSelectedPoint(mMoveX, mMoveY);
-                }
+//                if (isSelect) {
+//                }
+                mPoint = getIsSelectedPoint(mMoveX, mMoveY);
 
                 break;
             case MotionEvent.ACTION_UP:
                 isFinish = true;
-                isSelect = false;
+//                isSelect = false;
                 // 规定至少要有4个点被连线才有可能是正确
                 // 其他种情况都是错误的
                 if (mPointList.size() >= 4) {// 正确情况
@@ -262,17 +258,27 @@ public class LockPatternView2 extends View {
 
         }
         // 将mPoint添加到pointList中
-        if (isSelect && mPoint != null) {
-            if (mPoint.getState() == PointLock.BITMAP_NORMAL) {
-                mPoint.setState(PointLock.BITMAP_PRESS);
-                mPointList.add(mPoint);
+        if (mPoint != null) {
+            if(mPointList.size()>0){
+                PointLock last=mPointList.get(mPointList.size()-1);
+               PointLock centerP= getIsSelectedPoint(last.getX()/2+mPoint.getX()/2,last.getY()/2+mPoint.getY()/2);
+                if(centerP!=null){
+                    addPointCheck(centerP);
+                }
             }
+            addPointCheck(mPoint);
         }
         // 每次发生OnTouchEvent()后都刷新View
         postInvalidate();
         return true;
     }
 
+    private void addPointCheck(PointLock mPoint){
+        if (mPoint.getState() == PointLock.BITMAP_NORMAL) {
+            mPoint.setState(PointLock.BITMAP_PRESS);
+            mPointList.add(mPoint);
+        }
+    }
     /**
      * 判断九宫格中的某个点是否被点中了，或者某个点能否被连线
      */
@@ -286,7 +292,7 @@ public class LockPatternView2 extends View {
         return myPoint;
     }
 
-    public  float getDegrees(PointLock a, PointLock b) {
+    public float getDegrees(PointLock a, PointLock b) {
         float degrees = 0;
         float ax = a.getX();
         float ay = a.getY();
@@ -322,7 +328,6 @@ public class LockPatternView2 extends View {
         }
         return degrees;
     }
-
 
 
     public interface OnLockListener {

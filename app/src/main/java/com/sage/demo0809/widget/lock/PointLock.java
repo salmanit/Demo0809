@@ -73,9 +73,14 @@ public class PointLock {
         float result = (float) Math.sqrt((a.getX() - moveX)
                 * (a.getX() - moveX) + (a.getY() - moveY)
                 * (a.getY() - moveY));
-        if (result < 5 * radius / 4) {
+        if (result <=  radius ) {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public String toString() {
+        return "[index:"+index+";x="+x+";y="+y+"]";
     }
 }
