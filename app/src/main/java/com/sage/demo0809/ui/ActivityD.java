@@ -47,7 +47,7 @@ public class ActivityD extends ActivityBase {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
         toolbar= (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         setTitle("");
 //        toolbar.setFitsSystemWindows(false);
         iv_thumb= (ImageView) findViewById(R.id.iv_thumb);

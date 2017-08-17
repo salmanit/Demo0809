@@ -11,13 +11,18 @@ import com.sage.demo0809.widget.lock.LockPatternView
 import com.sage.demo0809.widget.lock.LockPatternView2
 import kotlinx.android.synthetic.main.activity9_check.*
 
-class Activity9Check : AppCompatActivity() {
+class Activity9Check : ActivityBase() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity9_check)
 
-
+        psw_txt.setInputCallBack {
+            showToast(it)
+        }
+        psw_txt2.setInputCallBack {
+            showToast(it)
+        }
 
 
 

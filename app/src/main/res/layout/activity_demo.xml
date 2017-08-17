@@ -6,6 +6,10 @@
     android:layout_height="match_parent"
     tools:context=".ui.ActivityD">
     <include layout="@layout/layout_toolbar"/>
+    <TextView
+        android:background="#5521dd"
+        android:layout_width="match_parent"
+        android:layout_height="50dp" />
     <ScrollView
         android:layout_width="match_parent"
         android:layout_weight="1"

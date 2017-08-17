@@ -34,10 +34,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
+    <com.sage.demo0809.widget.PswText
+        android:id="@+id/psw_txt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" />
+    <com.sage.demo0809.widget.PswText
+        android:id="@+id/psw_txt2"
+        android:paddingTop="5dp"
+        app:isDrawBorderImg="false"
+        app:borderColor="#ff5127"
+        app:inputBorder_color="#ff5127"
+        app:pswColor="#ff5127"
+        app:borderRadius="0dp"
+        app:pswLength="5"
+        app:clearTextPsw="true"
+        android:layout_margin="10dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content" />
     <com.sage.demo0809.widget.lock.LockPatternView
         android:id="@+id/lock_view"
-        android:layout_width="250dp"
-        android:layout_height="250dp" />
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
     <com.sage.demo0809.widget.lock.LockPatternView2
         android:id="@+id/lock_view2"
         android:layout_width="200dp"
