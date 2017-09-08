@@ -68,10 +68,35 @@ class ActivityRecyclerDrag : AppCompatActivity() {
 
                 override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                     println("onSwiped=====================$direction")
-                    val delete=viewHolder.adapterPosition
-                    adapter.notifyItemRemoved(delete)
-                    testData.removeAt(delete)
+//                    val delete=viewHolder.adapterPosition
+//                    adapter.notifyItemRemoved(delete)
+//                    testData.removeAt(delete)
                 }
+
+                //默认的是整个item拖动，下边的修改为只能拖动里边的某个控件
+                override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
+
+                    getDefaultUIUtil().clearView((viewHolder as MyRvViewHolder).getView(R.id.tv_right));
+                }
+
+                override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
+                   if(viewHolder!=null){
+                       getDefaultUIUtil().onSelected((viewHolder as MyRvViewHolder).getView(R.id.tv_right))
+                   }
+                }
+
+                override fun onChildDraw(c: Canvas?, recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                    getDefaultUIUtil().onDraw(c, recyclerView,
+                            (viewHolder as MyRvViewHolder).getView(R.id.tv_right), dX, dY,
+                            actionState, isCurrentlyActive);
+                }
+
+                override fun onChildDrawOver(c: Canvas?, recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?, dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean) {
+                    getDefaultUIUtil().onDrawOver(c, recyclerView,
+                            (viewHolder as MyRvViewHolder).getView(R.id.tv_right), dX, dY,
+                            actionState, isCurrentlyActive);
+                }
+
             }).attachToRecyclerView(rv_linear)
         }
         rv_grid.apply {
