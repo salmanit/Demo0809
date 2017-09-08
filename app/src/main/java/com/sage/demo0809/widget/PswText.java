@@ -32,7 +32,7 @@ import com.sage.demo0809.R;
 import java.util.ArrayList;
 
 
-public class PswText  extends View {
+public class PswText extends View {
     private InputMethodManager input;//Input method management
     private ArrayList<Integer> result;//Enter the current result to save
     private int saveResult;//Save the total number of passwords entered when the back key is pressed
@@ -155,7 +155,7 @@ public class PswText  extends View {
         //The password origin is initialized
         pswDotPaint = new Paint();
         pswDotPaint.setAntiAlias(true);
-        pswDotPaint.setStrokeWidth(4);
+        pswDotPaint.setStrokeWidth(3);
         pswDotPaint.setStyle(Paint.Style.FILL);
         pswDotPaint.setColor(pswColor);
 
@@ -170,20 +170,22 @@ public class PswText  extends View {
         borderPaint.setAntiAlias(true);
         borderPaint.setColor(borderColor);
         borderPaint.setStyle(Paint.Style.STROKE);
-        borderPaint.setStrokeWidth(4);
+        borderPaint.setStrokeWidth(strokeWidth);
 
         //Input the border brush to initialize
         inputBorderPaint = new Paint();
         inputBorderPaint.setAntiAlias(true);
         inputBorderPaint.setColor(inputBorderColor);
         inputBorderPaint.setStyle(Paint.Style.STROKE);
-        inputBorderPaint.setStrokeWidth(4);
+        inputBorderPaint.setStrokeWidth(strokeWidth);
         //Password box shadow color
         if (isShowBorderShadow) {
             inputBorderPaint.setShadowLayer(6, 0, 0, borderShadowColor);
             setLayerType(LAYER_TYPE_SOFTWARE, inputBorderPaint);
         }
     }
+
+    int strokeWidth = 4;//边框线条的宽度
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
@@ -192,22 +194,25 @@ public class PswText  extends View {
 
         int heightSpec = MeasureSpec.getMode(heightMeasureSpec);
         int heightSize = MeasureSpec.getSize(heightMeasureSpec);
-
+        System.out.println("111widthSize==" + widthSize + "  =====heightSize===" + heightSize);
         if (widthSpec == MeasureSpec.AT_MOST) {
             if (heightSpec != MeasureSpec.AT_MOST) {//Height is known but when width is unknown
                 spacingWidth = heightSize / 4;
                 widthSize = (heightSize * pswLength) + (spacingWidth * (pswLength - 1));
                 borderWidth = heightSize;
+                System.out.println("111heightSpec != MeasureSpec.AT_MOST==========" + widthSize + " ==" + borderWidth);
             } else {//Width, height are unknown
                 widthSize = (borderWidth * pswLength) + (spacingWidth * (pswLength - 1));
                 heightSize = borderWidth;
+                System.out.println("111=======" + widthSize + "======" + heightSize);
             }
         } else {
             //The width is known but the height is unknown
             if (heightSpec == MeasureSpec.AT_MOST) {
                 borderWidth = (widthSize * 4) / (5 * pswLength);
                 spacingWidth = borderWidth / 4;
-                heightSize = borderWidth;
+                heightSize = borderWidth + strokeWidth;
+                System.out.println("111heightSpec == MeasureSpec.AT_MOST==========" + spacingWidth + " ==" + borderWidth);
             }
         }
         setMeasuredDimension(widthSize, heightSize);
@@ -217,10 +222,10 @@ public class PswText  extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         int dotRadius = borderWidth / 6;//Circle accounts for one third of the lattice
-        int height = getHeight() - 2;
+        int height = getHeight() - strokeWidth / 2;
 
 		/*
-		* If the text size is equal to the default value, then adjust the size of the text size, otherwise set by the actual size of the input
+        * If the text size is equal to the default value, then adjust the size of the text size, otherwise set by the actual size of the input
 		* */
         if (pswTextSize == (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, 18, getResources().getDisplayMetrics())) {
             pswTextSize = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_SP, borderWidth / 8, getResources().getDisplayMetrics());
@@ -242,7 +247,7 @@ public class PswText  extends View {
             }
         } else if (darkPsw) {
             for (int i = 0; i < result.size(); i++) {
-                float circleX = (float) ((i * (borderWidth + spacingWidth)) + (borderWidth / 2)  + (0.6 * spacingWidth));
+                float circleX = (float) ((i * (borderWidth + spacingWidth)) + (borderWidth / 2) + (0.6 * spacingWidth));
                 float circleY = borderWidth / 2;
                 int left = (int) (i * (borderWidth + spacingWidth) + (0.5 * spacingWidth));
                 int right = (int) (((i + 1) * borderWidth) + (i * spacingWidth) + (0.7 * spacingWidth));
@@ -326,13 +331,13 @@ public class PswText  extends View {
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), borderImg);
         Rect src = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
         for (int i = 0; i < pswLength; i++) {
-            int left = (int) ( (i * (borderWidth + spacingWidth)) + (0.5 * spacingWidth));
+            int left = (int) ((i * (borderWidth + spacingWidth)) + (0.5 * spacingWidth));
             int right = (int) (((i + 1) * borderWidth) + (i * spacingWidth) + (0.7 * spacingWidth));
             if (isBorderImg) {
                 Rect dst = new Rect(left, 0, right, height);
                 canvas.drawBitmap(bitmap, src, dst, borderPaint);
             } else {
-                borderRectF.set(left, 0, right, height);
+                borderRectF.set(left, strokeWidth / 2, right, height);
                 canvas.drawRoundRect(borderRectF, borderRadius, borderRadius, borderPaint);
             }
         }
@@ -349,7 +354,7 @@ public class PswText  extends View {
             canvas.drawBitmap(bitmap, src, dst, inputBorderPaint);
             bitmap.recycle();
         } else {
-            borderRectF.set(left, 0, right, height);
+            borderRectF.set(left, strokeWidth / 2, right, height);
             canvas.drawRoundRect(borderRectF, borderRadius, borderRadius, inputBorderPaint);
         }
     }

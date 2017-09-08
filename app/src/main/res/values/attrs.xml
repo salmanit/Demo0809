@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+
+    <declare-styleable name="ScrollDataShows">
+
+
+    </declare-styleable>
     <!--密码输入框-->
     <declare-styleable name="PswText">
         <!--密码长度-->

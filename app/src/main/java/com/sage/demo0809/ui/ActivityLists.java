@@ -94,6 +94,8 @@ public class ActivityLists extends ActivityBase {
         System.err.println("7.1.9".compareTo("7.1.90") + "================" + year);
         ButterKnife.bind(this);
 
+        lists.add(new BeanActivity("recyclerview拖拽,点击长按事件", ActivityRecyclerDrag.class));
+        lists.add(new BeanActivity("flycoTabLayout", ActivityFlycoTabLayout.class));
         lists.add(new BeanActivity("九宫格解锁测试", Activity9Check.class));
         lists.add(new BeanActivity("动画测试", ActivityMoodAnim.class));
         lists.add(new BeanActivity("阿里直播播放器测试", ActivityAliPlayerHome.class));

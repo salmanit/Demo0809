@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#f4f4f4"
+    tools:context="com.sage.demo0809.ui.ActivityFlycoTabLayout">
+    <com.flyco.tablayout.SegmentTabLayout
+        android:id="@+id/tl_4"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        tl:tl_bar_color="#ffffff"
+        tl:tl_indicator_color="#EC7263"
+        tl:tl_indicator_margin_bottom="0dp"
+        tl:tl_indicator_margin_left="0dp"
+        tl:tl_indicator_margin_right="0dp"
+        tl:tl_indicator_margin_top="0dp"
+        tl:tl_textSelectColor="#ffffff"
+        tl:tl_textUnselectColor="#999999"
+        tl:tl_divider_color="#e0e0e0"
+        tl:tl_divider_width="2dp"
+        tl:tl_bar_stroke_color="#e0e0e0"
+        tl:tl_bar_stroke_width="2dp"
+        tl:tl_tab_space_equal="true"
+        tl:tl_textsize="15sp"
+        tl:tl_textBold="BOTH"/>
+
+    <Button
+        android:layout_marginTop="10dp"
+        android:id="@+id/btn_result"
+        android:text="result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

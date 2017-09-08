@@ -1,48 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.sage.demo0809.widget.RelativeLayoutCustomState
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.mcxtzhang.swipemenulib.SwipeMenuLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/custom_state_bg_color"
     android:clickable="true"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    android:paddingBottom="1dp"
+    app:ios="false"
+    app:leftSwipe="true"
+    app:swipeEnable="true">
 
-    <ImageView
-        android:id="@+id/iv_logo"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_centerVertical="true"
-        android:duplicateParentState="true"
-        android:src="@drawable/email_read_state" />
+    <com.sage.demo0809.widget.RelativeLayoutCustomState
 
-    <TextView
-        android:id="@+id/tv_position"
-        android:layout_width="wrap_content"
+        android:id="@+id/item_root"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/iv_logo"
-        tools:text="1" />
+        android:background="@drawable/custom_state_bg_color"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="10dp">
 
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_toRightOf="@id/tv_position"
-        tools:text="首页面" />
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:duplicateParentState="true"
+            android:src="@drawable/email_read_state" />
 
-    <TextView
-        android:id="@+id/tv_class"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toRightOf="@id/tv_name"
-        tools:text="ActivityClassLists" />
+        <TextView
+            android:id="@+id/tv_position"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/iv_logo"
+            tools:text="1" />
 
-</com.sage.demo0809.widget.RelativeLayoutCustomState>
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_toRightOf="@id/tv_position"
+            tools:text="首页面" />
+
+        <TextView
+            android:id="@+id/tv_class"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@id/tv_name"
+            tools:text="ActivityClassLists" />
+
+    </com.sage.demo0809.widget.RelativeLayoutCustomState>
+
+    <Button
+        android:id="@+id/btn_accept"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="#d9dee4"
+        android:text="通过"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/btn_refuse"
+        android:layout_width="60dp"
+        android:layout_height="match_parent"
+        android:background="#f00"
+        android:text="不通过"
+        android:textColor="@android:color/white" />
+</com.mcxtzhang.swipemenulib.SwipeMenuLayout>

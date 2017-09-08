@@ -241,7 +241,15 @@
         <activity android:name=".ui.ActivityTabLayoutCustom" />
         <activity android:name=".ui.aliplayer.ActivityAliPlayerHome" />
         <activity android:name=".ui.ActivityMoodAnim" />
-        <activity android:name=".ui.Activity9Check"></activity>
+        <activity
+            android:name=".ui.Activity9Check"
+            android:configChanges="screenSize|orientation|keyboardHidden"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".ui.ActivityFlycoTabLayout" />
+        <activity android:name=".ui.ActivityRecyclerDrag"></activity>
     </application>
 
 </manifest>

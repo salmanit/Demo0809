@@ -7,6 +7,7 @@ import android.text.TextUtils
 import android.widget.ImageView
 
 import com.sage.demo0809.R
+import com.sage.demo0809.fragment.FragmentEdit
 import com.sage.demo0809.widget.lock.LockPatternView
 import com.sage.demo0809.widget.lock.LockPatternView2
 import kotlinx.android.synthetic.main.activity9_check.*
@@ -28,6 +29,8 @@ class Activity9Check : ActivityBase() {
 
         tv_set.setOnClickListener {
             state=true
+            supportFragmentManager.beginTransaction().add(R.id.layout_root,FragmentEdit(),"edit")
+                    .addToBackStack("aa").commit()
         }
         tv_check.setOnClickListener {
             state=false
@@ -56,6 +59,12 @@ class Activity9Check : ActivityBase() {
                 return state||TextUtils.equals(oldPsw,nowPsw)
             }
         })
+
+
+
+        wv.settings.javaScriptEnabled=true
+//        wv.loadUrl("http://www.baidu.com")
+        wv.loadUrl("http://readymade1.srapi.cn//Api//Waptv//tv_detail?source=chart&user_id=7085&tv_id=13")
     }
     var state=true
     var oldPsw=""

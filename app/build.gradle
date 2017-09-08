@@ -114,6 +114,7 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'sage.libmediaplayhandle:libmediaplayhandle:1.0'
     compile 'com.github.Blincheng:EToast2:v2.1.0'
+    compile 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.2.5'
     testCompile 'junit:junit:4.12'
     apt 'com.jakewharton:butterknife-compiler:8.4.0'
 }

@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import com.sage.demo0809.MyLog;
@@ -60,5 +61,13 @@ public class FragmentEdit extends BottomSheetDialogFragment {
     public void hiddenInput(Activity context){
         ((InputMethodManager)context.getSystemService(Context.INPUT_METHOD_SERVICE))
                 .hideSoftInputFromWindow(context.getCurrentFocus().getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        WebView wv= (WebView) getView().findViewById(R.id.wv);
+        wv.getSettings().setJavaScriptEnabled(true);
+        wv.loadUrl("http://readymade1.srapi.cn//Api//Waptv//tv_detail?source=chart&user_id=7085&tv_id=13");
     }
 }
