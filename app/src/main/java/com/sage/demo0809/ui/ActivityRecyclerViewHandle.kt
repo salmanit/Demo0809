@@ -7,6 +7,8 @@ import android.support.v4.view.ViewCompat
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
+import android.support.v7.widget.helper.ItemTouchUIUtil
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
@@ -21,12 +23,14 @@ import com.sage.demo0809.bean.RvParent
 import com.sage.demo0809.custom.ItemDecorationFloat
 import kotlinx.android.synthetic.main.activity_recycler_view_handle.*
 import rx.Observer
+import java.util.*
 
 class ActivityRecyclerViewHandle : AppCompatActivity() {
 
      var lists= ArrayList<RvParent>()
     var currentItem = 0
     lateinit var itemDecorationFloat:ItemDecorationFloat
+    lateinit var helper:ItemTouchHelper
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recycler_view_handle)
@@ -64,7 +68,7 @@ class ActivityRecyclerViewHandle : AppCompatActivity() {
         rv_right.apply {
             layoutManager = LinearLayoutManager(this@ActivityRecyclerViewHandle)
             itemDecorationFloat=ItemDecorationFloat()
-//            addItemDecoration(itemDecorationFloat)
+            addItemDecoration(itemDecorationFloat)
             adapter = object : MySimpleRvAdapter<RvParent>() {
                 override fun layoutId(viewType: Int): Int {
                     return R.layout.item_rv_handle_child
@@ -88,6 +92,41 @@ class ActivityRecyclerViewHandle : AppCompatActivity() {
 
                             }
                         }
+                        helper=ItemTouchHelper(object :ItemTouchHelper.Callback(){
+                            override fun getMovementFlags(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?): Int {
+                                return  makeMovementFlags(ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT or ItemTouchHelper.UP or ItemTouchHelper.DOWN
+                                        ,0)
+                            }
+
+                            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                                var old=viewHolder.adapterPosition;
+                                var now=target.adapterPosition;
+                                if(old<now){
+                                    (old..now-1).forEach { Collections.swap(rvParent.child,it,it+1) }
+                                }else{
+                                    (now..old-1).forEach { Collections.swap(rvParent.child,it,it+1) }
+                                }
+                                println("from=$old= to=$now===count=${rvParent.child.size}=======")
+                                adapter.notifyItemMoved(old,now)
+                                return true
+                            }
+
+                            override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder, actionState: Int) {
+                                println("onSelectedChanged================$actionState")
+                                if(actionState==ItemTouchHelper.ACTION_STATE_DRAG){
+                                    viewHolder.itemView.setBackgroundColor(Color.LTGRAY)
+                                }
+                            }
+
+                            override fun clearView(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder) {
+                                    println("clearView====================")
+                                viewHolder.itemView.setBackgroundColor(Color.TRANSPARENT)
+                            }
+                            override fun onSwiped(viewHolder: RecyclerView.ViewHolder?, direction: Int) {
+                                println("==========onSwiped==$direction")
+                            }
+                        })
+                        helper.attachToRecyclerView(this)
                     }
 
                 }
@@ -121,7 +160,7 @@ class ActivityRecyclerViewHandle : AppCompatActivity() {
         (rv_left.adapter as MySimpleRvAdapter<RvParent>).setLists(lists)
         (rv_right.adapter as MySimpleRvAdapter<RvParent>).setLists(lists)
         itemDecorationFloat.lists=lists
-        layout_float.visibility=View.VISIBLE
+        layout_float.visibility=View.INVISIBLE
     }
 
     var last=-1
@@ -156,7 +195,11 @@ class ActivityRecyclerViewHandle : AppCompatActivity() {
     private fun getData() {
         (0..10).mapTo(lists) {
             var childs = ArrayList<RvChild>()
-            (0..8).mapTo(childs) { RvChild("", "child$it", it) }
+            var child=8;
+            if(it==10){
+                child=20
+            }
+            (0..child).mapTo(childs) { RvChild("", "child$it", it) }
             RvParent("", "parent$it", childs)
         }
         println("size=============${lists.size}")
