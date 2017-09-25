@@ -1,6 +1,7 @@
 <resources>
 
-
+    <string name="nearOverText">即将售罄</string>
+    <string name="overText">已售罄</string>
     <string name="cancel">Cancel</string>
     <string name="use_password">Use password</string>
     <string name="sign_in">Sign in</string>

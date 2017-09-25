@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:background="#f4f4f4"
+    android:padding="10dp"
     tools:context="com.sage.demo0809.ui.ActivityFlycoTabLayout">
     <com.flyco.tablayout.SegmentTabLayout
         android:id="@+id/tl_4"
@@ -30,11 +31,29 @@
         tl:tl_tab_space_equal="true"
         tl:tl_textsize="15sp"
         tl:tl_textBold="BOTH"/>
+    <com.sage.demo0809.widget.SaleProgressView
+        android:id="@+id/spv"
+        android:layout_width="220dp"
+        android:layout_height="30dp"
+        android:layout_centerInParent="true"
+        tl:nearOverText="@string/nearOverText"
+        tl:overText="@string/overText"
+        />
 
-    <Button
-        android:layout_marginTop="10dp"
-        android:id="@+id/btn_result"
-        android:text="result"
+    <SeekBar
+        android:id="@+id/seek"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spv"
+        android:layout_marginTop="50dp"
+        android:max="100" />
+
+    <com.sage.demo0809.widget.ScrollDataShows
+        android:id="@+id/sds"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
+    <com.sage.demo0809.widget.ScrollDataShows2
+        android:id="@+id/sds2"
+        android:layout_width="match_parent"
+        android:layout_height="40dp" />
 </LinearLayout>
