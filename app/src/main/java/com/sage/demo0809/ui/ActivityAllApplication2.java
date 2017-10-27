@@ -17,15 +17,15 @@ import com.sage.demo0809.adapter.MyRvViewHolder;
 import com.sage.demo0809.adapter.MySimpleRvAdapter;
 import com.sage.demo0809.adapter.OnRecyclerItemClickListener;
 
-import java.util.Collections;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Sage on 2016/11/4.
@@ -87,24 +87,22 @@ public class ActivityAllApplication2 extends ActivityBase {
 
 
     private void loadingUnder(){
-
-
-        Observable.create(new Observable.OnSubscribe<List<ApplicationInfo>>() {
+        Observable.create(new ObservableOnSubscribe<List<ApplicationInfo>>() {
             @Override
-            public void call(Subscriber<? super List<ApplicationInfo>> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<List<ApplicationInfo>> e) throws Exception {
                 PackageManager packageManager = getPackageManager();
 
                 List<ApplicationInfo> applicationList = packageManager.getInstalledApplications(PackageManager.GET_UNINSTALLED_PACKAGES);
-                subscriber.onNext(applicationList);
+                e.onNext(applicationList);
             }
         }).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<ApplicationInfo> >() {
+                .subscribe(new Consumer<List<ApplicationInfo>>() {
                     @Override
-                    public void call(List<ApplicationInfo> resolveInfos) {
-                        adapter.setLists(resolveInfos);
+                    public void accept(List<ApplicationInfo> applicationInfos) throws Exception {
+                        adapter.setLists(applicationInfos);
                     }
                 });
+
     }
 
 }

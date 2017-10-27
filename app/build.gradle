@@ -80,13 +80,17 @@ dependencies {
     compile files('libs/alivc-player-2.4.0.jar')
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support:design:25.3.1'
-    compile 'io.reactivex:rxjava:1.0.14'
-    compile 'io.reactivex:rxandroid:1.0.1'
-    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
-    compile 'com.squareup.retrofit2:retrofit:2.0.2'
-    compile 'com.squareup.retrofit2:converter-gson:2.0.2'
-    compile 'com.squareup.okhttp:okhttp-urlconnection:2.4.0'
-    compile 'com.squareup.okhttp:okhttp:2.4.0'
+
+    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    compile 'io.reactivex.rxjava2:rxjava:2.1.3'
+
+    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    compile 'com.squareup.retrofit2:retrofit:2.3.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    compile 'com.squareup.okhttp3:okhttp-urlconnection:3.9.0'
+    compile 'com.squareup.okhttp3:okhttp:3.9.0'
+
     compile 'com.github.wseemann:FFmpegMediaMetadataRetriever:1.0.11'
     compile 'pl.droidsonroids.gif:android-gif-drawable:1.1.17'
     compile 'com.sage.bigscalephotoviewanim:libViewBigPics:1.0.7'

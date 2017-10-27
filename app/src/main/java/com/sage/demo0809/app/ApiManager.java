@@ -13,7 +13,7 @@ import okhttp3.Response;
 import okio.BufferedSink;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 
@@ -34,7 +34,7 @@ public class ApiManager {
     public static void init(){
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(ApiService.HOST_ADDRESS)
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(genericClient())
                 .build();

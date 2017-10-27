@@ -18,7 +18,12 @@ import com.sage.demo0809.app.RxSubscribe;
 import com.sage.demo0809.bean.MyRecordChart;
 import com.sage.demo0809.bean.MyRecordParams;
 
+import org.reactivestreams.Subscription;
+
 import java.util.HashMap;
+
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -62,8 +67,8 @@ public class MainActivity extends AppCompatActivity {
 //                });
 
 
-        MyRecordParams params=new MyRecordParams();
-        MyLog.i("---------"+params.toString());
+        MyRecordParams params = new MyRecordParams();
+        MyLog.i("---------" + params.toString());
 //        ApiManager.getService().getTodayInfo(params)
 //                .compose(new RxHelper<MyRecordChart>().handleBase())
 //                .subscribe(new RxSubscribe<MyRecordChart>() {
@@ -91,26 +96,31 @@ public class MainActivity extends AppCompatActivity {
 //                    }
 //                });
 
-        HashMap<String,String> map=new HashMap<>();
-        map.put("version","1.0");
-        map.put("channel","360");
-        map.put("mobile_phone","13795492180");
-        map.put("password","888888");
-        map.put("search","hr");
-        map.put("page","1");
-            ApiManager.getService().getTodayInfo(map)
-                    .compose(new RxHelper<MyRecordChart>().handleBase())
-                    .subscribe(new RxSubscribe<MyRecordChart>() {
-                        @Override
-                        public void _onError(String msg) {
-                            showToast("error=="+msg);
-                        }
+        HashMap<String, String> map = new HashMap<>();
+        map.put("version", "1.0");
+        map.put("channel", "360");
+        map.put("mobile_phone", "13795492180");
+        map.put("password", "888888");
+        map.put("search", "hr");
+        map.put("page", "1");
+        ApiManager.getService().getTodayInfo(map)
+                .compose(new RxHelper<MyRecordChart>().handleBase())
+                .subscribe(new RxSubscribe<MyRecordChart>() {
+                    @Override
+                    public void _onError(String msg) {
+                        showToast("error==" + msg);
+                    }
 
-                        @Override
-                        public void onNext(MyRecordChart myRecordChart) {
-                            showToast("======="+myRecordChart.toString());
-                        }
-                    });
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(MyRecordChart myRecordChart) {
+                        showToast("=======" + myRecordChart.toString());
+                    }
+                });
 
 //        ApiManager.getService().login(new LoginParam())
 ////                .compose(new RxHelper<String>().handleResult())
@@ -134,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 //        });
     }
 
-    public void showToast(String msg){
+    public void showToast(String msg) {
         Snackbar.make(findViewById(Window.ID_ANDROID_CONTENT), msg, Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
     }

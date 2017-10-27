@@ -23,11 +23,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Sage on 2016/11/4.
@@ -88,10 +89,9 @@ public class ActivityAllApplication extends ActivityBase {
 
     private void loadingUnder() {
 
-
-        Observable.create(new Observable.OnSubscribe<List<ResolveInfo>>() {
+        Observable.create(new ObservableOnSubscribe<List<ResolveInfo>>() {
             @Override
-            public void call(Subscriber<? super List<ResolveInfo>> subscriber) {
+            public void subscribe(@NonNull ObservableEmitter<List<ResolveInfo>> e) throws Exception {
                 PackageManager pm = getPackageManager(); // 获得PackageManager对象
                 Intent mainIntent = new Intent(Intent.ACTION_MAIN, null);
                 mainIntent.addCategory(Intent.CATEGORY_LAUNCHER);
@@ -101,16 +101,16 @@ public class ActivityAllApplication extends ActivityBase {
                 // 调用系统排序 ， 根据name排序
                 // 该排序很重要，否则只能显示系统应用，而不能列出第三方应用程序
                 Collections.sort(resolveInfos, new ResolveInfo.DisplayNameComparator(pm));
-                subscriber.onNext(resolveInfos);
+                e.onNext(resolveInfos);
             }
         }).subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<List<ResolveInfo>>() {
+                .subscribe(new Consumer<List<ResolveInfo>>() {
                     @Override
-                    public void call(List<ResolveInfo> resolveInfos) {
+                    public void accept(List<ResolveInfo> resolveInfos) throws Exception {
                         adapter.setLists(resolveInfos);
                     }
                 });
+
     }
 
 }

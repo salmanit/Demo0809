@@ -20,11 +20,13 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import rx.Observable;
-import rx.Observer;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 public class ActivityRxTest extends ActivityBase {
 
@@ -65,44 +67,46 @@ public class ActivityRxTest extends ActivityBase {
     public void hello_click(View view){
     }
     public void test1(){
-        Observable.create(new Observable.OnSubscribe<Integer>() {
+        Observable.create(new ObservableOnSubscribe<Integer>() {
             @Override
-            public void call(Subscriber<? super Integer> subscriber) {
+            public void subscribe(@io.reactivex.annotations.NonNull ObservableEmitter<Integer> e) throws Exception {
                 System.out.println("!===1");
-                subscriber.onNext(1);
+                e.onNext(1);
                 System.out.println("!===2");
-                subscriber.onNext(2);
+                e.onNext(2);
                 System.out.println("!===3");
-                subscriber.onNext(3);
+                e.onNext(3);
                 System.out.println("!===complete");
-                subscriber.onCompleted();
+                e.onComplete();
                 System.out.println("!===4");
-                subscriber.onNext(4);
+                e.onNext(4);
             }
         })
-        .subscribeOn(AndroidSchedulers.mainThread())
-                .observeOn(Schedulers.io())
+//                .subscribeOn(AndroidSchedulers.mainThread())
+//                .observeOn(Schedulers.io())
+
                 .subscribe(new Observer<Integer>() {
-
-
-
                     @Override
-                    public void onNext(Integer value) {
-                        System.out.println("!===onNext"+value);
+                    public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
 
                     }
 
                     @Override
-                    public void onCompleted() {
-                        System.out.println("!===onComplete");
+                    public void onNext(@io.reactivex.annotations.NonNull Integer integer) {
+                        System.out.println("!===onNext"+integer);
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onError(@io.reactivex.annotations.NonNull Throwable e) {
                         System.out.println("!===onError");
                     }
 
+                    @Override
+                    public void onComplete() {
+                        System.out.println("!===onComplete");
+                    }
                 });
+
     }
 
 }

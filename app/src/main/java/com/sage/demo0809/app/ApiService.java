@@ -10,6 +10,7 @@ import com.sage.demo0809.bean.UploadAvatar;
 
 import java.util.Map;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.http.Body;
@@ -22,7 +23,6 @@ import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
-import rx.Observable;
 
 /**
  * Created by Sage on 2016/9/5.
@@ -34,7 +34,7 @@ public interface ApiService {
 
     @Multipart
     @POST("user/avatar")
-    Observable<UploadAvatar> uploadAvatar(@Body BaseParams baseParams,@Query("key1") String key1,@Query("key2") String key2);
+    Observable<UploadAvatar> uploadAvatar(@Body BaseParams baseParams, @Query("key1") String key1, @Query("key2") String key2);
 
     @POST("user/test")
     Observable<MyRecordChart> test(@Body BaseParams baseParams,@Query("key1") String key1,@Query("key2") String key2);

@@ -14,17 +14,8 @@ import android.widget.TextView;
 import com.db.chart.view.BarChartView;
 import com.sage.demo0809.MyLog;
 import com.sage.demo0809.R;
-import com.sage.demo0809.fragment.FragmentDemo;
-
-import org.apache.commons.lang3.StringEscapeUtils;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.schedulers.Schedulers;
 
 public class ActivityDrawerLayout extends ActivityBase {
 

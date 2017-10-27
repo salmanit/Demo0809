@@ -22,7 +22,6 @@ import com.sage.demo0809.bean.RvChild
 import com.sage.demo0809.bean.RvParent
 import com.sage.demo0809.custom.ItemDecorationFloat
 import kotlinx.android.synthetic.main.activity_recycler_view_handle.*
-import rx.Observer
 import java.util.*
 
 class ActivityRecyclerViewHandle : AppCompatActivity() {

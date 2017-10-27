@@ -8,11 +8,10 @@ import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.view.animation.OvershootInterpolator
 import android.widget.Toast
-
 import com.sage.demo0809.R
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import kotlinx.android.synthetic.main.activity_mood_anim.*
-import rx.Observable
-import rx.android.schedulers.AndroidSchedulers
 import java.util.concurrent.TimeUnit
 
 class ActivityMoodAnim : AppCompatActivity() {

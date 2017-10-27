@@ -3,16 +3,21 @@ package com.sage.demo0809.ui;
 import android.annotation.TargetApi;
 import android.app.ActivityManager;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.view.LayoutInflaterCompat;
+import android.support.v4.view.LayoutInflaterFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
+import android.util.AttributeSet;
+import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +34,16 @@ public class ActivityBase extends AppCompatActivity {
     TextView toolbar_title;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        LayoutInflaterCompat.setFactory(getLayoutInflater(), new LayoutInflaterFactory() {
+            @Override
+            public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
 
+                System.out.println("name======="+name);
+
+
+                return null;
+            }
+        });
         super.onCreate(savedInstanceState);
         ThemeHelper.statusBarLightMode(this);
         title=getIntent().getStringExtra("title");

@@ -32,57 +32,61 @@ import org.simple.eventbus.EventBus;
 import java.io.File;
 import java.util.HashMap;
 
-import rx.Observable;
-import rx.Subscriber;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class ActivityD extends ActivityBase {
-    String url="http://sunroam.imgup.cn/aerospace/bjc/19.mp4";
+    String url = "http://sunroam.imgup.cn/aerospace/bjc/19.mp4";
     Toolbar toolbar;
     ImageView iv_thumb;
     EditText et1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
-        toolbar= (Toolbar) findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
         setTitle("");
 //        toolbar.setFitsSystemWindows(false);
-        iv_thumb= (ImageView) findViewById(R.id.iv_thumb);
+        iv_thumb = (ImageView) findViewById(R.id.iv_thumb);
 //        if(Build.VERSION.SDK_INT>=21)
 //            getWindow().setStatusBarColor(Color.WHITE);
-        Observable.create(new Observable.OnSubscribe<Bitmap>() {
+        Observable.create(new ObservableOnSubscribe<Bitmap>() {
             @Override
-            public void call(Subscriber<? super Bitmap> subscriber) {
-               Bitmap bitmap= createVideoThumbnail(url, MediaStore.Video.Thumbnails.MINI_KIND);
-                subscriber.onNext(bitmap);
+            public void subscribe(@NonNull ObservableEmitter<Bitmap> e) throws Exception {
+                Bitmap bitmap = createVideoThumbnail(url, MediaStore.Video.Thumbnails.MINI_KIND);
+                e.onNext(bitmap);
             }
         })
                 .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Bitmap>() {
+                .subscribe(new Consumer<Bitmap>() {
                     @Override
-                    public void call(Bitmap bitmap) {
-                    iv_thumb.setImageBitmap(bitmap);
+                    public void accept(Bitmap bitmap) throws Exception {
+                        iv_thumb.setImageBitmap(bitmap);
                     }
                 });
-        Observable.create(new Observable.OnSubscribe<Bitmap>() {
-            @Override
-            public void call(Subscriber<? super Bitmap> subscriber) {
-               Bitmap bitmap= get(new File(Environment.getExternalStorageDirectory(),
-                       "device-2016-12-14-143818.mp4").getAbsolutePath());
-                subscriber.onNext(bitmap);
-            }
-        })
+        Observable
+                .create(new ObservableOnSubscribe<Bitmap>() {
+                    @Override
+                    public void subscribe(@NonNull ObservableEmitter<Bitmap> e) throws Exception {
+                        Bitmap bitmap = get(new File(Environment.getExternalStorageDirectory(),
+                                "device-2016-12-14-143818.mp4").getAbsolutePath());
+                        e.onNext(bitmap);
+                    }
+                })
                 .subscribeOn(Schedulers.io())
 //                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Bitmap>() {
+                .subscribe(new Consumer<Bitmap>() {
                     @Override
-                    public void call(Bitmap bitmap) {
-                    MyLog.i("=============");
-                        et1.setBackground(new BitmapDrawable(getResources(),bitmap));
+                    public void accept(Bitmap bitmap) throws Exception {
+                        MyLog.i("=============");
+                        et1.setBackground(new BitmapDrawable(getResources(), bitmap));
                     }
                 });
 
@@ -92,20 +96,21 @@ public class ActivityD extends ActivityBase {
                 startStep();
             }
         });
-        et1= (EditText) findViewById(R.id.et1);
+        et1 = (EditText) findViewById(R.id.et1);
         EventBus.getDefault().register(this);
     }
 
     private void startStep() {
 //        bindService(new Intent(this,SHealthConnectService.class),conn,BIND_AUTO_CREATE);
     }
+
     SHealthConnectService.MySHealthBind binder;
-    private ServiceConnection conn=new ServiceConnection() {
+    private ServiceConnection conn = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
-            binder= (SHealthConnectService.MySHealthBind) service;
+            binder = (SHealthConnectService.MySHealthBind) service;
             MyLog.i("111111111111=====onServiceConnected");
-            if(binder!=null){
+            if (binder != null) {
                 binder.startConnect(ActivityD.this);
             }
         }
@@ -115,28 +120,29 @@ public class ActivityD extends ActivityBase {
 
         }
     };
+
     @Override
     protected void onDestroy() {
         super.onDestroy();
         EventBus.getDefault().unregister(this);
-        if(binder!=null)
-        unbindService(conn);
+        if (binder != null)
+            unbindService(conn);
 
     }
 
     @org.simple.eventbus.Subscriber(tag = "S_Health_Step")
-    public void getStep(int step){
-        et1.setText("步数"+step);
+    public void getStep(int step) {
+        et1.setText("步数" + step);
     }
 
-    private Bitmap get(String filePath){
-       Bitmap bitmap= ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Images.Thumbnails.MINI_KIND);
-        MyLog.i("======"+(bitmap==null));
+    private Bitmap get(String filePath) {
+        Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(filePath, MediaStore.Images.Thumbnails.MINI_KIND);
+        MyLog.i("======" + (bitmap == null));
         return bitmap;
     }
 
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    private Bitmap createVideoThumbnail(String url,int kind) {
+    private Bitmap createVideoThumbnail(String url, int kind) {
         Bitmap bitmap = null;
         MediaMetadataRetriever retriever = new MediaMetadataRetriever();
         try {
@@ -170,7 +176,7 @@ public class ActivityD extends ActivityBase {
                 bitmap = Bitmap.createScaledBitmap(bitmap, w, h, true);
             }
         } else if (kind == MediaStore.Images.Thumbnails.MICRO_KIND) {
-            bitmap = ThumbnailUtils.extractThumbnail(bitmap,96,96,
+            bitmap = ThumbnailUtils.extractThumbnail(bitmap, 96, 96,
                     ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
         }
         return bitmap;
